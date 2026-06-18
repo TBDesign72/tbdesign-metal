@@ -4,42 +4,50 @@
 
   <url>
     <loc>https://tbdesign-metal.com/</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/"/>
   </url>
 
   <url>
-    <loc>https://tbdesign-metal.com/escalier-le-mans.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <loc>https://tbdesign-metal.com/sous-traitance-bureau-etudes-metallerie.html</loc>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/escalier-le-mans.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/sous-traitance-bureau-etudes-metallerie.html"/>
   </url>
 
   <url>
     <loc>https://tbdesign-metal.com/dessinateur-le-mans.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/dessinateur-le-mans.html"/>
   </url>
 
   <url>
-    <loc>https://tbdesign-metal.com/structures-metalliques-le-mans.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <loc>https://tbdesign-metal.com/escalier-le-mans.html</loc>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/structures-metalliques-le-mans.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/escalier-le-mans.html"/>
   </url>
 
   <url>
     <loc>https://tbdesign-metal.com/plans-execution-metallerie.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/plans-execution-metallerie.html"/>
+  </url>
+
+  <url>
+    <loc>https://tbdesign-metal.com/structures-metalliques-le-mans.html</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/structures-metalliques-le-mans.html"/>
   </url>
 
 </urlset>
