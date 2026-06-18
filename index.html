@@ -359,20 +359,69 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 .fdiv{width:32px;height:1px;background:#c8a96e44}
 .fleg{font-size:10px;color:var(--gris)}
 
-@media(max-width:768px){
-  .hero{grid-template-columns:1fr}
-  .hero-r{min-height:55vw}
-  .hero-l{padding:48px 24px}
-  .badge{bottom:20px;right:20px;padding:12px 18px}
-  .sect{padding:52px 20px}
-  .sect-ti{font-size:32px}
-  .srv-grid{grid-template-columns:1fr}
-  .real-grid{grid-template-columns:1fr}
-  .real,.real.wide{grid-column:span 1;height:200px}
-  .contact-grid{grid-template-columns:1fr}
-  .tools{padding:24px 20px;gap:20px}
-  footer{flex-direction:column;gap:12px;padding:20px 24px;text-align:center}
-}
+/* ══ TICKER ANIMÉ (inspiré Bobi Métal) ══ */
+.ticker-wrap{overflow:hidden;background:var(--or);padding:11px 0;border-top:1px solid #a8883e;border-bottom:1px solid #a8883e}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 32s linear infinite}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 36px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--noir);font-weight:500}
+.ticker-dot{width:4px;height:4px;background:var(--noir);border-radius:50%;flex-shrink:0;opacity:.5}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ══ HERO plein écran ══ */
+.hero{grid-template-columns:1fr 1fr;min-height:100vh}
+.hero-r img{opacity:.75}
+.hero-l{padding:80px 56px 80px 72px}
+
+/* ══ SERVICES cards — hover lift ══ */
+.srv{cursor:pointer;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s,box-shadow .35s;border:1px solid transparent}
+.srv:hover{transform:translateY(-6px);border-color:#c8a96e33;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.srv-ti{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--blanc);margin:14px 0 10px;transition:color .3s}
+.srv:hover .srv-ti{color:var(--or)}
+
+/* ══ SECTION WHY — nouvelle ══ */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#c8a96e11;margin-top:48px}
+.why-card{background:var(--noir);padding:40px 32px;transition:background .3s}
+.why-card:hover{background:#111}
+.why-icon{width:40px;height:40px;border:1px solid #c8a96e33;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.why-icon svg{stroke:var(--or);fill:none;stroke-width:1.4;width:18px;height:18px}
+.why-h{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--blanc);margin-bottom:8px}
+.why-d{font-size:11.5px;line-height:1.85;color:var(--gris)}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.why-grid{grid-template-columns:1fr}}
+
+/* ══ CTA BANDE PLEIN ÉCRAN (inspiré Bobi) ══ */
+.cta-band{position:relative;overflow:hidden;min-height:360px;display:flex;align-items:center;justify-content:center}
+.cta-band-bg{position:absolute;inset:0;background-image:url(images/real-escalier-acier.jpg);background-size:cover;background-position:center;filter:brightness(.25)}
+.cta-band-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.7) 0%,rgba(200,169,110,.12) 100%)}
+.cta-band-content{position:relative;z-index:1;text-align:center;padding:60px 24px}
+.cta-band-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,58px);font-weight:300;color:var(--blanc);margin-bottom:16px;line-height:1.15}
+.cta-band-title em{color:var(--or);font-style:italic}
+.cta-band-sub{font-size:13px;color:var(--gris);margin-bottom:36px;letter-spacing:.5px}
+.cta-band-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-band-btn{padding:14px 36px;background:var(--or);color:var(--noir);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;text-decoration:none;transition:background .3s,transform .2s;cursor:pointer;border:none}
+.cta-band-btn:hover{background:var(--or2);transform:translateY(-2px)}
+.cta-band-btn-ghost{padding:14px 36px;background:transparent;color:var(--blanc);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:400;text-decoration:none;border:1px solid #c8a96e55;transition:border-color .3s,color .3s,transform .2s;cursor:pointer}
+.cta-band-btn-ghost:hover{border-color:var(--or);color:var(--or);transform:translateY(-2px)}
+
+/* ══ FOOTER enrichi (inspiré Bobi) ══ */
+.footer-main{background:var(--anth);padding:64px 64px 32px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;border-top:1px solid #c8a96e18}
+.footer-brand p{font-size:12px;line-height:1.9;color:var(--gris);margin:16px 0 28px;max-width:280px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:36px;height:36px;border:1px solid #c8a96e33;display:flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s;text-decoration:none}
+.footer-social a:hover{border-color:var(--or);background:#c8a96e11}
+.footer-social svg{stroke:var(--gris);fill:none;stroke-width:1.5;width:15px;height:15px;transition:stroke .3s}
+.footer-social a:hover svg{stroke:var(--or)}
+.footer-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:20px;font-weight:500}
+.footer-col a{display:block;font-size:12px;color:var(--gris);text-decoration:none;margin-bottom:10px;transition:color .3s}
+.footer-col a:hover{color:var(--blanc)}
+.footer-col p{font-size:12px;color:var(--gris);line-height:1.8;margin-bottom:6px}
+.footer-bottom{background:var(--anth);padding:20px 64px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #c8a96e0f;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:10px;color:#666}
+.footer-bottom nav{display:flex;gap:24px;flex-wrap:wrap}
+.footer-bottom nav a{font-size:10px;color:#555;text-decoration:none;transition:color .3s}
+.footer-bottom nav a:hover{color:var(--or)}
+@media(max-width:900px){.footer-main{grid-template-columns:1fr 1fr;padding:40px 24px 24px}}
+@media(max-width:600px){.footer-main{grid-template-columns:1fr}.footer-bottom{padding:16px 24px;flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
@@ -402,6 +451,33 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   <a href="#zones" onclick="closeMobileMenu(this)">Zones</a>
   <a href="#avis" onclick="closeMobileMenu(this)">Avis</a>
   <a href="#contact-form" onclick="closeMobileMenu(this)">Contact · Devis gratuit</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <!-- dupliqué 2× pour boucle infinie -->
+    <span class="ticker-item">Bureau d'études métallerie<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Sous-traitance DAO<span class="ticker-dot"></span></span>
+    <span class="ticker-item">SolidWorks Expert<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Plans d'exécution<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Le Mans · France entière<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Dessinateur projeteur freelance<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Renfort bureau d'études<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Escaliers acier sur mesure<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Structures métalliques<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Devis sous 24h<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Bureau d'études métallerie<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Sous-traitance DAO<span class="ticker-dot"></span></span>
+    <span class="ticker-item">SolidWorks Expert<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Plans d'exécution<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Le Mans · France entière<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Dessinateur projeteur freelance<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Renfort bureau d'études<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Escaliers acier sur mesure<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Structures métalliques<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Devis sous 24h<span class="ticker-dot"></span></span>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -440,6 +516,57 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div class="srv"><span class="srv-n">04</span><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
     <div class="srv"><span class="srv-n">05</span><div class="srv-ti">Rendu & modélisation 3D</div><p class="srv-d">Modélisation avancée sous SolidWorks, rendus photo-réalistes et simulations d'assemblage pour valider vos projets avant fabrication.</p><span class="srv-tag">SolidWorks · Rendu</span></div>
     <div class="srv"><span class="srv-n">06</span><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables immédiatement exploitables.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
+  </div>
+</section>
+
+<!-- POURQUOI TB DESIGN -->
+<section class="sect darker" id="pourquoi" aria-label="Pourquoi choisir TB Design">
+  <div class="sect-hd">
+    <div><p class="sect-ey">Garanties</p><h2 class="sect-ti">Pourquoi choisir <em>TB Design</em></h2></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="why-h">15 ans d'expérience</div>
+      <p class="why-d">Métallerie, serrurerie, charpente légère — une expertise terrain acquise sur des milliers d'ouvrages, directement transposée dans chaque dossier d'étude.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="why-h">Livrables atelier-ready</div>
+      <p class="why-d">Plans PDF cotés, DXF pour la découpe laser ou plasma, STEP pour l'import FAO. Aucun retravail côté atelier — vous pouvez lancer la fabrication directement.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="why-h">Réactivité & délais tenus</div>
+      <p class="why-d">Devis sous 24h, délai précis communiqué dès la commande. Interlocuteur unique du début à la fin du projet — pas de délégation, pas de surprise.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="why-h">Particuliers & professionnels</div>
+      <p class="why-d">Du particulier qui imagine son escalier au métallier qui externalise son bureau d'études — je m'adapte au contexte et aux exigences de chacun.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="why-h">Confidentialité assurée</div>
+      <p class="why-d">Vos projets, vos clients, vos méthodes restent confidentiels. Accord de confidentialité possible sur demande, systématiquement respecté.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="why-h">Sans charge fixe</div>
+      <p class="why-d">Pas de salaire, pas de logiciel à maintenir, pas d'engagement de volume. Vous externalisez la conception à la mission, selon votre carnet de commandes.</p>
+    </div>
   </div>
 </section>
 
@@ -497,6 +624,20 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 
   </div>
 </section>
+
+<!-- CTA BANDE PLEIN ÉCRAN -->
+<div class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="cta-band-ov"></div>
+  <div class="cta-band-content">
+    <h2 class="cta-band-title">Un projet à concevoir ?<br><em>Parlons-en.</em></h2>
+    <p class="cta-band-sub">Devis gratuit sous 24h · Métalliers, architectes, particuliers</p>
+    <div class="cta-band-btns">
+      <button class="cta-band-btn" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
+      <a class="cta-band-btn-ghost" href="tel:+33619518509">06 19 51 85 09</a>
+    </div>
+  </div>
+</div>
 
 <!-- FAQ -->
 <section class="sect darker" id="faq" aria-label="Questions fréquentes" style="border-top:1px solid #c8a96e18">
@@ -761,22 +902,54 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   </div>
 </section>
 
-<footer itemscope itemtype="https://schema.org/LocalBusiness" style="flex-wrap:wrap;">
+<footer class="footer-main" itemscope itemtype="https://schema.org/LocalBusiness">
   <meta itemprop="name" content="TB Design">
   <meta itemprop="telephone" content="+33619518509">
   <meta itemprop="email" content="teo@tbdesign-metal.com">
   <meta itemprop="url" content="https://tbdesign-metal.com">
-  <img src="images/logo.png" loading="lazy" class="flogo" alt="TB Design">
-  <div class="fdiv"></div>
-  <span class="fleg">Micro-entreprise · TB Design · Téo Brunner · Le Mans</span>
-  <nav class="seo-links" aria-label="Pages du site" style="width:100%;margin-top:18px;padding-top:14px;border-top:1px solid #c8a96e18;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:center;">
-    <a href="/escalier-le-mans.html" style="font-size:10px;letter-spacing:1px;color:var(--gris);text-decoration:none;">Escalier acier Le Mans</a>
-    <a href="/dessinateur-le-mans.html" style="font-size:10px;letter-spacing:1px;color:var(--gris);text-decoration:none;">Dessinateur métallerie Le Mans</a>
-    <a href="/structures-metalliques-le-mans.html" style="font-size:10px;letter-spacing:1px;color:var(--gris);text-decoration:none;">Structures métalliques Le Mans</a>
-    <a href="/plans-execution-metallerie.html" style="font-size:10px;letter-spacing:1px;color:var(--gris);text-decoration:none;">Plans d'exécution métallerie</a>
-    <a href="/sous-traitance-bureau-etudes-metallerie.html" style="font-size:10px;letter-spacing:1px;color:var(--gris);text-decoration:none;">Sous-traitance bureau d'études métallerie</a>
-  </nav>
+
+  <div class="footer-brand">
+    <img src="images/logo.png" loading="lazy" style="height:36px;display:block;margin-bottom:16px;" alt="TB Design">
+    <p>Bureau d'études métallerie indépendant. Sous-traitance DAO, plans d'exécution SolidWorks, escaliers acier et structures sur mesure. Le Mans & toute la France.</p>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn TB Design">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="mailto:teo@tbdesign-metal.com" aria-label="Email TB Design">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a href="tel:+33619518509" aria-label="Téléphone TB Design">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-col">
+    <p class="footer-col-title">Pages</p>
+    <a href="/escalier-le-mans.html">Escalier acier Le Mans</a>
+    <a href="/dessinateur-le-mans.html">Dessinateur projeteur Le Mans</a>
+    <a href="/structures-metalliques-le-mans.html">Structures métalliques</a>
+    <a href="/plans-execution-metallerie.html">Plans d'exécution métallerie</a>
+    <a href="/sous-traitance-bureau-etudes-metallerie.html">Sous-traitance bureau d'études</a>
+  </div>
+
+  <div class="footer-col">
+    <p class="footer-col-title">Contact</p>
+    <p>Téo Brunner · TB Design</p>
+    <p>Le Mans · Sarthe (72)</p>
+    <p style="margin-top:8px"><a href="tel:+33619518509" style="color:var(--gris);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--or)'" onmouseout="this.style.color='var(--gris)'">06 19 51 85 09</a></p>
+    <p><a href="mailto:teo@tbdesign-metal.com" style="color:var(--gris);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--or)'" onmouseout="this.style.color='var(--gris)'">teo@tbdesign-metal.com</a></p>
+    <p style="margin-top:16px;font-size:11px;color:#555">Micro-entreprise · TVA non applicable (art. 293 B CGI)</p>
+  </div>
 </footer>
+<div class="footer-bottom">
+  <p>© 2026 TB Design · Téo Brunner · Le Mans</p>
+  <nav aria-label="Liens légaux">
+    <a href="#contact-form" onclick="event.preventDefault();document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Devis gratuit</a>
+    <a href="#avis">Avis</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</div>
 
 <!-- CURSEUR DORÉ -->
 <div id="cursor"></div>
