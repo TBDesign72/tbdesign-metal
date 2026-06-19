@@ -216,7 +216,6 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="dns-prefetch" href="//formsubmit.co">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1124,7 +1123,10 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </div>
 
     <div class="cf-right">
-      <form id="contactForm">
+      <form id="contactForm" action="https://formsubmit.co/teo@tbdesign-metal.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau message depuis TB Design">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
 
         <div class="cf-field">
           <label class="cf-label" for="name">Votre nom</label>
@@ -1733,53 +1735,39 @@ animateTrail();
 // Particules remplacées par grain CSS
 
 // ── FORMULAIRE ──
-// ── FORMULAIRE EMAILJS ──
-(function(){
-  emailjs.init('AxIiPw0DuieTgWj1g');
+// Envoi en AJAX (fetch) pour éviter le rechargement complet de la page
+// (qui causait un scroll en haut puis un retour en bas)
+window.addEventListener("DOMContentLoaded",function(){
+  var form=document.getElementById("contactForm");
+  if(!form)return;
+  var success=document.getElementById("cfSuccess");
+  var submitBtn=form.querySelector(".cf-btn");
 
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  form.addEventListener("submit",function(e){
     e.preventDefault();
-    var btn = this.querySelector('.cf-btn');
-    var btnText = btn.querySelector('.cf-btn-text');
-    var fileInput = document.getElementById('attachment');
-    var file = fileInput.files[0];
-
-    btnText.textContent = 'Envoi en cours...';
-    btn.disabled = true;
-
-    function sendEmail(attachmentData, attachmentName) {
-      var params = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        objet: document.getElementById('objet').value,
-        message: document.getElementById('message').value,
-        attachment: attachmentData || '',
-        attachment_name: attachmentName || ''
-      };
-
-      emailjs.send('service_kyzr78b', 'template_5hqvy7s', params)
-        .then(function() {
-          document.getElementById('cfSuccess').classList.add('visible');
-          btnText.textContent = 'Message envoyé';
-          document.getElementById('contactForm').reset();
-        })
-        .catch(function() {
-          btnText.textContent = 'Erreur — réessayez';
-          btn.disabled = false;
-        });
+    if(submitBtn){
+      submitBtn.disabled=true;
+      submitBtn.style.opacity="0.6";
     }
-
-    if (file) {
-      var reader = new FileReader();
-      reader.onload = function(ev) {
-        sendEmail(ev.target.result, file.name);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      sendEmail('', '');
-    }
+    var formData=new FormData(form);
+    fetch(form.action,{
+      method:"POST",
+      body:formData,
+      headers:{"Accept":"application/json"}
+    }).then(function(response){
+      // Succès affiché sans aucun scroll : la page reste exactement où elle est
+      form.style.opacity="0.3";
+      if(success)success.classList.add("visible");
+      form.reset();
+    }).catch(function(error){
+      if(submitBtn){
+        submitBtn.disabled=false;
+        submitBtn.style.opacity="1";
+      }
+      alert("Une erreur est survenue lors de l'envoi. Merci de réessayer ou de me contacter directement par email.");
+    });
   });
-})();
+});
 </script>
 
 <script>
