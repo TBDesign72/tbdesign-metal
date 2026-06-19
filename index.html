@@ -1124,9 +1124,10 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 
     <div class="cf-right">
       <form id="contactForm" action="https://formsubmit.co/f20d4ba6f55dfa594b48823e1243a0a2" method="POST">
-        <input type="hidden" name="_subject" value="Nouveau message depuis votre plaquette TB Design">
-        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_subject" value="Nouveau message depuis TB Design">
+        <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://tbdesign-metal.com?sent=1">
 
         <div class="cf-field">
           <label class="cf-label" for="name">Votre nom</label>
@@ -1735,38 +1736,7 @@ animateTrail();
 // Particules remplacées par grain CSS
 
 // ── FORMULAIRE ──
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.cf-btn');
-  const btnText = btn.querySelector('.cf-btn-text');
-  btnText.textContent = 'Envoi en cours...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(this.action, {
-      method: 'POST',
-      body: new FormData(this),
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      this.reset();
-      btnText.textContent = 'Message envoyé !';
-      document.getElementById('cfSuccess').classList.add('visible');
-    } else {
-      btnText.textContent = 'Erreur — réessayez';
-      btn.disabled = false;
-    }
-  } catch {
-    // Fallback : ouvrir le client mail (la pièce jointe devra être ajoutée manuellement)
-    const name = document.getElementById('name').value;
-    const objet = document.getElementById('objet').value;
-    const msg = document.getElementById('message').value;
-    const hasFile = document.getElementById('attachment').files.length > 0;
-    const note = hasFile ? '\n\n(Pensez à joindre votre fichier manuellement dans cet e-mail.)' : '';
-    window.location.href = `mailto:teo@tbdesign-metal.com?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent('De: ' + name + '\n\n' + msg + note)}`;
-    btnText.textContent = 'Envoyé via messagerie';
-  }
-});
+// Formulaire géré nativement par FormSubmit
 </script>
 
 <script>
