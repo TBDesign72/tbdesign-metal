@@ -1123,7 +1123,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </div>
 
     <div class="cf-right">
-      <form id="contactForm" action="https://formsubmit.co/teo@tbdesign-metal.com" method="POST">
+      <form id="contactForm" action="https://formsubmit.co/ajax/teo@tbdesign-metal.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="Nouveau message depuis TB Design">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
@@ -1755,6 +1755,9 @@ window.addEventListener("DOMContentLoaded",function(){
       body:formData,
       headers:{"Accept":"application/json"}
     }).then(function(response){
+      if(!response.ok){ throw new Error("Erreur serveur"); }
+      return response.json();
+    }).then(function(data){
       // Succès affiché sans aucun scroll : la page reste exactement où elle est
       form.style.opacity="0.3";
       if(success)success.classList.add("visible");
@@ -1764,7 +1767,7 @@ window.addEventListener("DOMContentLoaded",function(){
         submitBtn.disabled=false;
         submitBtn.style.opacity="1";
       }
-      alert("Une erreur est survenue lors de l'envoi. Merci de réessayer ou de me contacter directement par email.");
+      alert("Une erreur est survenue lors de l'envoi. Merci de réessayer ou de me contacter directement par email à teo@tbdesign-metal.com.");
     });
   });
 });
