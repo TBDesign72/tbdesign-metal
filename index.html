@@ -216,6 +216,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="dns-prefetch" href="//formsubmit.co">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1123,11 +1124,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </div>
 
     <div class="cf-right">
-      <form id="contactForm" action="https://formsubmit.co/teo@tbdesign-metal.com" method="POST">
-        <input type="hidden" name="_subject" value="Nouveau message depuis TB Design">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://www.tbdesign-metal.com?sent=1">
+      <form id="contactForm">
 
         <div class="cf-field">
           <label class="cf-label" for="name">Votre nom</label>
@@ -1736,18 +1733,53 @@ animateTrail();
 // Particules remplacées par grain CSS
 
 // ── FORMULAIRE ──
-// Formulaire géré nativement par FormSubmit
-if(window.location.search.includes("sent=1")){
-  window.addEventListener("DOMContentLoaded",function(){
-    var s=document.getElementById("cfSuccess");
-    var f=document.getElementById("contactForm");
-    if(s)s.classList.add("visible");
-    if(f)f.style.opacity="0.3";
-    var sec=document.getElementById("contact-form");
-    if(sec)setTimeout(function(){sec.scrollIntoView({behavior:"smooth"});},200);
-    window.history.replaceState({},"",window.location.pathname);
+// ── FORMULAIRE EMAILJS ──
+(function(){
+  emailjs.init('AxIiPw0DuieTgWj1g');
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = this.querySelector('.cf-btn');
+    var btnText = btn.querySelector('.cf-btn-text');
+    var fileInput = document.getElementById('attachment');
+    var file = fileInput.files[0];
+
+    btnText.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+
+    function sendEmail(attachmentData, attachmentName) {
+      var params = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        objet: document.getElementById('objet').value,
+        message: document.getElementById('message').value,
+        attachment: attachmentData || '',
+        attachment_name: attachmentName || ''
+      };
+
+      emailjs.send('service_kyzr78b', 'template_5hqvy7s', params)
+        .then(function() {
+          document.getElementById('cfSuccess').classList.add('visible');
+          btnText.textContent = 'Message envoyé';
+          document.getElementById('contactForm').reset();
+        })
+        .catch(function() {
+          btnText.textContent = 'Erreur — réessayez';
+          btn.disabled = false;
+        });
+    }
+
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        sendEmail(ev.target.result, file.name);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      sendEmail('', '');
+    }
   });
-}
+})();
 </script>
 
 <script>
