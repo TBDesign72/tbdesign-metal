@@ -1737,6 +1737,17 @@ animateTrail();
 
 // ── FORMULAIRE ──
 // Formulaire géré nativement par FormSubmit
+if(window.location.search.includes("sent=1")){
+  window.addEventListener("DOMContentLoaded",function(){
+    var s=document.getElementById("cfSuccess");
+    var f=document.getElementById("contactForm");
+    if(s)s.classList.add("visible");
+    if(f)f.style.opacity="0.3";
+    var sec=document.getElementById("contact-form");
+    if(sec)setTimeout(function(){sec.scrollIntoView({behavior:"smooth"});},200);
+    window.history.replaceState({},"",window.location.pathname);
+  });
+}
 </script>
 
 <script>
