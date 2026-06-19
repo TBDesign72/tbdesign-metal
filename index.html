@@ -525,6 +525,12 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     grid-template-columns:1fr;
   }
 
+  /* ZONES D'INTERVENTION */
+  .zones-grid{
+    grid-template-columns:1fr !important;
+    max-width:100% !important;
+  }
+
   /* WHY GRID déjà géré mais sécurité */
   .why-grid{
     grid-template-columns:1fr;
@@ -871,7 +877,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   <div class="sect-hd">
     <div><p class="sect-ey">Couverture nationale</p><h2 class="sect-ti">Zones d'<em>intervention</em></h2></div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1100px">
+  <div class="zones-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1100px">
     <div style="background:var(--anth);padding:32px 28px;border:1px solid #c8a96e0a">
       <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:14px;font-weight:500">Secteur principal</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--blanc);margin-bottom:12px">Sarthe & Pays de la Loire</p>
