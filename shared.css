@@ -194,3 +194,15 @@ footer.sp-footer{
   footer.sp-footer{padding:32px 20px;flex-direction:column;align-items:flex-start;}
   .sp-footer-legal{text-align:left;}
 }
+
+/* ══ CLASSES EXTRAITES DES STYLES INLINE ══ */
+.real-ti-lg{font-size:22px}
+.real-ti-sm{font-size:17px}
+.sect-border-top{border-top:1px solid #c8a96e18}
+.zones-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1100px}
+@media(max-width:768px){.zones-grid{grid-template-columns:1fr}}
+.tarif-prix-devis{font-size:36px;padding-top:6px}
+.footer-logo-img{height:36px;display:block;margin-bottom:16px}
+.footer-legal-note{margin-top:16px;font-size:11px;color:#555}
+.sect-hd-lg{margin-bottom:36px}
+.footer-address{font-size:11px;color:var(--gris);letter-spacing:1px;margin-bottom:12px;font-style:normal}

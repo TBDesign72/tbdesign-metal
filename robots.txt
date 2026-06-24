@@ -2,3 +2,13 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tbdesign-metal.com/sitemap.xml
+
+# LLM indexation
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
