@@ -206,3 +206,20 @@ footer.sp-footer{
 .footer-legal-note{margin-top:16px;font-size:11px;color:#555}
 .sect-hd-lg{margin-bottom:36px}
 .footer-address{font-size:11px;color:var(--gris);letter-spacing:1px;margin-bottom:12px;font-style:normal}
+
+/* ══ ZONES D'INTERVENTION ══ */
+.zone-card{background:var(--anth);padding:32px 28px;border:1px solid #c8a96e0a}
+.zone-card-highlight{border-color:#c8a96e44}
+.zone-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:14px;font-weight:500}
+.zone-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--blanc);margin-bottom:12px}
+.zone-cities{font-size:12px;color:var(--gris);line-height:1.8}
+.zone-note{margin-top:28px;font-size:11px;color:var(--gris);max-width:680px;line-height:1.9}
+.zone-strong{color:var(--blanc);font-weight:400}
+
+/* ══ FOOTER CONTACT ══ */
+.footer-contact-line{margin-top:8px}
+.footer-contact-link{color:var(--gris);text-decoration:none;transition:color .3s}
+.footer-contact-link:hover{color:var(--or)}
+
+/* ══ FORMULAIRE ══ */
+.form-file-note{font-size:10px;color:var(--gris);margin-top:6px}
