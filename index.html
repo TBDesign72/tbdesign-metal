@@ -305,25 +305,31 @@ section.sect,section.contact-form-section{display:block}
 .real-cat{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:6px;display:block}
 .real-ti{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--blanc);line-height:1.2}
 
-/* ══ RÉALISATIONS RÉCENTES ══ */
-.rr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:8px}
-.rr-card{background:var(--anth);border:1px solid #c8a96e14;overflow:hidden;opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .3s}
+/* ══ RÉALISATIONS RÉCENTES (défilement horizontal) ══ */
+.rr-scroll{overflow-x:auto;overflow-y:hidden;margin:0 -64px;padding:4px 64px 24px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#c8a96e55 transparent}
+.rr-scroll::-webkit-scrollbar{height:5px}
+.rr-scroll::-webkit-scrollbar-track{background:transparent}
+.rr-scroll::-webkit-scrollbar-thumb{background:#c8a96e55;border-radius:4px}
+.rr-scroll::-webkit-scrollbar-thumb:hover{background:var(--or)}
+.rr-track{display:flex;gap:22px;width:max-content}
+.rr-card{background:var(--anth);border:1px solid #c8a96e14;overflow:hidden;opacity:0;transform:translateY(28px) translateX(0);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .3s;flex:0 0 300px}
 .rr-card.visible{opacity:1;transform:translateY(0)}
 .rr-card.visible:hover{border-color:#c8a96e44;transform:translateY(-3px)}
 .rr-card:nth-child(1){transition-delay:0s}
-.rr-card:nth-child(2){transition-delay:.12s}
-.rr-card:nth-child(3){transition-delay:.24s}
-.rr-card:nth-child(4){transition-delay:.36s}
-.rr-card:nth-child(n+5){transition-delay:.12s}
-.rr-img{height:280px;overflow:hidden;background:var(--gf)}
-.rr-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92);transition:transform .5s,filter .5s}
-.rr-card:hover .rr-img img{transform:scale(1.04);filter:brightness(1)}
-.rr-body{padding:28px 30px}
+.rr-card:nth-child(2){transition-delay:.08s}
+.rr-card:nth-child(3){transition-delay:.16s}
+.rr-card:nth-child(4){transition-delay:.24s}
+.rr-card:nth-child(n+5){transition-delay:.08s}
+.rr-img{height:380px;overflow:hidden;background:var(--gf);display:flex;align-items:center;justify-content:center}
+.rr-img img{width:100%;height:100%;object-fit:contain;display:block;filter:brightness(.96);transition:transform .5s,filter .5s}
+.rr-card:hover .rr-img img{transform:scale(1.03);filter:brightness(1)}
+.rr-body{padding:22px 24px}
 .rr-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:10px;display:block;font-weight:500}
-.rr-ti{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--blanc);margin-bottom:12px;line-height:1.25}
-.rr-d{font-size:12px;line-height:1.85;color:var(--gris)}
-.rr-d + .rr-d{margin-top:10px}
-@media(max-width:900px){.rr-grid{grid-template-columns:1fr}}
+.rr-ti{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--blanc);margin-bottom:8px;line-height:1.25}
+.rr-d{font-size:12px;line-height:1.75;color:var(--gris)}
+.rr-hint{font-size:10px;letter-spacing:1px;color:var(--gris);display:flex;align-items:center;gap:8px;margin-top:14px}
+.rr-hint svg{width:14px;height:14px;stroke:var(--or)}
+@media(max-width:900px){.rr-scroll{margin:0 -20px;padding:4px 20px 20px}.rr-card{flex-basis:250px}.rr-img{height:320px}}
 
 /* ══ FAQ ══ */
 .faq-list{max-width:820px;margin-top:8px}
@@ -519,11 +525,6 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   /* TOOLS BARRE */
   .tools-div{
     display:none;
-  }
-
-  /* RÉALISATIONS RÉCENTES */
-  .rr-grid{
-    grid-template-columns:1fr;
   }
 
   /* ZONES D'INTERVENTION */
@@ -752,21 +753,68 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   <div class="sect-hd">
     <div><p class="sect-ey">Actualité</p><h2 class="sect-ti">Réalisations <em>récentes</em></h2></div>
   </div>
-  <div class="rr-grid">
+  <div class="rr-scroll">
+    <div class="rr-track">
 
     <div class="rr-card">
       <div class="rr-img"><img src="images/recent-veranda-acier.webp" loading="lazy" alt="Rendu 3D photoréaliste d'une véranda en acier"></div>
       <div class="rr-body">
-        <span class="rr-cat">Rendu photoréaliste — Projet de véranda acier</span>
-        <h3 class="rr-ti">Modélisation 3D et rendu photoréaliste</h3>
-        <p class="rr-d">Réalisés pour une entreprise de métallerie afin d'aider le client final à se projeter et à présenter son dossier en mairie.</p>
-        <p class="rr-d">La 3D apporte une lecture immédiate, facilite les échanges et sécurise les choix techniques avant fabrication.</p>
+        <span class="rr-cat">Rendu 3D — Véranda acier</span>
+        <h3 class="rr-ti">Modélisation & rendu photoréaliste</h3>
+        <p class="rr-d">Réalisé pour un métallier, afin d'aider son client à se projeter et de présenter le dossier en mairie.</p>
       </div>
     </div>
 
-    <!-- Pour ajouter une nouvelle réalisation chaque semaine, dupliquez le bloc .rr-card ci-dessus -->
+    <div class="rr-card">
+      <div class="rr-img"><img src="images/recent-escalier-quart-tournant.webp" loading="lazy" alt="Escalier acier quart tournant avec plans d'exécution"></div>
+      <div class="rr-body">
+        <span class="rr-cat">Plans d'exécution — Escalier</span>
+        <h3 class="rr-ti">Escalier quart tournant à limon central</h3>
+        <p class="rr-d">Marches bois et garde-corps verre, dessiné sur mesure pour une trémie d'étage.</p>
+      </div>
+    </div>
 
+    <div class="rr-card">
+      <div class="rr-img"><img src="images/recent-pergola-acier.webp" loading="lazy" alt="Structure de pergola en tubes acier avec plans d'exécution"></div>
+      <div class="rr-body">
+        <span class="rr-cat">Plans d'exécution — Structure</span>
+        <h3 class="rr-ti">Pergola en tubes acier</h3>
+        <p class="rr-d">Portique sur mesure en tube 80x80, pensé pour la fabrication et la pose.</p>
+      </div>
+    </div>
+
+    <div class="rr-card">
+      <div class="rr-img"><img src="images/recent-passerelle-vitree.webp" loading="lazy" alt="Passerelle vitrée sur structure acier avec plans d'exécution"></div>
+      <div class="rr-body">
+        <span class="rr-cat">Plans d'exécution — Verrière</span>
+        <h3 class="rr-ti">Passerelle sur structure vitrée</h3>
+        <p class="rr-d">Ossature acier et plancher vitré assurant la transition entre deux espaces baignés de lumière.</p>
+      </div>
+    </div>
+
+    <div class="rr-card">
+      <div class="rr-img"><img src="images/recent-garde-corps-brise-vue.webp" loading="lazy" alt="Garde-corps brise-vue en acier et verre avec plans d'exécution"></div>
+      <div class="rr-body">
+        <span class="rr-cat">Plans d'exécution — Garde-corps</span>
+        <h3 class="rr-ti">Garde-corps brise-vue en verre</h3>
+        <p class="rr-d">Montants acier et remplissage verre, pour une terrasse préservée des vis-à-vis sans perdre la luminosité.</p>
+      </div>
+    </div>
+
+    <div class="rr-card">
+      <div class="rr-img"><img src="images/recent-escalier-mur-pierre.webp" loading="lazy" alt="Escalier acier contre mur en pierre apparente avec plans d'exécution"></div>
+      <div class="rr-body">
+        <span class="rr-cat">Plans d'exécution — Escalier</span>
+        <h3 class="rr-ti">Escalier sur mesure contre mur en pierre</h3>
+        <p class="rr-d">Structure acier apparente et marches bois, intégrée à une pierre apparente pour un rendu brut et chaleureux.</p>
+      </div>
+    </div>
+
+    <!-- Pour ajouter une nouvelle réalisation, dupliquez le bloc .rr-card ci-dessus -->
+
+    </div>
   </div>
+  <p class="rr-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Défilement automatique — survolez ou glissez pour explorer</p>
 </section>
 
 <!-- CTA BANDE PLEIN ÉCRAN -->
@@ -2193,6 +2241,63 @@ document.addEventListener('DOMContentLoaded',function(){
     },{threshold:0.15});
     rrCards.forEach(function(card){ rrObserver.observe(card); });
   }
+});
+document.addEventListener('DOMContentLoaded',function(){
+  var rrScroll = document.querySelector('.rr-scroll');
+  var rrTrack = document.querySelector('.rr-track');
+  if(!rrScroll || !rrTrack) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+
+  // Duplique les cartes pour permettre une boucle infinie sans à-coup
+  var originalCards = Array.prototype.slice.call(rrTrack.children);
+  originalCards.forEach(function(card){
+    var clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden','true');
+    clone.classList.add('visible');
+    rrTrack.appendChild(clone);
+  });
+
+  var loopWidth = 0;
+  function computeLoopWidth(){
+    loopWidth = rrTrack.scrollWidth / 2;
+  }
+  computeLoopWidth();
+  window.addEventListener('resize', computeLoopWidth);
+
+  var paused = false;
+  var resumeTimer = null;
+  var speed = 0.7; // px par frame, défilement lent et fluide
+
+  function pause(){
+    paused = true;
+    if(resumeTimer){ clearTimeout(resumeTimer); }
+  }
+  function scheduleResume(delay){
+    if(resumeTimer){ clearTimeout(resumeTimer); }
+    resumeTimer = setTimeout(function(){ paused = false; }, delay || 1800);
+  }
+
+  ['mouseenter','touchstart','pointerdown'].forEach(function(evt){
+    rrScroll.addEventListener(evt, pause, {passive:true});
+  });
+  ['mouseleave'].forEach(function(evt){
+    rrScroll.addEventListener(evt, function(){ scheduleResume(600); }, {passive:true});
+  });
+  ['touchend','pointerup'].forEach(function(evt){
+    rrScroll.addEventListener(evt, function(){ scheduleResume(2200); }, {passive:true});
+  });
+
+  function tick(){
+    if(!paused){
+      rrScroll.scrollLeft += speed;
+      if(rrScroll.scrollLeft >= loopWidth){
+        rrScroll.scrollLeft -= loopWidth;
+      }
+    }
+    window.requestAnimationFrame(tick);
+  }
+  window.requestAnimationFrame(tick);
 });
 document.addEventListener('DOMContentLoaded',function(){
   var faqItems = document.querySelectorAll('.faq-item');
