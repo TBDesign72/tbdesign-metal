@@ -430,6 +430,26 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 .footer-bottom nav{display:flex;gap:24px;flex-wrap:wrap}
 .footer-bottom nav a{font-size:10px;color:#555;text-decoration:none;transition:color .3s}
 .footer-bottom nav a:hover{color:var(--or)}
+.footer-bottom-l{display:flex;align-items:center;gap:14px}
+.footer-bottom-li{width:30px;height:30px;border:1px solid #c8a96e33;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .3s,background .3s}
+.footer-bottom-li:hover{border-color:var(--or);background:#c8a96e11}
+.footer-bottom-li svg{width:14px;height:14px;fill:var(--gris);transition:fill .3s}
+.footer-bottom-li:hover svg{fill:var(--or)}
+.hero-cta-row{display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap}
+.hero-cta-note{font-size:11px;color:var(--gris);letter-spacing:.3px}
+.renfort-box{max-width:900px;margin:0 auto;text-align:center;padding:12px 24px}
+.renfort-ti{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:500;color:var(--blanc);margin-bottom:28px}
+.renfort-grid{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:24px}
+.renfort-q{font-size:13px;letter-spacing:1px;color:var(--or);border:1px solid #c8a96e33;padding:10px 20px;display:inline-block}
+.renfort-d{font-size:13px;line-height:1.9;color:var(--gris);max-width:640px;margin:0 auto}
+@media(max-width:600px){.renfort-grid{gap:12px}.renfort-q{font-size:12px;padding:8px 14px}}
+.wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.wf-step{position:relative;padding-top:8px}
+.wf-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#c8a96e33;line-height:1;display:block;margin-bottom:14px}
+.wf-ti{font-size:14px;font-weight:600;color:var(--blanc);margin-bottom:8px;letter-spacing:.3px}
+.wf-d{font-size:11.5px;line-height:1.7;color:var(--gris)}
+@media(max-width:900px){.wf-grid{grid-template-columns:1fr 1fr;row-gap:36px}}
+@media(max-width:560px){.wf-grid{grid-template-columns:1fr}}
 @media(max-width:900px){.footer-main{grid-template-columns:1fr 1fr;padding:40px 24px 24px}}
 @media(max-width:600px){.footer-main{grid-template-columns:1fr}.footer-bottom{padding:16px 24px;flex-direction:column;text-align:center}}
 
@@ -631,8 +651,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <section class="hero">
   <div class="hero-l">
     <img src="images/logo.webp" class="logo" alt="TB Design">
-    <h1 class="eyebrow">TB Design – Bureau d'Études & Sous-traitance DAO Métallerie</h1>
-    <p class="tagline">Dessinateur projeteur indépendant en métallerie et serrurerie. Sous-traitance bureau d'études, plans d'exécution SolidWorks, renfort ponctuel ou régulier. Le Mans & toute la France.</p>
+    <h1 class="eyebrow">Votre bureau d'études métallerie, sans embauche</h1>
+    <p class="tagline">TB Design accompagne les métalliers et serruriers dans leurs études : modélisation SolidWorks, plans d'exécution, dossiers de fabrication. Un renfort ponctuel ou régulier, sans charge fixe. Le Mans & toute la France.</p>
     <div class="stats">
       <div><div class="stat-n">15</div><div class="stat-l">Ans d'expérience</div></div>
       <div><div class="stat-n">SW</div><div class="stat-l">SolidWorks Expert</div></div>
@@ -644,7 +664,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div class="hero-ov"></div>
     <div class="badge">
       <span class="badge-t">Spécialité</span>
-      <span class="badge-s">Métallerie · Serrurerie · Acier</span>
+      <span class="badge-s">Sous-traitance BE · Métallerie · Serrurerie</span>
     </div>
   </div>
 </section>
@@ -657,12 +677,38 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div><p class="sect-ey">Expertise</p><h2 class="sect-ti">Mes <em>services</em></h2></div>
   </div>
   <div class="srv-grid">
-    <div class="srv"><span class="srv-n">01</span><div class="srv-ti">Escaliers sur mesure</div><p class="srv-d">Conception complète d'escaliers en acier, inox ou mixtes. Plans de fabrication, limons, marches, garde-corps — dossiers d'exécution prêts pour l'atelier.</p><span class="srv-tag">Acier · Inox · Mixte</span></div>
-    <div class="srv"><span class="srv-n">02</span><div class="srv-ti">Structures métalliques</div><p class="srv-d">Charpentes légères, mezzanines, passerelles, portails et ouvrages de serrurerie. Modélisation 3D SolidWorks précise pour une fabrication fluide et sans ambiguïté.</p><span class="srv-tag">Charpente · Serrurerie</span></div>
-    <div class="srv"><span class="srv-n">03</span><div class="srv-ti">Menuiseries acier</div><p class="srv-d">Portes, fenêtres acier, verrières, claustra et façades vitrées. Conception orientée atelier, plans de fabrication détaillés livrés en PDF et DXF.</p><span class="srv-tag">Verrières · Claustra</span></div>
-    <div class="srv"><span class="srv-n">04</span><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
-    <div class="srv"><span class="srv-n">05</span><div class="srv-ti">Rendu & modélisation 3D</div><p class="srv-d">Modélisation avancée sous SolidWorks, rendus photo-réalistes et simulations d'assemblage pour valider vos projets avant fabrication.</p><span class="srv-tag">SolidWorks · Rendu</span></div>
-    <div class="srv"><span class="srv-n">06</span><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables immédiatement exploitables.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
+    <div class="srv"><span class="srv-n">01</span><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables directement exploitables par l'atelier.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
+    <div class="srv"><span class="srv-n">02</span><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
+    <div class="srv"><span class="srv-n">03</span><div class="srv-ti">Escaliers sur mesure</div><p class="srv-d">Conception complète d'escaliers en acier, inox ou mixtes. Plans de fabrication, limons, marches, garde-corps — dossiers d'exécution prêts pour l'atelier.</p><span class="srv-tag">Acier · Inox · Mixte</span></div>
+    <div class="srv"><span class="srv-n">04</span><div class="srv-ti">Structures métalliques</div><p class="srv-d">Charpentes légères, mezzanines, passerelles, portails et ouvrages de serrurerie. Modélisation 3D SolidWorks précise pour une fabrication fluide et sans ambiguïté.</p><span class="srv-tag">Charpente · Serrurerie</span></div>
+    <div class="srv"><span class="srv-n">05</span><div class="srv-ti">Menuiseries acier</div><p class="srv-d">Portes, fenêtres acier, verrières, claustra et façades vitrées. Conception orientée atelier, plans de fabrication détaillés livrés en PDF et DXF.</p><span class="srv-tag">Verrières · Claustra</span></div>
+    <div class="srv"><span class="srv-n">06</span><div class="srv-ti">Rendu & modélisation 3D</div><p class="srv-d">Modélisation avancée sous SolidWorks, rendus photo-réalistes et simulations d'assemblage pour valider vos projets avant fabrication.</p><span class="srv-tag">SolidWorks · Rendu</span></div>
+  </div>
+</section>
+
+<!-- RENFORT ATELIER -->
+<section class="sect darker" aria-label="Renfort ponctuel pour métalliers et bureaux d'études">
+  <div class="renfort-box">
+    <h2 class="renfort-ti">Un renfort quand votre atelier en a besoin</h2>
+    <div class="renfort-grid">
+      <div class="renfort-item"><span class="renfort-q">Pic d'activité ?</span></div>
+      <div class="renfort-item"><span class="renfort-q">Dessinateur absent ?</span></div>
+      <div class="renfort-item"><span class="renfort-q">Dossier urgent ?</span></div>
+    </div>
+    <p class="renfort-d">Pas besoin d'embaucher pour absorber une surcharge d'études. TB Design intervient à la mission ou de manière récurrente, à distance, partout en France.</p>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="sect darker" aria-label="Méthode de travail, du projet à l'atelier">
+  <div class="sect-hd">
+    <div><p class="sect-ey">Méthode</p><h2 class="sect-ti">De votre projet à <em>l'atelier</em></h2></div>
+  </div>
+  <div class="wf-grid">
+    <div class="wf-step"><span class="wf-n">01</span><div class="wf-ti">Vous m'envoyez votre projet</div><p class="wf-d">PDF, DWG, croquis, photos ou relevé sur site.</p></div>
+    <div class="wf-step"><span class="wf-n">02</span><div class="wf-ti">Modélisation 3D</div><p class="wf-d">SolidWorks, avec vérification des assemblages.</p></div>
+    <div class="wf-step"><span class="wf-n">03</span><div class="wf-ti">Dossier de fabrication</div><p class="wf-d">Plans, détails, nomenclature, DXF, STEP.</p></div>
+    <div class="wf-step"><span class="wf-n">04</span><div class="wf-ti">Fabrication</div><p class="wf-d">Votre atelier travaille directement à partir du dossier.</p></div>
   </div>
 </section>
 
@@ -676,8 +722,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <div class="why-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
-      <div class="why-h">15 ans d'expérience</div>
-      <p class="why-d">Métallerie, serrurerie, charpente légère — une expertise terrain acquise sur des milliers d'ouvrages, directement transposée dans chaque dossier d'étude.</p>
+      <div class="why-h">15 ans dans la métallerie</div>
+      <p class="why-d">Avant TB Design, j'ai travaillé en atelier et en bureau d'études métallerie, sur des projets allant de l'escalier sur mesure aux structures. Cette expérience terrain m'aide à concevoir un ouvrage pensé pour être fabriqué et posé — pas seulement un modèle 3D.</p>
     </div>
     <div class="why-card">
       <div class="why-icon">
@@ -697,8 +743,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <div class="why-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <div class="why-h">Particuliers & professionnels</div>
-      <p class="why-d">Du particulier qui imagine son escalier au métallier qui externalise son bureau d'études — je m'adapte au contexte et aux exigences de chacun.</p>
+      <div class="why-h">Métalliers & bureaux d'études</div>
+      <p class="why-d">Ma cible principale : métalliers, serruriers, constructeurs métalliques et bureaux d'études qui externalisent tout ou partie de leurs études. J'accompagne aussi les architectes et, ponctuellement, les particuliers sur un projet précis.</p>
     </div>
     <div class="why-card">
       <div class="why-icon">
@@ -1060,14 +1106,14 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </div>
 
     <div class="tarif-card">
-      <p class="tarif-label">Sur-mesure</p>
-      <h3 class="tarif-titre">Projet spécial</h3>
-      <div class="tarif-prix tarif-prix-devis">Sur devis</div>
+      <p class="tarif-label">Sous-traitance BE</p>
+      <h3 class="tarif-titre">Mission ou collaboration</h3>
+      <div class="tarif-prix tarif-prix-devis">Selon volume</div>
       <p class="tarif-prix-note">HT · Étude gratuite</p>
       <div class="tarif-sep"></div>
       <ul class="tarif-items">
+        <li>Renfort ponctuel ou récurrent</li>
         <li>Projet complexe ou grande série</li>
-        <li>Renfort bureau d'études ponctuel</li>
         <li>Sculpture et pièces uniques acier</li>
         <li>Délai et révisions selon projet</li>
         <li>Réponse sous 24h</li>
@@ -1150,7 +1196,12 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   </div>
 </footer>
 <div class="footer-bottom">
-  <p>© 2026 TB Design · Téo Brunner · Le Mans</p>
+  <div class="footer-bottom-l">
+    <a href="https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6" target="_blank" rel="noopener noreferrer" class="footer-bottom-li" aria-label="Profil LinkedIn TB Design">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    </a>
+    <p>© 2026 TB Design · Téo Brunner · Le Mans</p>
+  </div>
   <nav aria-label="Liens légaux">
     <a href="#contact-form" onclick="event.preventDefault();document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Devis gratuit</a>
     <a href="#avis">Avis</a>
