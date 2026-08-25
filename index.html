@@ -298,6 +298,7 @@ section.sect,section.contact-form-section{display:block}
 .srv-tag{display:inline-block;margin-top:14px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or);border:1px solid #c8a96e44;padding:3px 10px}
 .srv-icon{width:36px;height:36px;border:1px solid #c8a96e33;display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:border-color .3s,background .3s}
 .srv-icon svg{stroke:var(--or);fill:none;stroke-width:1.4;width:17px;height:17px}
+.srv-icon svg{stroke:var(--or);fill:none;stroke-width:1.4;width:17px;height:17px}
 .srv:hover .srv-icon{border-color:var(--or);background:#c8a96e0f}
 .srv-icon-img{width:64px;height:64px;margin-bottom:14px;display:flex;align-items:center;justify-content:center}
 .srv-icon-img img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));transition:transform .35s cubic-bezier(.16,1,.3,1)}
@@ -459,6 +460,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 .wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
 .wf-step{position:relative;padding-top:8px}
 .wf-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#c8a96e33;line-height:1;display:block;margin-bottom:14px}
+.wf-icon{width:34px;height:34px;margin-bottom:10px;display:block}
+.wf-icon svg{width:100%;height:100%;stroke:var(--or);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .wf-ti{font-size:14px;font-weight:600;color:var(--blanc);margin-bottom:8px;letter-spacing:.3px}
 .wf-d{font-size:11.5px;line-height:1.7;color:var(--gris)}
 @media(max-width:900px){.wf-grid{grid-template-columns:1fr 1fr;row-gap:36px}}
@@ -695,12 +698,12 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div><p class="sect-ey">Expertise</p><h2 class="sect-ti">Mes <em>services</em></h2></div>
   </div>
   <div class="srv-grid">
-    <div class="srv"><span class="srv-n">01</span><div class="srv-icon-img"><img src="images/compas.png" alt="Renfort bureau d'études"></div><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables directement exploitables par l'atelier.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
-    <div class="srv"><span class="srv-n">02</span><div class="srv-icon-img"><img src="images/plans.png" alt="Plans d'exécution"></div><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
-    <div class="srv"><span class="srv-n">03</span><div class="srv-icon-img"><img src="images/escalier.png" alt="Escaliers sur mesure"></div><div class="srv-ti">Escaliers sur mesure</div><p class="srv-d">Conception complète d'escaliers en acier, inox ou mixtes. Plans de fabrication, limons, marches, garde-corps — dossiers d'exécution prêts pour l'atelier.</p><span class="srv-tag">Acier · Inox · Mixte</span></div>
-    <div class="srv"><span class="srv-n">04</span><div class="srv-icon-img"><img src="images/structure.png" alt="Structures métalliques"></div><div class="srv-ti">Structures métalliques</div><p class="srv-d">Charpentes légères, mezzanines, passerelles, portails et ouvrages de serrurerie. Modélisation 3D SolidWorks précise pour une fabrication fluide et sans ambiguïté.</p><span class="srv-tag">Charpente · Serrurerie</span></div>
-    <div class="srv"><span class="srv-n">05</span><div class="srv-icon-img"><img src="images/menuiserie.png" alt="Menuiseries acier"></div><div class="srv-ti">Menuiseries acier</div><p class="srv-d">Portes, fenêtres acier, verrières, claustra et façades vitrées. Conception orientée atelier, plans de fabrication détaillés livrés en PDF et DXF.</p><span class="srv-tag">Verrières · Claustra</span></div>
-    <div class="srv"><span class="srv-n">06</span><div class="srv-icon-img"><img src="images/rendu3d.png" alt="Rendu et modélisation 3D"></div><div class="srv-ti">Rendu & modélisation 3D</div><p class="srv-d">Modélisation avancée sous SolidWorks, rendus photo-réalistes et simulations d'assemblage pour valider vos projets avant fabrication.</p><span class="srv-tag">SolidWorks · Rendu</span></div>
+    <div class="srv"><span class="srv-n">01</span><div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 12l2 2 4-5"/></svg></div><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables directement exploitables par l'atelier.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
+    <div class="srv"><span class="srv-n">02</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M4 3h13l3 3v15a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
+    <div class="srv"><span class="srv-n">03</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M3 21V17H7V13H11V9H15V5H19V21H3z"/></svg></div><div class="srv-ti">Escaliers sur mesure</div><p class="srv-d">Conception complète d'escaliers en acier, inox ou mixtes. Plans de fabrication, limons, marches, garde-corps — dossiers d'exécution prêts pour l'atelier.</p><span class="srv-tag">Acier · Inox · Mixte</span></div>
+    <div class="srv"><span class="srv-n">04</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M3 21V7l9-4 9 4v14M3 21h18M7 21V11M12 21V9M17 21V11"/></svg></div><div class="srv-ti">Structures métalliques</div><p class="srv-d">Charpentes légères, mezzanines, passerelles, portails et ouvrages de serrurerie. Modélisation 3D SolidWorks précise pour une fabrication fluide et sans ambiguïté.</p><span class="srv-tag">Charpente · Serrurerie</span></div>
+    <div class="srv"><span class="srv-n">05</span><div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 12h18"/></svg></div><div class="srv-ti">Menuiseries acier</div><p class="srv-d">Portes, fenêtres acier, verrières, claustra et façades vitrées. Conception orientée atelier, plans de fabrication détaillés livrés en PDF et DXF.</p><span class="srv-tag">Verrières · Claustra</span></div>
+    <div class="srv"><span class="srv-n">06</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/><path d="M12 22V12M20.66 7L12 12M3.34 7L12 12"/></svg></div><div class="srv-ti">Rendu & modélisation 3D</div><p class="srv-d">Modélisation avancée sous SolidWorks, rendus photo-réalistes et simulations d'assemblage pour valider vos projets avant fabrication.</p><span class="srv-tag">SolidWorks · Rendu</span></div>
   </div>
 </section>
 
@@ -724,10 +727,10 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div><p class="sect-ey">Méthode</p><h2 class="sect-ti">De votre projet à <em>l'atelier</em></h2></div>
   </div>
   <div class="wf-grid">
-    <div class="wf-step"><span class="wf-n">01</span><div class="wf-ti">Vous m'envoyez votre projet</div><p class="wf-d">PDF, DWG, croquis, photos ou relevé sur site.</p></div>
-    <div class="wf-step"><span class="wf-n">02</span><div class="wf-ti">Modélisation 3D</div><p class="wf-d">SolidWorks, avec vérification des assemblages.</p></div>
-    <div class="wf-step"><span class="wf-n">03</span><div class="wf-ti">Dossier de fabrication</div><p class="wf-d">Plans, détails, nomenclature, DXF, STEP.</p></div>
-    <div class="wf-step"><span class="wf-n">04</span><div class="wf-ti">Fabrication</div><p class="wf-d">Votre atelier travaille directement à partir du dossier.</p></div>
+    <div class="wf-step"><span class="wf-n">01</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M3 12l18-9-9 18-2-7-7-2z"/></svg></div><div class="wf-ti">Vous m'envoyez votre projet</div><p class="wf-d">PDF, DWG, croquis, photos ou relevé sur site.</p></div>
+    <div class="wf-step"><span class="wf-n">02</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/><path d="M12 22V12M20.66 7L12 12M3.34 7L12 12"/></svg></div><div class="wf-ti">Modélisation 3D</div><p class="wf-d">SolidWorks, avec vérification des assemblages.</p></div>
+    <div class="wf-step"><span class="wf-n">03</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 16h6M9 10h2"/></svg></div><div class="wf-ti">Dossier de fabrication</div><p class="wf-d">Plans, détails, nomenclature, DXF, STEP.</p></div>
+    <div class="wf-step"><span class="wf-n">04</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v3h-6v10h6v3H4v-3h6V7H4z"/></svg></div><div class="wf-ti">Fabrication</div><p class="wf-d">Votre atelier travaille directement à partir du dossier.</p></div>
   </div>
 </section>
 
@@ -745,29 +748,29 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <p class="why-d">Avant TB Design, j'ai acquis mon expérience en bureau d'études métallerie, sur des projets allant de l'escalier sur mesure aux structures. Cette expérience me permet de concevoir un ouvrage pensé pour être fabriqué et posé — pas seulement un modèle 3D.</p>
     </div>
     <div class="why-card">
-      <div class="why-icon" style="border:none;width:40px;height:40px;">
-        <img src="images/step.png" alt="Livrables PDF DXF STEP" style="width:40px;height:40px;object-fit:contain;">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       </div>
       <div class="why-h">Livrables atelier-ready</div>
       <p class="why-d">Plans PDF cotés, DXF pour la découpe laser ou plasma, STEP pour l'import FAO. Aucun retravail côté atelier — vous pouvez lancer la fabrication directement.</p>
     </div>
     <div class="why-card">
       <div class="why-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6M12 2v3"/></svg>
       </div>
       <div class="why-h">Réactivité & délais tenus</div>
       <p class="why-d">Devis sous 24h, délai précis communiqué dès la commande. Interlocuteur unique du début à la fin du projet — pas de délégation, pas de surprise.</p>
     </div>
     <div class="why-card">
       <div class="why-icon">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="7"/><circle cx="15" cy="12" r="7"/></svg>
       </div>
       <div class="why-h">Métalliers & bureaux d'études</div>
       <p class="why-d">Ma cible principale : métalliers, serruriers, constructeurs métalliques et bureaux d'études qui externalisent tout ou partie de leurs études. J'accompagne aussi les architectes et, ponctuellement, les particuliers sur un projet précis.</p>
     </div>
     <div class="why-card">
       <div class="why-icon">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M8.5 12l2.5 2.5 5-5"/></svg>
       </div>
       <div class="why-h">Confidentialité assurée</div>
       <p class="why-d">Vos projets, vos clients, vos méthodes restent confidentiels. Accord de confidentialité possible sur demande, systématiquement respecté.</p>
@@ -992,6 +995,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <section class="sect dark sect-border-top" id="zones" aria-label="Zones d'intervention – sous-traitance métallerie France">
   <div class="sect-hd">
     <div><p class="sect-ey">Couverture nationale</p><h2 class="sect-ti">Zones d'<em>intervention</em></h2></div>
+    <svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:var(--or);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));"><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
   </div>
   <div class="zones-grid">
     <div class="zone-card">
