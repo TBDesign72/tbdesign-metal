@@ -282,7 +282,8 @@ section.sect,section.contact-form-section{display:block}
 .stats.in-view > div:nth-child(2){transition-delay:.15s}
 .stats.in-view > div:nth-child(3){transition-delay:.25s}
 .stats.in-view > div{opacity:1;transform:translateY(0)}
-.sect-n{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:#c8a96e1a;line-height:1;flex-shrink:0}
+.sect-n{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:#c8a96e55;line-height:1;flex-shrink:0;opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.sect-n.in-view{opacity:1;transform:translateY(0)}
 .sect-ey{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--or);margin-bottom:8px}
 .sect-ti{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.1}
 .sect-ti em{color:var(--or);font-style:italic}
@@ -292,7 +293,14 @@ section.sect,section.contact-form-section{display:block}
 .srv:hover{background:#222}
 .srv::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--or),transparent);opacity:0;transition:opacity .3s}
 .srv:hover::before{opacity:1}
-.srv-n{position:absolute;top:14px;right:20px;font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:#c8a96e35;line-height:1}
+.srv-n{position:absolute;top:14px;right:20px;font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:#c8a96e55;line-height:1;opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.srv-n.in-view{opacity:1;transform:translateY(0)}
+.srv:nth-child(1) .srv-n{transition-delay:0s}
+.srv:nth-child(2) .srv-n{transition-delay:.08s}
+.srv:nth-child(3) .srv-n{transition-delay:.16s}
+.srv:nth-child(4) .srv-n{transition-delay:.24s}
+.srv:nth-child(5) .srv-n{transition-delay:.32s}
+.srv:nth-child(6) .srv-n{transition-delay:.4s}
 .srv-ti{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--blanc);margin-bottom:12px}
 .srv-d{font-size:11.5px;line-height:1.85;color:var(--gris)}
 .srv-tag{display:inline-block;margin-top:14px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or);border:1px solid #c8a96e44;padding:3px 10px}
@@ -459,7 +467,12 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 @media(max-width:600px){.renfort-grid{gap:12px}.renfort-q{font-size:12px;padding:8px 14px}}
 .wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
 .wf-step{position:relative;padding-top:8px}
-.wf-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#c8a96e33;line-height:1;display:block;margin-bottom:14px}
+.wf-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#c8a96e55;line-height:1;display:block;margin-bottom:14px;opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.wf-n.in-view{opacity:1;transform:translateY(0)}
+.wf-step:nth-child(1) .wf-n{transition-delay:0s}
+.wf-step:nth-child(2) .wf-n{transition-delay:.1s}
+.wf-step:nth-child(3) .wf-n{transition-delay:.2s}
+.wf-step:nth-child(4) .wf-n{transition-delay:.3s}
 .wf-icon{width:34px;height:34px;margin-bottom:10px;display:block}
 .wf-icon svg{width:100%;height:100%;stroke:var(--or);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .wf-ti{font-size:14px;font-weight:600;color:var(--blanc);margin-bottom:8px;letter-spacing:.3px}
@@ -698,7 +711,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div><p class="sect-ey">Expertise</p><h2 class="sect-ti">Mes <em>services</em></h2></div>
   </div>
   <div class="srv-grid">
-    <div class="srv"><span class="srv-n">01</span><div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 12l2 2 4-5"/></svg></div><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables directement exploitables par l'atelier.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
+    <div class="srv"><span class="srv-n">01</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M4 18v-2a8 8 0 0116 0v2"/><path d="M2 18h20v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2z"/><path d="M12 4v4"/></svg></div><div class="srv-ti">Renfort bureau d'études</div><p class="srv-d">Sous-traitance DAO ponctuelle ou régulière pour métalliers et bureaux d'études en surcharge. Réactivité, confidentialité, livrables directement exploitables par l'atelier.</p><span class="srv-tag">Sous-traitance · Mission</span></div>
     <div class="srv"><span class="srv-n">02</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M4 3h13l3 3v15a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><div class="srv-ti">Plans d'exécution</div><p class="srv-d">Dossiers complets : vues d'ensemble, plans de fabrication, nomenclatures et coupes. Livrés en PDF + DXF + STEP, adaptés à votre charte et directement exploitables.</p><span class="srv-tag">PDF · DXF · STEP</span></div>
     <div class="srv"><span class="srv-n">03</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M3 21V17H7V13H11V9H15V5H19V21H3z"/></svg></div><div class="srv-ti">Escaliers sur mesure</div><p class="srv-d">Conception complète d'escaliers en acier, inox ou mixtes. Plans de fabrication, limons, marches, garde-corps — dossiers d'exécution prêts pour l'atelier.</p><span class="srv-tag">Acier · Inox · Mixte</span></div>
     <div class="srv"><span class="srv-n">04</span><div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M3 21V7l9-4 9 4v14M3 21h18M7 21V11M12 21V9M17 21V11"/></svg></div><div class="srv-ti">Structures métalliques</div><p class="srv-d">Charpentes légères, mezzanines, passerelles, portails et ouvrages de serrurerie. Modélisation 3D SolidWorks précise pour une fabrication fluide et sans ambiguïté.</p><span class="srv-tag">Charpente · Serrurerie</span></div>
@@ -2301,6 +2314,9 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   },{threshold:0.2});
   document.querySelectorAll('.sect-ti, .sect-hd').forEach(function(el){
+    revealObserver.observe(el);
+  });
+  document.querySelectorAll('.srv-n, .wf-n, .sect-n').forEach(function(el){
     revealObserver.observe(el);
   });
 });
