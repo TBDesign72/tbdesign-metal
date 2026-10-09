@@ -117,6 +117,7 @@
   "sameAs": [
     "https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6",
     "https://www.instagram.com/tb_design_metal/",
+    "https://www.facebook.com/share/1BejunpeUM/",
     "https://www.pagesjaunes.fr/pros/tbdesign-metal",
     "https://www.kompass.com/c/tb-design/fr",
     "https://www.europages.fr/tb-design"
@@ -144,7 +145,7 @@
       "addressRegion": "Sarthe",
       "addressCountry": "FR"
     },
-    "sameAs": ["https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6", "https://www.instagram.com/tb_design_metal/"]
+    "sameAs": ["https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6", "https://www.instagram.com/tb_design_metal/", "https://www.facebook.com/share/1BejunpeUM/"]
   },
   {
     "@type": "BreadcrumbList",
@@ -228,7 +229,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--or:#c8a96e;--or2:#e2c992;--blanc:#f7f4ef;--gris:#9a9a9a;--anth:#141414;--noir:#0a0a0a;--gf:#1e1e1e}
 html{overflow-x:hidden;width:100%}
-body{background:var(--noir);color:var(--blanc);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;width:100%;min-width:320px;position:relative}
+body{background:var(--noir);color:var(--blanc);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:clip;width:100%;min-width:320px;position:relative}
 
 /* Conteneur global max-width pour ultra-wide */
 .hero,.sect,.tools,.contact-form-section,footer{
@@ -253,10 +254,20 @@ section.sect,section.contact-form-section{display:block}
 .hero-cta-btn-ghost:hover{border-color:var(--or);color:var(--or);transform:translateY(-2px)}
 .stats{display:flex;gap:44px}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--or);line-height:1}
+.stat-n.counted{
+  background-image:linear-gradient(120deg,var(--or) 35%,#fff6e0 50%,var(--or) 65%);
+  background-size:260% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:statShine 1.1s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes statShine{to{background-position:0% 0}}
+@media(prefers-reduced-motion:reduce){.stat-n.counted{animation:none;background:none;color:var(--or);-webkit-text-fill-color:var(--or)}}
 .stat-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-top:2px}
 .hero-r{position:relative;overflow:hidden;background:#111}
 .hero-r img{width:100%;height:100%;object-fit:cover;opacity:.6;display:block}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(20,20,20,.4),transparent 60%),linear-gradient(to top,rgba(10,10,10,.6),transparent 50%)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(20,20,20,.4),transparent 60%),linear-gradient(to top,rgba(10,10,10,.6),transparent 50%);z-index:2}
+.badge{z-index:3}
+
 .badge{position:absolute;bottom:40px;right:40px;border:1px solid #c8a96e66;padding:16px 28px;background:rgba(10,10,10,.7);text-align:center}
 .badge-t{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--or);display:block;margin-bottom:5px}
 .badge-s{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--blanc)}
@@ -328,6 +339,15 @@ section.sect,section.contact-form-section{display:block}
 .real-c{position:absolute;bottom:0;left:0;right:0;padding:22px;z-index:2}
 .real-cat{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:6px;display:block}
 .real-ti{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--blanc);line-height:1.2}
+.real-more-wrap{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1)}
+.real-more-wrap .real-grid{margin-top:3px}
+.real-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:28px;padding:16px;background:none;border:1px solid #c8a96e3a;color:var(--or);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:border-color .3s,background .3s}
+.real-toggle:hover{border-color:var(--or);background:#c8a96e0f}
+.real-toggle-icon{position:relative;width:12px;height:12px;flex-shrink:0}
+.real-toggle-icon::before,.real-toggle-icon::after{content:'';position:absolute;top:50%;left:50%;background:var(--or);transform:translate(-50%,-50%)}
+.real-toggle-icon::before{width:12px;height:1px}
+.real-toggle-icon::after{width:1px;height:12px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.real-toggle[aria-expanded="true"] .real-toggle-icon::after{transform:translate(-50%,-50%) rotate(90deg) scaleY(0)}
 
 /* ══ RÉALISATIONS RÉCENTES (défilement horizontal) ══ */
 .rr-scroll{overflow-x:auto;overflow-y:hidden;margin:0 -64px;padding:4px 64px 24px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#c8a96e55 transparent}
@@ -385,6 +405,16 @@ section.sect,section.contact-form-section{display:block}
 .ci-arrow{display:inline-block;margin-left:6px;opacity:0;transition:opacity .3s,transform .3s;font-size:11px;color:var(--or)}
 .ci-sub{font-size:11px;color:var(--gris);margin-top:2px;display:block}
 .ci-hover-hint{font-size:9px;letter-spacing:1px;color:#c8a96e66;margin-top:3px;display:block;font-style:italic}
+
+/* ══ FAQ — Voir plus / Voir moins ══ */
+.faq-more-wrap{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1)}
+.faq-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:820px;margin-top:8px;padding:16px;background:none;border:1px solid #c8a96e3a;color:var(--or);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:border-color .3s,background .3s}
+.faq-toggle:hover{border-color:var(--or);background:#c8a96e0f}
+.faq-toggle-icon{position:relative;width:12px;height:12px;flex-shrink:0}
+.faq-toggle-icon::before,.faq-toggle-icon::after{content:'';position:absolute;top:50%;left:50%;background:var(--or);transform:translate(-50%,-50%)}
+.faq-toggle-icon::before{width:12px;height:1px}
+.faq-toggle-icon::after{width:1px;height:12px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.faq-toggle[aria-expanded="true"] .faq-toggle-icon::after{transform:translate(-50%,-50%) rotate(90deg) scaleY(0)}
 
 footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #c8a96e18}
 .flogo{height:32px;display:block}
@@ -459,6 +489,17 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 .footer-bottom-li:hover svg{fill:var(--or)}
 .footer-bottom-ig svg{fill:none;stroke:var(--gris);stroke-width:1.6;transition:stroke .3s}
 .footer-bottom-ig:hover svg{fill:none;stroke:var(--or)}
+
+/* ══ Réseaux sociaux mis en avant (Instagram + Facebook) ══ */
+.ci-social .ci-icon{width:42px;height:42px;border-color:#c8a96e88;border-width:1.5px}
+.ci-social .ci-icon svg{width:19px;height:19px}
+.ci-icon-fb svg{fill:var(--or);stroke:none}
+.footer-social-ig,.footer-social-fb{width:44px;height:44px;border-color:#c8a96e55}
+.footer-social-ig svg,.footer-social-fb svg{width:20px;height:20px}
+.footer-social-fb svg{fill:var(--gris);stroke:none;transition:fill .3s}
+.footer-social-fb:hover svg{fill:var(--or)}
+.footer-bottom-fb svg{fill:var(--gris);transition:fill .3s}
+.footer-bottom-fb:hover svg{fill:var(--or)}
 .hero-cta-row{display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap}
 .hero-cta-note{font-size:11px;color:var(--gris);letter-spacing:.3px}
 .renfort-box{max-width:900px;margin:0 auto;text-align:center;padding:12px 24px}
@@ -620,6 +661,42 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     padding:32px 20px;
   }
 }
+
+/* ══ Escalier hélicoïdal qui se trace au scroll ══ */
+.esc-section{position:relative;height:380vh;background:var(--noir)}
+.esc-sticky{
+  position:sticky;top:0;height:100vh;
+  display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1.4fr);align-items:center;gap:40px;
+  padding:130px 64px 24px;  /* laisse la place à la barre de navigation et au mini-sommaire */
+  box-sizing:border-box;overflow:hidden;
+}
+.esc-texte{max-width:420px}
+.esc-d{color:var(--gris);font-size:14px;line-height:1.7;margin:18px 0 26px}
+.esc-etapes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:esc}
+.esc-etapes li{
+  counter-increment:esc;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:#8a8478;display:flex;align-items:center;gap:12px;transition:color .3s;
+}
+.esc-etapes li::before{
+  content:counter(esc,decimal-leading-zero);font-family:'Cormorant Garamond',serif;font-size:15px;
+  letter-spacing:0;color:#c8a96e55;width:22px;transition:color .3s;
+}
+.esc-etapes li.fait{color:var(--blanc)}
+.esc-etapes li.fait::before{color:var(--or)}
+.esc-etapes li.en-cours{color:var(--or)}
+.esc-etapes li.en-cours::before{color:var(--or)}
+#escSvg{display:block;width:100%;height:100%;max-height:calc(100vh - 154px);overflow:visible}
+#escSvg path{fill:none;stroke:#C9A66B;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:900px){
+  .esc-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:12px;padding:118px 20px 16px;align-items:stretch}
+  .esc-texte{max-width:none}
+  .esc-d{display:none}
+  .esc-etapes{flex-direction:row;flex-wrap:wrap;gap:6px 14px}
+  .esc-etapes li{font-size:8.5px;letter-spacing:2px;gap:6px}
+  .esc-etapes li::before{font-size:12px;width:auto}
+  #escSvg{max-height:none;min-height:0}
+  .esc-section .sect-ti{font-size:24px}
+}
 </style>
 </head>
 <body>
@@ -644,7 +721,10 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 
 <div class="main-nav-mobile" id="mobileMenu">
   <a href="#services" onclick="closeMobileMenu(this)">Services</a>
-  <a href="#realisations" onclick="closeMobileMenu(this)">Réalisations</a>
+  <a href="#pourquoi" onclick="closeMobileMenu(this)">Pourquoi</a>
+  <a href="#realisations" onclick="closeMobileMenu(this)">Domaines</a>
+  <a href="#recentes" onclick="closeMobileMenu(this)">Réalisations récentes</a>
+  <a href="#faq" onclick="closeMobileMenu(this)">FAQ</a>
   <a href="#tarifs" onclick="closeMobileMenu(this)">Tarifs</a>
   <a href="#zones" onclick="closeMobileMenu(this)">Zones</a>
   <a href="#avis" onclick="closeMobileMenu(this)">Avis</a>
@@ -685,9 +765,9 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <h1 class="eyebrow">Pas de bureau d'études ? Ou trop peu de temps pour le vôtre ?</h1>
     <p class="tagline">Sous-traitance DAO, modélisation SolidWorks, plans d'exécution — pour les ateliers sans BE interne comme pour ceux en surcharge ponctuelle. Renfort ponctuel ou régulier, sans charge fixe. Le Mans & toute la France.</p>
     <div class="stats">
-      <div><div class="stat-n">15</div><div class="stat-l">Ans d'expérience</div></div>
+      <div><div class="stat-n" data-count="15" data-suffix="">15</div><div class="stat-l">Ans d'expérience</div></div>
       <div><div class="stat-n">SW</div><div class="stat-l">SolidWorks Expert</div></div>
-      <div><div class="stat-n">100%</div><div class="stat-l">Atelier-ready</div></div>
+      <div><div class="stat-n" data-count="100" data-suffix="%">100%</div><div class="stat-l">Atelier-ready</div></div>
     </div>
     <div class="hero-cta-row">
       <a href="#contact-form" class="hero-cta-btn" onclick="event.preventDefault();document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Envoyer mon projet</a>
@@ -704,6 +784,21 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </div>
   </div>
 </section>
+
+<!-- MINI-SOMMAIRE — navigation rapide pour faciliter la lecture d'une page longue -->
+<nav class="mini-toc" id="miniToc" aria-label="Sommaire de la page">
+  <div class="mini-toc-track">
+    <a href="#services" data-section="services">Services</a>
+    <a href="#pourquoi" data-section="pourquoi">Pourquoi</a>
+    <a href="#realisations" data-section="realisations">Domaines</a>
+    <a href="#recentes" data-section="recentes">Réalisations</a>
+    <a href="#faq" data-section="faq">FAQ</a>
+    <a href="#zones" data-section="zones">Zones</a>
+    <a href="#tarifs" data-section="tarifs">Tarifs</a>
+    <a href="#avis" data-section="avis">Avis</a>
+    <a href="#contact-form" data-section="contact-form">Contact</a>
+  </div>
+</nav>
 
 <!-- SERVICES -->
 <!-- section id pour ancres SEO -->
@@ -746,6 +841,27 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div class="wf-step"><span class="wf-n">02</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/><path d="M12 22V12M20.66 7L12 12M3.34 7L12 12"/></svg></div><div class="wf-ti">Modélisation 3D</div><p class="wf-d">SolidWorks, avec vérification des assemblages.</p></div>
     <div class="wf-step"><span class="wf-n">03</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 16h6M9 10h2"/></svg></div><div class="wf-ti">Dossier de fabrication</div><p class="wf-d">Plans, détails, nomenclature, DXF, STEP.</p></div>
     <div class="wf-step"><span class="wf-n">04</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v3h-6v10h6v3H4v-3h6V7H4z"/></svg></div><div class="wf-ti">Fabrication</div><p class="wf-d">Votre atelier travaille directement à partir du dossier.</p></div>
+  </div>
+</section>
+
+<!-- ESCALIER HÉLICOÏDAL — dessin technique qui se trace au scroll -->
+<section class="esc-section" id="escScene" aria-label="Escalier hélicoïdal dessiné pièce par pièce">
+  <div class="esc-sticky">
+    <div class="esc-texte">
+      <p class="sect-ey">Conception</p>
+      <h2 class="sect-ti">Un escalier hélicoïdal, <em>pièce par pièce</em></h2>
+      <p class="esc-d">Faites défiler : chaque pièce se dessine dans l'ordre de conception, de la platine à la main courante.</p>
+      <ol class="esc-etapes" id="escEtapes">
+        <li data-partie="platine">Platine</li>
+        <li data-partie="fut">Fût</li>
+        <li data-partie="marches">Marches</li>
+        <li data-partie="limon">Limon</li>
+        <li data-partie="barreaux">Barreaux</li>
+        <li data-partie="mainCourante">Main courante</li>
+      </ol>
+    </div>
+    <svg id="escSvg" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Dessin technique d'un escalier hélicoïdal métallique avec garde-corps"></svg>
   </div>
 </section>
 
@@ -823,14 +939,22 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div class="real"><img src="images/real-escalier-mur-pierre.webp" loading="lazy" alt="Escalier mur pierre"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Escalier & charpente</span><div class="real-ti real-ti-sm">Acier & mur pierre apparente</div></div></div>
     <div class="real"><img src="images/real-claustra-loft.webp" loading="lazy" alt="Claustra loft"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Garde-corps & claustra</span><div class="real-ti real-ti-sm">Claustra & structures loft</div></div></div>
     <div class="real"><img src="images/real-metallerie-architecturale.webp" loading="lazy" alt="Métallerie architecturale"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Métallerie architecturale</span><div class="real-ti real-ti-sm">Structures & garde-corps</div></div></div>
-    <div class="real"><img src="images/real-verriere-atelier.webp" loading="lazy" alt="Verrière atelier"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Menuiseries acier</span><div class="real-ti real-ti-sm">Verrière style atelier</div></div></div>
-    <div class="real"><img src="images/real-plans-execution.webp" loading="lazy" alt="Plans d'exécution"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Conception & plans</span><div class="real-ti real-ti-sm">Dossiers d'exécution SolidWorks</div></div></div>
-    <div class="real"><img src="images/real-rendu-solidworks.webp" loading="lazy" alt="Rendu SolidWorks"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Rendu SolidWorks</span><div class="real-ti real-ti-sm">Modélisation 3D & rendu</div></div></div>
-    <div class="real"><img src="images/real-sculpture-porsche-911-gt3.webp" loading="lazy" alt="Sculpture Porsche 911 GT3"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Pièce unique</span><div class="real-ti real-ti-sm">Sculpture Porsche 911 GT3 acier</div></div></div>
-    <div class="real"><img src="images/real-ecureuil-low-poly.webp" loading="lazy" alt="Écureuil low poly"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Sculpture low poly</span><div class="real-ti real-ti-sm">Écureuil grand format</div></div></div>
-    <div class="real"><img src="images/real-taureau-low-poly.webp" loading="lazy" alt="Taureau low poly"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Sculpture low poly</span><div class="real-ti real-ti-sm">Taureau acier noir</div></div></div>
-    <div class="real"><img src="images/real-trappe-motorisee.webp" loading="lazy" alt="Trappe motorisée"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Conception spéciale</span><div class="real-ti real-ti-sm">Trappe motorisée extérieure</div></div></div>
   </div>
+  <div class="real-more-wrap" id="realMoreWrap">
+    <div class="real-grid real-grid-more">
+      <div class="real"><img src="images/real-verriere-atelier.webp" loading="lazy" alt="Verrière atelier"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Menuiseries acier</span><div class="real-ti real-ti-sm">Verrière style atelier</div></div></div>
+      <div class="real"><img src="images/real-plans-execution.webp" loading="lazy" alt="Plans d'exécution"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Conception & plans</span><div class="real-ti real-ti-sm">Dossiers d'exécution SolidWorks</div></div></div>
+      <div class="real"><img src="images/real-rendu-solidworks.webp" loading="lazy" alt="Rendu SolidWorks"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Rendu SolidWorks</span><div class="real-ti real-ti-sm">Modélisation 3D & rendu</div></div></div>
+      <div class="real"><img src="images/real-sculpture-porsche-911-gt3.webp" loading="lazy" alt="Sculpture Porsche 911 GT3"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Pièce unique</span><div class="real-ti real-ti-sm">Sculpture Porsche 911 GT3 acier</div></div></div>
+      <div class="real"><img src="images/real-ecureuil-low-poly.webp" loading="lazy" alt="Écureuil low poly"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Sculpture low poly</span><div class="real-ti real-ti-sm">Écureuil grand format</div></div></div>
+      <div class="real"><img src="images/real-taureau-low-poly.webp" loading="lazy" alt="Taureau low poly"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Sculpture low poly</span><div class="real-ti real-ti-sm">Taureau acier noir</div></div></div>
+      <div class="real"><img src="images/real-trappe-motorisee.webp" loading="lazy" alt="Trappe motorisée"><div class="real-ov"></div><div class="real-c"><span class="real-cat">Conception spéciale</span><div class="real-ti real-ti-sm">Trappe motorisée extérieure</div></div></div>
+    </div>
+  </div>
+  <button class="real-toggle" id="realToggleBtn" type="button" aria-expanded="false" aria-controls="realMoreWrap">
+    <span class="real-toggle-txt">Voir les 7 autres réalisations</span>
+    <span class="real-toggle-icon"></span>
+  </button>
 </section>
 
 <!-- RÉALISATIONS RÉCENTES -->
@@ -999,47 +1123,57 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <div class="faq-a"><div class="faq-a-in">Basé au Mans, j'interviens dans la Sarthe et les régions voisines (Pays de la Loire, Normandie, Centre-Val de Loire, Île-de-France) pour les projets nécessitant une visite. Pour la sous-traitance DAO et les plans d'exécution, j'interviens à distance pour des clients partout en France : Nantes, Rennes, Angers, Tours, Paris et au-delà.</div></div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span class="faq-q-text">Comment externaliser son bureau d'études métallerie ?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-in">Externaliser son bureau d'études métallerie consiste à confier tout ou partie de la production technique (plans, modélisation, nomenclatures) à un prestataire indépendant spécialisé. Cela permet d'absorber les pics d'activité sans embauche, de réduire les délais et de bénéficier d'une expertise pointue sur SolidWorks. Le processus est simple : vous transmettez votre cahier des charges, le prestataire produit les livrables et vous les retourne prêts pour l'atelier en PDF et DXF.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span class="faq-q-text">Que doit contenir un dossier d'exécution en serrurerie-métallerie ?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-in">Un dossier d'exécution complet comprend : les plans d'ensemble (vues 2D cotées), les plans de détail (assemblages, fixations, jonctions), les coupes et élévations, une nomenclature des matières avec références et quantités, et les fichiers numériques exploitables (DXF pour la découpe, STEP pour l'importation FAO, PDF pour la consultation atelier). Un dossier bien constitué permet à l'atelier de fabriquer sans retour vers le bureau d'études.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span class="faq-q-text">Comment réaliser un plan de fabrication d'escalier métallique ?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-in">La réalisation commence par la modélisation 3D complète sous SolidWorks : limons, marches, garde-corps, fixations. On en extrait ensuite les plans 2D cotés (plan de masse, élévations, détails des assemblages, coupes sur limon et marches) ainsi que la nomenclature des profilés et tôles. Le dossier final est livré en PDF et DXF pour permettre la découpe directe et une fabrication sans ambiguïté.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span class="faq-q-text">SolidWorks ou Tekla pour la métallerie et la serrurerie ?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-in">SolidWorks excelle pour les escaliers sur mesure, menuiseries acier, verrières et ouvrages de serrurerie architecturale : précision de détail, extraction de plans 2D rapide, idéal pour les petites et moyennes séries. Tekla est davantage orienté charpente lourde et grandes structures, avec une gestion avancée des gros assemblages. Pour la majorité des projets de métallerie-serrurerie, SolidWorks est le choix le plus adapté.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span class="faq-q-text">Quels sont les avantages de sous-traiter le dessin industriel en métallerie ?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-in">Sous-traiter le dessin industriel à un prestataire spécialisé permet de libérer vos équipes des tâches chronophages de mise en plan, d'absorber les surcharges sans embauche permanente, et d'obtenir des livrables directement exploitables par l'atelier. Pas de montée en compétence, pas de charge salariale fixe : vous payez uniquement la prestation produite, dans les délais convenus. C'est particulièrement adapté aux métalliers PME qui n'ont pas vocation à internaliser un bureau d'études à plein temps.</div></div>
-    </div>
-
   </div>
+
+  <div class="faq-more-wrap" id="faqMoreWrap">
+    <div class="faq-list faq-list-more">
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="faq-q-text">Comment externaliser son bureau d'études métallerie ?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">Externaliser son bureau d'études métallerie consiste à confier tout ou partie de la production technique (plans, modélisation, nomenclatures) à un prestataire indépendant spécialisé. Cela permet d'absorber les pics d'activité sans embauche, de réduire les délais et de bénéficier d'une expertise pointue sur SolidWorks. Le processus est simple : vous transmettez votre cahier des charges, le prestataire produit les livrables et vous les retourne prêts pour l'atelier en PDF et DXF.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="faq-q-text">Que doit contenir un dossier d'exécution en serrurerie-métallerie ?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">Un dossier d'exécution complet comprend : les plans d'ensemble (vues 2D cotées), les plans de détail (assemblages, fixations, jonctions), les coupes et élévations, une nomenclature des matières avec références et quantités, et les fichiers numériques exploitables (DXF pour la découpe, STEP pour l'importation FAO, PDF pour la consultation atelier). Un dossier bien constitué permet à l'atelier de fabriquer sans retour vers le bureau d'études.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="faq-q-text">Comment réaliser un plan de fabrication d'escalier métallique ?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">La réalisation commence par la modélisation 3D complète sous SolidWorks : limons, marches, garde-corps, fixations. On en extrait ensuite les plans 2D cotés (plan de masse, élévations, détails des assemblages, coupes sur limon et marches) ainsi que la nomenclature des profilés et tôles. Le dossier final est livré en PDF et DXF pour permettre la découpe directe et une fabrication sans ambiguïté.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="faq-q-text">SolidWorks ou Tekla pour la métallerie et la serrurerie ?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">SolidWorks excelle pour les escaliers sur mesure, menuiseries acier, verrières et ouvrages de serrurerie architecturale : précision de détail, extraction de plans 2D rapide, idéal pour les petites et moyennes séries. Tekla est davantage orienté charpente lourde et grandes structures, avec une gestion avancée des gros assemblages. Pour la majorité des projets de métallerie-serrurerie, SolidWorks est le choix le plus adapté.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="faq-q-text">Quels sont les avantages de sous-traiter le dessin industriel en métallerie ?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">Sous-traiter le dessin industriel à un prestataire spécialisé permet de libérer vos équipes des tâches chronophages de mise en plan, d'absorber les surcharges sans embauche permanente, et d'obtenir des livrables directement exploitables par l'atelier. Pas de montée en compétence, pas de charge salariale fixe : vous payez uniquement la prestation produite, dans les délais convenus. C'est particulièrement adapté aux métalliers PME qui n'ont pas vocation à internaliser un bureau d'études à plein temps.</div></div>
+      </div>
+
+    </div>
+  </div>
+  <button class="faq-toggle" id="faqToggleBtn" type="button" aria-expanded="false" aria-controls="faqMoreWrap">
+    <span class="faq-toggle-txt">Voir les 5 autres questions</span>
+    <span class="faq-toggle-icon"></span>
+  </button>
 </section>
 
 <!-- ZONES D'INTERVENTION -->
@@ -1129,8 +1263,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
           </span>
         </div>
       </div>
-      <div class="ci">
-        <div class="ci-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r=".9"/></svg></div>
+      <div class="ci ci-social">
+        <div class="ci-icon ci-icon-social"><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r=".9"/></svg></div>
         <div>
           <span class="ci-lbl">Instagram</span>
           <span class="ci-val">
@@ -1138,6 +1272,18 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
               @tb_design_metal <span class="ci-arrow">→</span>
             </a>
             <span class="ci-hover-hint">Ouvre Instagram</span>
+          </span>
+        </div>
+      </div>
+      <div class="ci ci-social">
+        <div class="ci-icon ci-icon-social ci-icon-fb"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.75 8.44-4.92 8.44-9.94z"/></svg></div>
+        <div>
+          <span class="ci-lbl">Facebook</span>
+          <span class="ci-val">
+            <a href="https://www.facebook.com/share/1BejunpeUM/" target="_blank" rel="noopener noreferrer" aria-label="Page Facebook TB Design">
+              TB Design <span class="ci-arrow">→</span>
+            </a>
+            <span class="ci-hover-hint">Ouvre Facebook</span>
           </span>
         </div>
       </div>
@@ -1156,7 +1302,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <p class="tarif-hd-right">Toutes les prestations font l'objet d'un devis gratuit et personnalisé. Les fourchettes ci-dessous sont données à titre indicatif.</p>
   </div>
 
-  <div class="tarif-grid">
+  <div class="tarif-scroll">
+    <div class="tarif-track">
 
     <div class="tarif-card">
       <p class="tarif-label">Prestation simple</p>
@@ -1207,6 +1354,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <button class="tarif-cta" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Me contacter</button>
     </div>
 
+    </div>
   </div>
 
   <div class="tarif-note">
@@ -1253,8 +1401,11 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
       <a href="https://www.linkedin.com/in/tb-design-téo-brunner-7b0030b6" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn TB Design">
         <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
       </a>
-      <a href="https://www.instagram.com/tb_design_metal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram TB Design">
+      <a href="https://www.instagram.com/tb_design_metal/" target="_blank" rel="noopener noreferrer" class="footer-social-ig" aria-label="Instagram TB Design">
         <svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r=".9"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/1BejunpeUM/" target="_blank" rel="noopener noreferrer" class="footer-social-fb" aria-label="Page Facebook TB Design">
+        <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.75 8.44-4.92 8.44-9.94z"/></svg>
       </a>
       <a href="mailto:teo@tbdesign-metal.com" aria-label="Email TB Design">
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1290,6 +1441,9 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     </a>
     <a href="https://www.instagram.com/tb_design_metal/" target="_blank" rel="noopener noreferrer" class="footer-bottom-li footer-bottom-ig" aria-label="Instagram TB Design">
       <svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r=".9"/></svg>
+    </a>
+    <a href="https://www.facebook.com/share/1BejunpeUM/" target="_blank" rel="noopener noreferrer" class="footer-bottom-li footer-bottom-fb" aria-label="Page Facebook TB Design">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.75 8.44-4.92 8.44-9.94z"/></svg>
     </a>
     <p>© 2026 TB Design · Téo Brunner · Le Mans</p>
   </div>
@@ -1725,18 +1879,25 @@ body::after{
   font-size:11px;color:var(--gris);line-height:1.8;
   max-width:320px;text-align:right;
 }
-.tarif-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:3px;
-  margin-bottom:40px;
+.tarif-scroll{
+  overflow-x:auto;overflow-y:hidden;
+  margin:0 -64px;padding:4px 64px 24px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:#c8a96e55 transparent;
+  margin-bottom:16px;
 }
+.tarif-scroll::-webkit-scrollbar{height:5px}
+.tarif-scroll::-webkit-scrollbar-track{background:transparent}
+.tarif-scroll::-webkit-scrollbar-thumb{background:#c8a96e55;border-radius:4px}
+.tarif-scroll::-webkit-scrollbar-thumb:hover{background:var(--or)}
+.tarif-track{display:flex;gap:3px;width:max-content}
 .tarif-card{
   background:var(--anth);
   padding:40px 32px;
   border:1px solid #c8a96e0a;
   position:relative;
   transition:border-color .3s,transform .3s;
+  flex:0 0 340px;
 }
 .tarif-card:hover{border-color:#c8a96e33;transform:translateY(-3px);}
 .tarif-card.featured{
@@ -1801,12 +1962,12 @@ body::after{
   background:rgba(200,169,110,0.02);
 }
 .tarif-note strong{color:var(--blanc);}
-@media(max-width:1024px){.tarif-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){
   .tarif-section{padding:52px 20px;}
   .tarif-hd{flex-direction:column;align-items:flex-start;gap:20px;}
   .tarif-hd-right{text-align:left;max-width:none;}
-  .tarif-grid{grid-template-columns:1fr;}
+  .tarif-scroll{margin:0 -20px 16px;padding:4px 20px 20px;}
+  .tarif-card{flex-basis:280px;padding:32px 24px;}
 }
 
 /* ══ NAVIGATION FIXE ══ */
@@ -1908,6 +2069,50 @@ body::after{
   .main-nav-cta { display: none; }
   .main-nav-burger { display: flex; }
   .main-nav { padding: 0 20px; }
+}
+
+/* ══ MINI-SOMMAIRE — accès rapide aux sections (lecture page longue) ══ */
+.mini-toc {
+  background: var(--anth);
+  border-top: 1px solid #c8a96e22;
+  border-bottom: 1px solid #c8a96e22;
+  position: sticky;
+  top: 56px;
+  z-index: 500;
+}
+.mini-toc-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.mini-toc-track::-webkit-scrollbar { display: none; }
+.mini-toc a {
+  flex-shrink: 0;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gris);
+  text-decoration: none;
+  padding: 9px 18px;
+  border: 1px solid #c8a96e33;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color .3s, border-color .3s, background .3s;
+}
+.mini-toc a:hover,
+.mini-toc a.active {
+  color: var(--or);
+  border-color: var(--or);
+  background: #c8a96e14;
+}
+@media(max-width:600px) {
+  .mini-toc-track { padding: 12px 16px; gap: 8px; }
+  .mini-toc a { font-size: 9.5px; padding: 8px 14px; }
 }
 </style>
 <style>
@@ -2023,6 +2228,8 @@ window.addEventListener("DOMContentLoaded",function(){
   const nav = document.getElementById('mainNav');
   const sections = document.querySelectorAll('[data-section]');
   const navLinks = document.querySelectorAll('.main-nav-links a[data-section]');
+  const miniTocTrack = document.querySelector('.mini-toc-track');
+  const miniTocLinks = document.querySelectorAll('.mini-toc a[data-section]');
 
   // Apparaît dès qu'on dépasse 80px de scroll, quelle que soit la direction
   window.addEventListener('scroll', function() {
@@ -2041,10 +2248,18 @@ window.addEventListener("DOMContentLoaded",function(){
     navLinks.forEach(a => {
       a.classList.toggle('active', a.dataset.section === current);
     });
+    miniTocLinks.forEach(a => {
+      const isActive = a.dataset.section === current;
+      a.classList.toggle('active', isActive);
+      if(isActive && miniTocTrack) {
+        const left = a.offsetLeft - (miniTocTrack.clientWidth - a.clientWidth) / 2;
+        miniTocTrack.scrollTo({left: Math.max(0, left), behavior: 'smooth'});
+      }
+    });
   }, {passive: true});
 
   // Scroll smooth sur les liens
-  document.querySelectorAll('.main-nav-links a, .main-nav-mobile a').forEach(a => {
+  document.querySelectorAll('.main-nav-links a, .main-nav-mobile a, .mini-toc a').forEach(a => {
     a.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
       if(href && href.startsWith('#')) {
@@ -2358,7 +2573,33 @@ document.addEventListener('DOMContentLoaded',function(){
       if(heroLogo) heroLogo.classList.add('in-view');
       if(heroEyebrow) heroEyebrow.classList.add('in-view');
       if(heroTagline) heroTagline.classList.add('in-view');
-      if(heroStats) heroStats.classList.add('in-view');
+      if(heroStats){
+        heroStats.classList.add('in-view');
+        // Compteurs animés + reflet métallique sur les chiffres clés
+        var reduceMotionStats = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        heroStats.querySelectorAll('.stat-n[data-count]').forEach(function(el){
+          var target = parseInt(el.getAttribute('data-count'),10) || 0;
+          var suffix = el.getAttribute('data-suffix') || '';
+          if(reduceMotionStats){
+            el.textContent = target + suffix;
+            return;
+          }
+          var startTime = null;
+          var duration = 1300;
+          function step(ts){
+            if(!startTime) startTime = ts;
+            var p = Math.min((ts-startTime)/duration, 1);
+            var eased = 1 - Math.pow(1-p, 3);
+            el.textContent = Math.round(eased*target) + suffix;
+            if(p < 1){
+              window.requestAnimationFrame(step);
+            } else {
+              el.classList.add('counted');
+            }
+          }
+          window.requestAnimationFrame(step);
+        });
+      }
     },150);
   });
 
@@ -2449,6 +2690,63 @@ document.addEventListener('DOMContentLoaded',function(){
   window.requestAnimationFrame(tick);
 });
 document.addEventListener('DOMContentLoaded',function(){
+  // ══ Tarifs — carrousel défilement horizontal (même logique que Réalisations récentes) ══
+  var tfScroll = document.querySelector('.tarif-scroll');
+  var tfTrack = document.querySelector('.tarif-track');
+  if(!tfScroll || !tfTrack) return;
+  var tfReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(tfReduceMotion) return;
+
+  // Duplique les cartes pour permettre une boucle infinie sans à-coup
+  var tfOriginalCards = Array.prototype.slice.call(tfTrack.children);
+  tfOriginalCards.forEach(function(card){
+    var clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden','true');
+    tfTrack.appendChild(clone);
+  });
+
+  var tfLoopWidth = 0;
+  function computeTfLoopWidth(){
+    tfLoopWidth = tfTrack.scrollWidth / 2;
+  }
+  computeTfLoopWidth();
+  window.addEventListener('resize', computeTfLoopWidth);
+
+  var tfPaused = false;
+  var tfResumeTimer = null;
+  var tfSpeed = 0.5; // px par frame, un peu plus lent (cartes à lire)
+
+  function tfPause(){
+    tfPaused = true;
+    if(tfResumeTimer){ clearTimeout(tfResumeTimer); }
+  }
+  function tfScheduleResume(delay){
+    if(tfResumeTimer){ clearTimeout(tfResumeTimer); }
+    tfResumeTimer = setTimeout(function(){ tfPaused = false; }, delay || 1800);
+  }
+
+  ['mouseenter','touchstart','pointerdown'].forEach(function(evt){
+    tfScroll.addEventListener(evt, tfPause, {passive:true});
+  });
+  ['mouseleave'].forEach(function(evt){
+    tfScroll.addEventListener(evt, function(){ tfScheduleResume(600); }, {passive:true});
+  });
+  ['touchend','pointerup'].forEach(function(evt){
+    tfScroll.addEventListener(evt, function(){ tfScheduleResume(2200); }, {passive:true});
+  });
+
+  function tfTick(){
+    if(!tfPaused){
+      tfScroll.scrollLeft += tfSpeed;
+      if(tfScroll.scrollLeft >= tfLoopWidth){
+        tfScroll.scrollLeft -= tfLoopWidth;
+      }
+    }
+    window.requestAnimationFrame(tfTick);
+  }
+  window.requestAnimationFrame(tfTick);
+});
+document.addEventListener('DOMContentLoaded',function(){
   var faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(function(item){
     var btn = item.querySelector('.faq-q');
@@ -2469,8 +2767,52 @@ document.addEventListener('DOMContentLoaded',function(){
         item.classList.add('open');
         ans.style.maxHeight = inner.scrollHeight + 'px';
       }
+      // Si l'item est dans le panneau "voir plus" déjà déployé, on réajuste sa hauteur
+      var moreWrap = item.closest('#faqMoreWrap');
+      if(moreWrap && moreWrap.style.maxHeight){
+        moreWrap.style.maxHeight = moreWrap.scrollHeight + 'px';
+      }
     });
   });
+
+  // ══ FAQ — Voir plus / Voir moins ══
+  var faqBtn = document.getElementById('faqToggleBtn');
+  var faqWrap = document.getElementById('faqMoreWrap');
+  if(faqBtn && faqWrap){
+    var faqTxt = faqBtn.querySelector('.faq-toggle-txt');
+    faqBtn.addEventListener('click', function(){
+      var isOpen = faqBtn.getAttribute('aria-expanded') === 'true';
+      if(isOpen){
+        faqBtn.setAttribute('aria-expanded','false');
+        faqWrap.style.maxHeight = null;
+        faqTxt.textContent = 'Voir les 5 autres questions';
+      } else {
+        faqBtn.setAttribute('aria-expanded','true');
+        faqWrap.style.maxHeight = faqWrap.scrollHeight + 'px';
+        faqTxt.textContent = 'Voir moins';
+      }
+    });
+  }
+});
+document.addEventListener('DOMContentLoaded',function(){
+  // ══ Domaines de réalisation — Voir plus / Voir moins ══
+  var realBtn = document.getElementById('realToggleBtn');
+  var realWrap = document.getElementById('realMoreWrap');
+  if(realBtn && realWrap){
+    var realTxt = realBtn.querySelector('.real-toggle-txt');
+    realBtn.addEventListener('click', function(){
+      var isOpen = realBtn.getAttribute('aria-expanded') === 'true';
+      if(isOpen){
+        realBtn.setAttribute('aria-expanded','false');
+        realWrap.style.maxHeight = null;
+        realTxt.textContent = 'Voir les 7 autres réalisations';
+      } else {
+        realBtn.setAttribute('aria-expanded','true');
+        realWrap.style.maxHeight = realWrap.scrollHeight + 'px';
+        realTxt.textContent = 'Voir moins';
+      }
+    });
+  }
 });
 document.addEventListener('DOMContentLoaded',function(){
   var map={
@@ -2495,5 +2837,627 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+<script>
+/* Escalier hélicoïdal : dessin SVG synchronisé avec le défilement */
+(function(){
+  'use strict';
+
+  /* ============================================================
+     1. GÉOMÉTRIE 3D DE L'ESCALIER (unités arbitraires, y = haut)
+     ============================================================ */
+  var N_MARCHES   = 14;                 // nombre de marches
+  var ROTATION    = 315;                // rotation totale en degrés
+  var D_THETA     = ROTATION / N_MARCHES;
+  var THETA_DEP   = 200;                // angle de départ (orientation de la vue)
+  var R_FUT       = 0.11;               // rayon du fût
+  var R_MARCHE    = 1.0;                // rayon extérieur des marches
+  var R_LIMON     = 1.015;              // rayon du limon (au contact des marches)
+  var HAUTEUR     = 3.6;                // hauteur à franchir
+  var H_MARCHE    = HAUTEUR / (N_MARCHES + 1);
+  var EP_MARCHE   = 0.06;               // épaisseur de marche
+  var R_PLATINE   = 0.34;               // rayon de la platine ronde
+  var EP_PLATINE  = 0.03;               // épaisseur de la platine
+  var TROU_POS    = 0.245;              // rayon du cercle de perçage
+  var TROU_R      = 0.028;              // rayon des trous
+  var H_FUT       = N_MARCHES * H_MARCHE + 0.32;
+  // limon : plat cintré en hélice qui enveloppe l'extrémité extérieure des marches
+  var LIMON_DESSUS = 0.045;             // dépassement au-dessus de la ligne des nez de marche
+  var H_LIMON     = 0.42;               // hauteur du limon (≈ 2,6 × l'ancienne)
+  // garde-corps
+  var H_GC        = 0.95;               // hauteur de la main courante au-dessus des nez de marche
+  var R_TUBE      = 0.028;              // rayon du tube de main courante
+  var BARREAUX_PAR_MARCHE = 2;          // espacement régulier : 2 barreaux par marche
+
+  /* ============================================================
+     2. PROJECTION EN PERSPECTIVE
+     ============================================================ */
+  var CIBLE_Y   = HAUTEUR / 2;
+  var INCLINAIS = 15 * Math.PI / 180;   // la caméra regarde légèrement vers le bas
+  var DIST_CAM  = 16;
+  var ECHELLE   = 100;
+
+  function projeter(x, y, z){
+    var yy = y - CIBLE_Y;
+    var c = Math.cos(INCLINAIS), s = Math.sin(INCLINAIS);
+    var ecranY    = yy * c - z * s;
+    var profondeur = z * c + yy * s;           // positif = vers la caméra
+    var k = DIST_CAM / (DIST_CAM - profondeur);
+    return { x: x * k * ECHELLE, y: -ecranY * k * ECHELLE, p: profondeur };
+  }
+  function polaire(r, thetaDeg, y){
+    var t = thetaDeg * Math.PI / 180;
+    return [r * Math.cos(t), y, r * Math.sin(t)];
+  }
+
+  var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  function P(pt){
+    var q = projeter(pt[0], pt[1], pt[2]);
+    if (q.x < minX) minX = q.x; if (q.x > maxX) maxX = q.x;
+    if (q.y < minY) minY = q.y; if (q.y > maxY) maxY = q.y;
+    return q;
+  }
+  function f(n){ return Math.round(n * 100) / 100; }
+  function polyligne(points, fermer){
+    var d = '';
+    for (var i = 0; i < points.length; i++){
+      var q = P(points[i]);
+      d += (i === 0 ? 'M' : 'L') + f(q.x) + ',' + f(q.y) + ' ';
+    }
+    return d + (fermer ? 'Z' : '');
+  }
+  function profondeurMoy(points){
+    var s = 0;
+    for (var i = 0; i < points.length; i++) s += projeter(points[i][0], points[i][1], points[i][2]).p;
+    return s / points.length;
+  }
+  // Les éléments situés à l'arrière sont tracés un peu plus pâles (lecture de la profondeur)
+  function opaciteSelonProfondeur(p){
+    var t = Math.max(0, Math.min(1, (p + 1.2) / 2.4));
+    return (0.32 + 0.68 * t).toFixed(2);
+  }
+
+  /* ============================================================
+     3. CONSTRUCTION DES PHASES (l'ordre du tableau = l'ordre de tracé)
+        Chaque phase contient un ou plusieurs tracés dessinés ensemble.
+     ============================================================ */
+  var svg = document.getElementById('escSvg');
+  var NS  = 'http://www.w3.org/2000/svg';
+  var phases = [];   // { partie, poids, traces:[{d, largeur, opacite}], solide }
+  var solides = [];  // volumes servant au masquage des lignes cachées
+
+  function phase(partie, poids, traces, solide){
+    phases.push({ partie: partie, poids: poids, traces: traces, solide: solide || null });
+  }
+
+  /* --- Outils géométriques --- */
+  var COS_I = Math.cos(INCLINAIS), SIN_I = Math.sin(INCLINAIS);
+  // position de la caméra dans l'espace (sert à savoir quelles faces sont visibles)
+  var CAMERA = [0, CIBLE_Y + DIST_CAM * SIN_I, DIST_CAM * COS_I];
+  // angle des génératrices de contour d'un cylindre vertical vu depuis la caméra
+  function angleTangente(r){ return Math.asin(r / CAMERA[2]) * 180 / Math.PI; }
+
+  function arc(r, a0, a1, y, n){
+    var pts = [];
+    for (var i = 0; i <= n; i++) pts.push(polaire(r, a0 + (a1 - a0) * i / n, y));
+    return pts;
+  }
+  function faceVisible(normale, pointFace){
+    var vx = CAMERA[0] - pointFace[0], vy = CAMERA[1] - pointFace[1], vz = CAMERA[2] - pointFace[2];
+    return normale[0] * vx + normale[1] * vy + normale[2] * vz > 1e-9;
+  }
+  // enveloppe convexe (chaîne monotone) des points projetés
+  function enveloppe(pts3d){
+    return enveloppe2d(pts3d.map(function(p){ var q = projeter(p[0], p[1], p[2]); return [q.x, q.y]; }));
+  }
+  function enveloppe2d(pts){
+    pts = pts.slice();
+    pts.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
+    function cross(o, a, b){ return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0]); }
+    var bas = [], haut = [];
+    pts.forEach(function(p){
+      while (bas.length >= 2 && cross(bas[bas.length-2], bas[bas.length-1], p) <= 0) bas.pop();
+      bas.push(p);
+    });
+    for (var i = pts.length - 1; i >= 0; i--){
+      var p = pts[i];
+      while (haut.length >= 2 && cross(haut[haut.length-2], haut[haut.length-1], p) <= 0) haut.pop();
+      haut.push(p);
+    }
+    haut.pop(); bas.pop();
+    return bas.concat(haut);
+  }
+  function centre(pts3d){
+    var c = [0, 0, 0];
+    pts3d.forEach(function(p){ c[0] += p[0]; c[1] += p[1]; c[2] += p[2]; });
+    return [c[0] / pts3d.length, c[1] / pts3d.length, c[2] / pts3d.length];
+  }
+  function nouveauSolide(type, pts3d, extra){
+    var c = centre(pts3d);
+    var env = (extra && extra.poly) ? extra.poly
+            : (extra && extra.ecran) ? enveloppe2d(extra.ecran) : enveloppe(pts3d);
+    var bx = [Infinity, Infinity, -Infinity, -Infinity];
+    env.forEach(function(p){
+      bx[0] = Math.min(bx[0], p[0]); bx[1] = Math.min(bx[1], p[1]);
+      bx[2] = Math.max(bx[2], p[0]); bx[3] = Math.max(bx[3], p[1]);
+    });
+    var so = { id: solides.length, type: type, z: c[2],
+               prof: projeter(c[0], c[1], c[2]).p, env: env, boite: bx };
+    if (extra) for (var k in extra) so[k] = extra[k];
+    solides.push(so);
+    return so;
+  }
+  // assemble des arêtes [a,b] (clés de points) en polylignes continues
+  function chainer(aretes, points){
+    var voisins = {};
+    aretes.forEach(function(e, i){
+      (voisins[e[0]] = voisins[e[0]] || []).push(i);
+      (voisins[e[1]] = voisins[e[1]] || []).push(i);
+    });
+    var utilise = aretes.map(function(){ return false; });
+    var d = '';
+    function suivante(n){
+      var l = voisins[n] || [];
+      for (var i = 0; i < l.length; i++) if (!utilise[l[i]]) return l[i];
+      return -1;
+    }
+    var noeuds = Object.keys(voisins);
+    // on démarre de préférence sur une extrémité libre (degré impair)
+    noeuds.sort(function(a, b){ return (voisins[b].length % 2) - (voisins[a].length % 2); });
+    noeuds.forEach(function(depart){
+      var e = suivante(depart);
+      while (e !== -1){
+        var chemin = [depart], courant = depart;
+        while (e !== -1){
+          utilise[e] = true;
+          courant = aretes[e][0] === courant ? aretes[e][1] : aretes[e][0];
+          chemin.push(courant);
+          e = suivante(courant);
+        }
+        d += polyligne(chemin.map(function(k){ return points[k]; }), false);
+        e = suivante(depart);
+      }
+    });
+    return d;
+  }
+
+  /* --- 3.1 Platine ronde au sol --- */
+  var aP = angleTangente(R_PLATINE);
+  var platineSolide = nouveauSolide('platine',
+    arc(R_PLATINE, 0, 360, EP_PLATINE, 36).concat(arc(R_PLATINE, 0, 360, 0, 36)));
+  // dessus : ellipse complète (toujours visible depuis la caméra, placée au-dessus)
+  phase('platine', 1.2, [{ d: polyligne(arc(R_PLATINE, aP, aP + 360, EP_PLATINE, 72), false), largeur: 1.2, opacite: 1 }], platineSolide);
+  // chant : génératrice droite ↓, arc avant du dessous, génératrice gauche ↑ (contour fermé sur le dessus)
+  var chantPlatine = [polaire(R_PLATINE, aP, EP_PLATINE)]
+    .concat(arc(R_PLATINE, aP, 180 - aP, 0, 36))
+    .concat([polaire(R_PLATINE, 180 - aP, EP_PLATINE)]);
+  phase('platine', 0.7, [{ d: polyligne(chantPlatine, false), largeur: 1.1, opacite: 0.95 }], platineSolide);
+  // quatre trous de fixation à 90°
+  [45, 135, 225, 315].forEach(function(a){
+    var cx = TROU_POS * Math.cos(a * Math.PI / 180), cz = TROU_POS * Math.sin(a * Math.PI / 180);
+    var pts = [];
+    for (var b = 0; b <= 360; b += 15){
+      var t = b * Math.PI / 180;
+      pts.push([cx + TROU_R * Math.cos(t), EP_PLATINE, cz + TROU_R * Math.sin(t)]);
+    }
+    phase('platine', 0.22, [{ d: polyligne(pts, false), largeur: 0.9, opacite: 0.9 }], platineSolide);
+  });
+
+  /* --- 3.2 Fût central (bas → haut) --- */
+  var aF = angleTangente(R_FUT);
+  var futSolide = nouveauSolide('fut',
+    arc(R_FUT, 0, 360, EP_PLATINE, 24).concat(arc(R_FUT, 0, 360, H_FUT, 24)));
+  // pied : seul l'arc avant est visible, posé sur le dessus de la platine
+  phase('fut', 0.3, [{ d: polyligne(arc(R_FUT, aF, 180 - aF, EP_PLATINE, 24), false), largeur: 1.3, opacite: 1 }], futSolide);
+  // deux génératrices de contour, tracées du bas vers le haut
+  phase('fut', 2.2, [
+    { d: polyligne([polaire(R_FUT, aF, EP_PLATINE),       polaire(R_FUT, aF, H_FUT)], false),       largeur: 1.4, opacite: 1 },
+    { d: polyligne([polaire(R_FUT, 180 - aF, EP_PLATINE), polaire(R_FUT, 180 - aF, H_FUT)], false), largeur: 1.4, opacite: 1 }
+  ], futSolide);
+  // tête : ellipse complète
+  phase('fut', 0.35, [{ d: polyligne(arc(R_FUT, aF, aF + 360, H_FUT, 36), false), largeur: 1.3, opacite: 1 }], futSolide);
+
+  /* --- 3.3 Marches, une par une : dessus fermé + chants visibles fermés --- */
+  var largeurAngulaire = D_THETA * 0.94;   // jour régulier entre deux marches
+  var N_EXT = 10, N_INT = 4;
+  for (var k = 0; k < N_MARCHES; k++){
+    var t1 = THETA_DEP + k * D_THETA;
+    var t2 = t1 + largeurAngulaire;
+    var yH = (k + 1) * H_MARCHE;          // dessus
+    var yB = yH - EP_MARCHE;              // dessous
+
+    // points nommés : Ou/Ob = arc extérieur haut/bas, Iu/Ib = arc intérieur (contre le fût)
+    var pts = {};
+    for (var j = 0; j <= N_EXT; j++){
+      var a = t1 + (t2 - t1) * j / N_EXT;
+      pts['Ou' + j] = polaire(R_MARCHE, a, yH);
+      pts['Ob' + j] = polaire(R_MARCHE, a, yB);
+    }
+    for (var m = 0; m <= N_INT; m++){
+      var ai = t1 + (t2 - t1) * m / N_INT;
+      pts['Iu' + m] = polaire(R_FUT, ai, yH);
+      pts['Ib' + m] = polaire(R_FUT, ai, yB);
+    }
+
+    // dessus : contour fermé fût → extérieur → arc → fût → retour le long du fût
+    var cle = ['Iu0'];
+    for (var j2 = 0; j2 <= N_EXT; j2++) cle.push('Ou' + j2);
+    for (var m2 = N_INT; m2 >= 0; m2--) cle.push('Iu' + m2);
+    var dDessus = polyligne(cle.map(function(c){ return pts[c]; }), false);
+    var aretesDessus = {};
+    for (var q = 0; q < cle.length - 1; q++) aretesDessus[[cle[q], cle[q+1]].sort().join('|')] = true;
+
+    // faces latérales candidates (le dessous et la face contre le fût ne sont jamais visibles)
+    var r1 = t1 * Math.PI / 180, r2 = t2 * Math.PI / 180;
+    var faces = [
+      { type: 'joue', coins: ['Iu0', 'Ou0', 'Ob0', 'Ib0'],
+        n: [Math.sin(r1), 0, -Math.cos(r1)] },
+      { type: 'joue', coins: ['Iu' + N_INT, 'Ou' + N_EXT, 'Ob' + N_EXT, 'Ib' + N_INT],
+        n: [-Math.sin(r2), 0, Math.cos(r2)] }
+    ];
+    for (var j3 = 0; j3 < N_EXT; j3++){
+      var am = (t1 + (t2 - t1) * (j3 + 0.5) / N_EXT) * Math.PI / 180;
+      faces.push({ type: 'ext', coins: ['Ou' + j3, 'Ou' + (j3+1), 'Ob' + (j3+1), 'Ob' + j3],
+                   n: [Math.cos(am), 0, Math.sin(am)] });
+    }
+
+    // arêtes des faces visibles ; on retire les subdivisions internes de la face cylindrique
+    var compte = {};
+    faces.forEach(function(fc){
+      if (!faceVisible(fc.n, centre(fc.coins.map(function(c){ return pts[c]; })))) return;
+      for (var e = 0; e < 4; e++){
+        var a1 = fc.coins[e], b1 = fc.coins[(e + 1) % 4];
+        var cl = [a1, b1].sort().join('|');
+        if (!compte[cl]) compte[cl] = { a: a1, b: b1, types: [] };
+        compte[cl].types.push(fc.type);
+      }
+    });
+    var aretesChants = [];
+    Object.keys(compte).forEach(function(cl){
+      var e = compte[cl];
+      if (aretesDessus[cl]) return;                                       // déjà tracée avec le dessus
+      if (e.types.length === 2 && e.types[0] === 'ext' && e.types[1] === 'ext') return; // subdivision
+      aretesChants.push([e.a, e.b]);
+    });
+
+    var tous = Object.keys(pts).map(function(c){ return pts[c]; });
+    var so = nouveauSolide('marche', tous);
+    var op = opaciteSelonProfondeur(profondeurMoy([polaire(R_MARCHE, (t1 + t2) / 2, yH)]));
+    phase('marches', 0.62, [{ d: dDessus, largeur: 1.25, opacite: op }], so);
+    if (aretesChants.length){
+      phase('marches', 0.38, [{ d: chainer(aretesChants, pts), largeur: 1.0, opacite: op }], so);
+    }
+  }
+
+  /* --- 3.4 Limon extérieur : surface hélicoïdale continue, après les marches --- */
+  var thetaDebut = THETA_DEP;
+  var thetaFin   = THETA_DEP + (N_MARCHES - 1) * D_THETA + largeurAngulaire;
+  function yNez(theta){ return H_MARCHE * (1 + (theta - thetaDebut) / D_THETA); }  // ligne des nez de marche
+  // bord supérieur juste au-dessus des nez : le limon couvre toute l'extrémité extérieure de chaque marche
+  function yLimonHaut(theta){ return yNez(theta) + LIMON_DESSUS; }
+  function yLimonBas(theta){ return Math.max(0, yLimonHaut(theta) - H_LIMON); }     // coupe d'aplomb au sol
+
+  // raccord de départ (vertical, du sol au bord supérieur)
+  phase('limon', 0.35, [{ d: polyligne([polaire(R_LIMON, thetaDebut, yLimonBas(thetaDebut)),
+                                         polaire(R_LIMON, thetaDebut, yLimonHaut(thetaDebut))], false),
+                          largeur: 1.5, opacite: 1 }],
+        nouveauSolide('limon', [polaire(R_LIMON, thetaDebut, yLimonBas(thetaDebut)),
+                                polaire(R_LIMON, thetaDebut, yLimonHaut(thetaDebut)),
+                                polaire(R_LIMON, thetaDebut + 0.5, yLimonHaut(thetaDebut))], { rang: -1 }));
+
+  // angles des génératrices de contour du limon (comme pour le fût), ramenés dans la plage de l'escalier
+  var aL = angleTangente(R_LIMON), silhouettesLimon = [];
+  [aL, 180 - aL].forEach(function(a0){
+    for (var tour = -2; tour <= 3; tour++){
+      var a = a0 + 360 * tour;
+      if (a > thetaDebut + 1 && a < thetaFin - 1) silhouettesLimon.push(a);
+    }
+  });
+
+  // deux contours longitudinaux révélés ensemble, segment par segment
+  // (les segments sont coupés pile sur les génératrices de contour : aucun segment ne se replie sur lui-même)
+  var PAS = 7.5, rang = 0;
+  var bornes = [];
+  for (var bt = thetaDebut; bt < thetaFin - 0.001; bt += PAS) bornes.push(bt);
+  silhouettesLimon.forEach(function(a){ bornes.push(a); });
+  bornes.push(thetaFin);
+  bornes.sort(function(a, b){ return a - b; });
+  bornes = bornes.filter(function(a, i){ return i === 0 || a - bornes[i - 1] > 0.3; });
+  function ecran(p){ var q = projeter(p[0], p[1], p[2]); return [q.x, q.y]; }
+  for (var ib = 0; ib < bornes.length - 1; ib++){
+    var th = bornes[ib], thB = bornes[ib + 1];
+    var haut = [], bas = [];
+    for (var s3 = 0; s3 <= 5; s3++){
+      var a4 = th + (thB - th) * s3 / 5;
+      haut.push(polaire(R_LIMON, a4, yLimonHaut(a4)));
+      bas.push(polaire(R_LIMON, a4, yLimonBas(a4)));
+    }
+    var opL = opaciteSelonProfondeur(profondeurMoy([polaire(R_LIMON, (th + thB) / 2, yNez((th + thB) / 2))]));
+    var zMil = Math.sin((th + thB) / 2 * Math.PI / 180);
+    var soL = nouveauSolide('limon', haut.concat(bas), {
+      rang: rang++, cote: zMil >= 0 ? 1 : -1,
+      poly: haut.map(ecran).concat(bas.slice().reverse().map(ecran))
+    });
+    var tracesL = [
+      { d: polyligne(haut, false), largeur: 1.6, opacite: opL, embout: 'butt' },
+      { d: polyligne(bas,  false), largeur: 1.3, opacite: opL, embout: 'butt' }
+    ];
+    // arête de contour verticale là où la surface du limon tourne et se dérobe à la vue
+    silhouettesLimon.forEach(function(as){
+      if (as >= th && as < thB){
+        tracesL.push({ d: polyligne([polaire(R_LIMON, as, yLimonHaut(as)), polaire(R_LIMON, as, yLimonBas(as))], false),
+                       largeur: 1.3, opacite: opL });
+      }
+    });
+    phase('limon', (thB - th) / PAS, tracesL, soL);
+  }
+  // raccord d'arrivée (vertical, du bord supérieur au bord inférieur)
+  phase('limon', 0.35, [{ d: polyligne([polaire(R_LIMON, thetaFin, yLimonHaut(thetaFin)),
+                                         polaire(R_LIMON, thetaFin, yLimonBas(thetaFin))], false),
+                          largeur: 1.5, opacite: 1 }],
+        nouveauSolide('limon', [polaire(R_LIMON, thetaFin, yLimonBas(thetaFin)),
+                                polaire(R_LIMON, thetaFin, yLimonHaut(thetaFin)),
+                                polaire(R_LIMON, thetaFin - 0.5, yLimonHaut(thetaFin))], { rang: rang }));
+
+  /* --- 3.5 Barreaux verticaux, du bas vers le haut --- */
+  function yMainCourante(theta){ return yNez(theta) + H_GC; }   // axe du tube
+  var nBarreaux = Math.round((thetaFin - thetaDebut) / D_THETA * BARREAUX_PAR_MARCHE);
+  var marginB = 2;   // en degrés : premier et dernier barreau légèrement en retrait des raccords
+  for (var b = 0; b <= nBarreaux; b++){
+    var tb = thetaDebut + marginB + (thetaFin - thetaDebut - 2 * marginB) * b / nBarreaux;
+    var pied  = polaire(R_LIMON, tb, yLimonHaut(tb));
+    // le barreau monte jusqu'à l'axe du tube : le tube (placé devant) masque exactement sa partie haute
+    var tete  = polaire(R_LIMON, tb, yMainCourante(tb));
+    var opB = opaciteSelonProfondeur(profondeurMoy([pied]));
+    phase('barreaux', 1, [{ d: polyligne([pied, tete], false), largeur: 1.0, opacite: opB }],
+          nouveauSolide('barreau', [pied, tete]));
+  }
+
+  /* --- 3.6 Main courante tubulaire ronde, en dernier, du bas vers le haut --- */
+  // axe hélicoïdal projeté, puis deux contours décalés perpendiculairement à la courbe à l'écran
+  var N_MC = Math.ceil((thetaFin - thetaDebut) / 1.25);
+  var axe = [];
+  for (var i = 0; i <= N_MC; i++){
+    var tm = thetaDebut + (thetaFin - thetaDebut) * i / N_MC;
+    var p3 = polaire(R_LIMON, tm, yMainCourante(tm));
+    var q = projeter(p3[0], p3[1], p3[2]);
+    var k3 = DIST_CAM / (DIST_CAM - q.p);
+    axe.push({ t: tm, p3: p3, x: q.x, y: q.y, r: R_TUBE * ECHELLE * k3 });
+  }
+  var cA = [], cB = [];
+  for (var i2 = 0; i2 < axe.length; i2++){
+    var av = axe[Math.max(0, i2 - 1)], ap = axe[Math.min(axe.length - 1, i2 + 1)];
+    var tx = ap.x - av.x, ty = ap.y - av.y, l = Math.sqrt(tx * tx + ty * ty) || 1;
+    var nx = -ty / l, ny = tx / l;
+    cA.push([axe[i2].x + nx * axe[i2].r, axe[i2].y + ny * axe[i2].r]);
+    cB.push([axe[i2].x - nx * axe[i2].r, axe[i2].y - ny * axe[i2].r]);
+    axe[i2].tx = tx / l; axe[i2].ty = ty / l; axe[i2].nx = nx; axe[i2].ny = ny;
+  }
+  function polyEcran(pts){
+    var d = '';
+    for (var i = 0; i < pts.length; i++){
+      var x = pts[i][0], y = pts[i][1];
+      if (x < minX) minX = x; if (x > maxX) maxX = x;
+      if (y < minY) minY = y; if (y > maxY) maxY = y;
+      d += (i === 0 ? 'M' : 'L') + f(x) + ',' + f(y) + ' ';
+    }
+    return d;
+  }
+  // embout arrondi : demi-cercle qui referme le tube (sens = -1 au départ, +1 à l'arrivée)
+  function embout(a, sens){
+    var pts = [];
+    for (var j = 0; j <= 10; j++){
+      var ang = Math.PI * j / 10;
+      var c = Math.cos(ang), sn = Math.sin(ang);
+      // part du contour A, passe par l'extrémité, arrive sur le contour B
+      var dx = a.nx * c + a.tx * sens * sn, dy = a.ny * c + a.ty * sens * sn;
+      pts.push([a.x + dx * a.r, a.y + dy * a.r]);
+    }
+    return pts;
+  }
+  var emb0 = embout(axe[0], -1), emb1 = embout(axe[axe.length - 1], 1);
+  phase('mainCourante', 0.25, [{ d: polyEcran(emb0), largeur: 1.2, opacite: 1 }],
+        nouveauSolide('main', [axe[0].p3], { ecran: emb0, rang: -1 }));
+
+  var PAS_MC = 6, rangMC = 0;   // 6 points d'axe par segment (7,5°)
+  for (var i3 = 0; i3 < axe.length - 1; i3 += PAS_MC){
+    var fin3 = Math.min(i3 + PAS_MC, axe.length - 1);
+    var segA = cA.slice(i3, fin3 + 1), segB = cB.slice(i3, fin3 + 1);
+    var milieu = axe[Math.floor((i3 + fin3) / 2)];
+    var opM = opaciteSelonProfondeur(profondeurMoy([milieu.p3]) - H_GC * Math.sin(INCLINAIS));
+    var soM = nouveauSolide('main', axe.slice(i3, fin3 + 1).map(function(a){ return a.p3; }),
+                            { poly: segA.concat(segB.slice().reverse()), rang: rangMC++ });
+    phase('mainCourante', (fin3 - i3) / PAS_MC, [
+      { d: polyEcran(segA), largeur: 1.25, opacite: opM, embout: 'butt' },
+      { d: polyEcran(segB), largeur: 1.25, opacite: opM, embout: 'butt' }
+    ], soM);
+  }
+  phase('mainCourante', 0.25, [{ d: polyEcran(emb1), largeur: 1.2, opacite: 1 }],
+        nouveauSolide('main', [axe[axe.length - 1].p3], { ecran: emb1, rang: rangMC }));
+
+  /* --- 3.7 Qui cache qui ? (pour retirer les lignes cachées) --- */
+  function devant(A, B){            // vrai si A est devant B pour la caméra
+    if (A === B) return false;
+    if (A.type === 'barreau') return false;         // barreaux fins : ils ne masquent rien
+    if (A.type === 'platine') return false;         // la platine est au sol, derrière tout
+    if (B.type === 'platine') return true;
+    if (A.type === 'fut') return B.z < 0;           // le fût cache ce qui est derrière l'axe
+    if (B.type === 'fut') return A.z > 0;
+    // segments contigus d'une même pièce courbe : pas d'auto-masquage,
+    // sauf de part et d'autre du virage où la surface se replie (l'avant cache alors l'arrière)
+    if (A.type === B.type && (A.type === 'limon' || A.type === 'main') && Math.abs(A.rang - B.rang) <= 1){
+      if (!(A.type === 'limon' && A.cote !== B.cote)) return false;
+    }
+    // (le tube, plus haut donc plus proche, masque le haut de son propre barreau : arrêt net sur le tube)
+    return A.prof > B.prof;
+  }
+  function chevauche(A, B){
+    var tol = 4;   // tolérance : tient compte de l'épaisseur des traits aux jonctions
+    return !(A.boite[2] + tol < B.boite[0] || B.boite[2] + tol < A.boite[0] ||
+             A.boite[3] + tol < B.boite[1] || B.boite[3] + tol < A.boite[1]);
+  }
+  /* ============================================================
+     4. RÉPARTITION DE LA PROGRESSION (ordre strict)
+     ============================================================ */
+  var BUDGET = { platine: 0.07, fut: 0.10, marches: 0.43, limon: 0.15, barreaux: 0.14, mainCourante: 0.11 };
+  var totalParPartie = {};
+  phases.forEach(function(ph){ totalParPartie[ph.partie] = (totalParPartie[ph.partie] || 0) + ph.poids; });
+
+  var curseur = 0;
+  phases.forEach(function(ph){
+    var duree = BUDGET[ph.partie] * ph.poids / totalParPartie[ph.partie];
+    ph.debut = curseur;
+    ph.fin   = curseur + duree;
+    curseur += duree;
+  });
+
+  /* ============================================================
+     5. CRÉATION DES ÉLÉMENTS SVG
+     ============================================================ */
+  // épaisseur de trait exprimée en unités du dessin (proportionnelle à sa taille)
+  var marge = 30;
+  var largeurVue = maxX - minX + 2 * marge;
+  var facteurTrait = largeurVue / 520;
+
+  // Un volume ne masque les autres qu'une fois sa première phase tracée
+  phases.forEach(function(ph){
+    if (ph.solide && ph.solide.revele === undefined) ph.solide.revele = ph.fin;
+  });
+
+  // Masques de lignes cachées : chaque volume est masqué par l'enveloppe des volumes placés devant lui
+  var defs = document.createElementNS(NS, 'defs');
+  svg.appendChild(defs);
+  var occultants = [];   // { el, solide } : polygones noirs à activer au fil du dessin
+  solides.forEach(function(B){
+    var devantB = solides.filter(function(A){ return devant(A, B) && chevauche(A, B); });
+    if (!devantB.length) return;
+    var masque = document.createElementNS(NS, 'mask');
+    masque.setAttribute('id', 'esc-cache-' + B.id);
+    masque.setAttribute('maskUnits', 'userSpaceOnUse');
+    masque.setAttribute('x', '-10000'); masque.setAttribute('y', '-10000');
+    masque.setAttribute('width', '20000'); masque.setAttribute('height', '20000');
+    var fondBlanc = document.createElementNS(NS, 'rect');
+    fondBlanc.setAttribute('x', '-10000'); fondBlanc.setAttribute('y', '-10000');
+    fondBlanc.setAttribute('width', '20000'); fondBlanc.setAttribute('height', '20000');
+    fondBlanc.setAttribute('fill', '#fff');
+    masque.appendChild(fondBlanc);
+    devantB.forEach(function(A){
+      var poly = document.createElementNS(NS, 'polygon');
+      // enveloppe très légèrement élargie pour ne laisser aucun résidu de trait caché sur les bords
+      var cx = 0, cy = 0;
+      A.env.forEach(function(p){ cx += p[0]; cy += p[1]; });
+      cx /= A.env.length; cy /= A.env.length;
+      var dilat = 1.1 * facteurTrait;
+      poly.setAttribute('points', A.env.map(function(p){
+        var dx = p[0] - cx, dy = p[1] - cy, l = Math.sqrt(dx * dx + dy * dy) || 1;
+        return f(p[0] + dx / l * dilat) + ',' + f(p[1] + dy / l * dilat);
+      }).join(' '));
+      poly.setAttribute('fill', '#000');
+      poly.style.display = 'none';
+      masque.appendChild(poly);
+      occultants.push({ el: poly, solide: A, actif: false });
+    });
+    defs.appendChild(masque);
+    B.masque = 'url(#esc-cache-' + B.id + ')';
+  });
+
+  var traces = [];
+  phases.forEach(function(ph){
+    ph.traces.forEach(function(tr){
+      var el = document.createElementNS(NS, 'path');
+      el.setAttribute('d', tr.d);
+      el.style.strokeWidth = (tr.largeur * facteurTrait).toFixed(2);
+      el.style.strokeOpacity = tr.opacite;
+      if (tr.embout) el.style.strokeLinecap = tr.embout;   // raccords du limon sans surépaisseur
+      el.setAttribute('data-piece', ph.partie);
+      if (ph.solide && ph.solide.masque) el.setAttribute('mask', ph.solide.masque);
+      svg.appendChild(el);
+      traces.push({ el: el, debut: ph.debut, fin: ph.fin });
+    });
+  });
+
+  svg.setAttribute('viewBox',
+    f(minX - marge) + ' ' + f(minY - marge) + ' ' +
+    f(largeurVue) + ' ' + f(maxY - minY + 2 * marge));
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+  traces.forEach(function(t){
+    t.longueur = t.el.getTotalLength();
+    t.el.style.strokeDasharray = t.longueur + ' ' + t.longueur;
+    t.el.style.strokeDashoffset = t.longueur;
+    t.el.style.visibility = 'hidden';
+  });
+
+  /* ============================================================
+     6. SYNCHRONISATION AVEC LE SCROLL (avance ET recule)
+     ============================================================ */
+  var scene = document.getElementById('escScene');
+  // indicateur des étapes (Platine, Fût, Marches…) synchronisé avec le dessin
+  var etapes = Array.prototype.slice.call(document.querySelectorAll('#escEtapes [data-partie]'));
+  var bornesPartie = {};
+  phases.forEach(function(ph){
+    var bp = bornesPartie[ph.partie] || (bornesPartie[ph.partie] = { debut: ph.debut, fin: ph.fin });
+    bp.debut = Math.min(bp.debut, ph.debut); bp.fin = Math.max(bp.fin, ph.fin);
+  });
+  var reduireMouvement = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function dessiner(progression){
+    for (var i = 0; i < traces.length; i++){
+      var t = traces[i];
+      var local = (progression - t.debut) / (t.fin - t.debut);
+      if (local <= 0){
+        t.el.style.visibility = 'hidden';
+        t.el.style.strokeDashoffset = t.longueur;
+      } else {
+        if (local > 1) local = 1;
+        t.el.style.visibility = 'visible';
+        t.el.style.strokeDashoffset = t.longueur * (1 - local);
+      }
+    }
+    // un volume ne cache ce qui est derrière lui qu'une fois tracé (et cesse de cacher si on remonte)
+    for (var o = 0; o < occultants.length; o++){
+      var oc = occultants[o];
+      var actif = progression >= oc.solide.revele;
+      if (actif !== oc.actif){
+        oc.actif = actif;
+        oc.el.style.display = actif ? 'inline' : 'none';
+      }
+    }
+    etapes.forEach(function(li){
+      var bp = bornesPartie[li.getAttribute('data-partie')];
+      if (!bp) return;
+      li.classList.toggle('en-cours', progression > bp.debut && progression < bp.fin - 1e-6);
+      li.classList.toggle('fait', progression >= bp.fin - 1e-6);   // tolérance d'arrondi (dernière étape à 100 %)
+    });
+  }
+
+  function progressionScroll(){
+    var r = scene.getBoundingClientRect();
+    var course = r.height - window.innerHeight;
+    if (course <= 0) return 1;
+    var p = -r.top / course;
+    if (p > 0.995) p = 1;        // arrondis au pixel : le dessin est garanti complet en bas de section
+    if (p < 0.005) p = 0;
+    return Math.max(0, Math.min(1, p));
+  }
+
+  var enAttente = false;
+  function surScroll(){
+    if (enAttente) return;
+    enAttente = true;
+    requestAnimationFrame(function(){
+      enAttente = false;
+      dessiner(progressionScroll());
+    });
+  }
+
+  if (reduireMouvement){
+    dessiner(1);
+  } else {
+    window.addEventListener('scroll', surScroll, { passive: true });
+    window.addEventListener('resize', surScroll);
+    dessiner(progressionScroll());
+  }
+})();
+</script>
 </body>
 </html>
