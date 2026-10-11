@@ -692,7 +692,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 }
 </style>
 <!-- Écran d'entrée immersif TB Design Métal (couche indépendante, fichiers entree*) -->
-<script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{var u=r?new URL(r):null;m=!!u&&(u.origin===location.origin||/(^|\.)(google|bing|qwant|duckduckgo|ecosia|yahoo|yandex|startpage|lilo|brave)\./.test(u.hostname+'.'))}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!sessionStorage.getItem('tbIntroVue')&&!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
+<script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{m=!!r&&new URL(r).origin===location.origin}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
 <link rel="stylesheet" href="entree.css">
 <script type="module" src="entree.js"></script>
 </head>
