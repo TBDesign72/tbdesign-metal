@@ -3,7 +3,7 @@
 
 Tous les fichiers vont directement à la racine du dépôt GitHub (TBDesign72, branche main), à côté de vos autres pages. Aucun dossier à créer.
 
-  index.html                 remplace votre index.html (4 lignes ajoutées avant </head>, section « escalier hélicoïdal pièce par pièce » retirée)
+  index.html                 remplace votre index.html : 4 lignes ajoutées avant </head> ; la section « escalier hélicoïdal pièce par pièce » est remplacée par la section « Mes créations en 3D » ; entrée « 3D » ajoutée au sommaire ; lien « Revoir l'intro 3D » en bas de page
   entree.js, entree.css      l'écran d'entrée
   entree-logo-embleme.webp, entree-logo-texte.webp   votre logo
   entree-*.json (9 fichiers) les 9 créations
@@ -12,5 +12,10 @@ Sur GitHub : Add file → Upload files → glisser les 14 fichiers → Commit ch
 Si un ancien dossier intro/ existe sur le dépôt (version précédente), vous pouvez le supprimer : il ne sert plus.
 Vérifier après 1 à 2 minutes : https://tbdesign-metal.com/?intro=1 en fenêtre privée (ou Ctrl+F5).
 
+Fonctionnement : à l'ouverture, votre logo se trace (≈ 3 s) pendant que l'engrenage compte de 0 à 100 % (il suit le tracé et attend, si besoin, la fin du chargement des créations), puis le bouton « Entrer sur le site » arrive en fondu ; les créations n'attendent pas : elles tournent déjà pendant le tracé. Les 9 créations apparaissent déjà construites dès que leur fichier est chargé (l'engrenage indique le chargement) et tournent autour du logo dans le sens horaire. Un clic sur une création l'ouvre en grand et la reconstruit (dessin pièce par pièce puis volumes).
+
+Section « Mes créations en 3D » (sur l'accueil, après « De votre projet à l'atelier ») : les 9 créations se dessinent puis se remplissent quand la section arrive à l'écran ; un clic ouvre la création en grand et la reconstruit (Reconstruire, Réinitialiser, ouvrir / fermer pour le portail et la verrière). La 3D n'est chargée qu'à l'approche de la section, pour ne pas ralentir la page. Bouton « Revoir l'introduction 3D » sous la grille et lien en bas de page.
+
+Les visiteurs qui arrivent depuis un moteur de recherche (Google, Bing, Qwant, DuckDuckGo…) vont directement sur l'accueil, sans écran d'entrée.
 L'écran s'affiche une fois par visite (pas en naviguant dans le site, ni avec le bouton retour, ni sur un lien avec #ancre).
 Pour le retirer : supprimer les 4 lignes de index.html.

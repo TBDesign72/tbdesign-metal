@@ -664,7 +664,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 
 </style>
 <!-- Écran d'entrée immersif TB Design Métal (couche indépendante, fichiers entree*) -->
-<script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{m=!!r&&new URL(r).origin===location.origin}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!sessionStorage.getItem('tbIntroVue')&&!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
+<script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{var u=r?new URL(r):null;m=!!u&&(u.origin===location.origin||/(^|\.)(google|bing|qwant|duckduckgo|ecosia|yahoo|yandex|startpage|lilo|brave)\./.test(u.hostname+'.'))}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!sessionStorage.getItem('tbIntroVue')&&!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
 <link rel="stylesheet" href="entree.css">
 <script type="module" src="entree.js"></script>
 </head>
@@ -758,6 +758,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <nav class="mini-toc" id="miniToc" aria-label="Sommaire de la page">
   <div class="mini-toc-track">
     <a href="#services" data-section="services">Services</a>
+    <a href="#creations-3d" data-section="creations-3d">3D</a>
     <a href="#pourquoi" data-section="pourquoi">Pourquoi</a>
     <a href="#realisations" data-section="realisations">Domaines</a>
     <a href="#recentes" data-section="recentes">Réalisations</a>
@@ -811,6 +812,26 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <div class="wf-step"><span class="wf-n">03</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 16h6M9 10h2"/></svg></div><div class="wf-ti">Dossier de fabrication</div><p class="wf-d">Plans, détails, nomenclature, DXF, STEP.</p></div>
     <div class="wf-step"><span class="wf-n">04</span><div class="wf-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v3h-6v10h6v3H4v-3h6V7H4z"/></svg></div><div class="wf-ti">Fabrication</div><p class="wf-d">Votre atelier travaille directement à partir du dossier.</p></div>
   </div>
+</section>
+
+<!-- MES CRÉATIONS EN 3D — se dessinent puis se remplissent à l'arrivée ; clic = vue en grand + reconstruction (entree.js) -->
+<section class="sect dark" id="creations-3d" aria-label="Mes créations en 3D">
+  <div class="sect-hd">
+    <div><p class="sect-ey">Modélisation 3D</p><h2 class="sect-ti">Mes créations, <em>pièce par pièce</em></h2></div>
+  </div>
+  <p class="tbg-intro">Neuf ouvrages modélisés en 3D, tracés comme sur la planche puis mis en volume. Cliquez sur une création pour la voir en grand et la reconstruire pièce par pièce.</p>
+  <div class="tbg-grille" id="tb-galerie3d">
+    <button type="button" class="tbg-carte" data-id="portail"><span class="tbg-scene"></span><span class="tbg-nom">Portail en ferronnerie d'art</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="helico"><span class="tbg-scene"></span><span class="tbg-nom">Escalier hélicoïdal</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="charpente"><span class="tbg-scene"></span><span class="tbg-nom">Charpente métallique</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="voiture"><span class="tbg-scene"></span><span class="tbg-nom">Voiture sculpturale</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="taureau"><span class="tbg-scene"></span><span class="tbg-nom">Taureau en métal facetté</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="mikado"><span class="tbg-scene"></span><span class="tbg-nom">Table Mikado</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="veranda"><span class="tbg-scene"></span><span class="tbg-nom">Véranda métallique vitrée</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="deuxq"><span class="tbg-scene"></span><span class="tbg-nom">Escalier deux-quarts tournant</span><span class="tbg-voir">Voir en 3D</span></button>
+    <button type="button" class="tbg-carte" data-id="verriere"><span class="tbg-scene"></span><span class="tbg-nom">Verrière</span><span class="tbg-voir">Voir en 3D</span></button>
+  </div>
+  <a class="tbg-revoir" href="./?intro=1" data-tb-revoir><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Revoir l'introduction 3D</a>
 </section>
 
 <!-- POURQUOI TB DESIGN -->
@@ -1396,6 +1417,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <p>© 2026 TB Design · Téo Brunner · Le Mans</p>
   </div>
   <nav aria-label="Liens légaux">
+    <a href="./?intro=1" data-tb-revoir>Revoir l'intro 3D</a>
     <a href="#contact-form" onclick="event.preventDefault();document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Devis gratuit</a>
     <a href="#avis">Avis</a>
     <a href="#faq">FAQ</a>

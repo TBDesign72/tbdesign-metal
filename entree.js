@@ -14,6 +14,7 @@ const BASE = new URL('./', import.meta.url);
 const CLE_VU = 'tbIntroVue';
 const LOGO_EMBLEME = new URL('entree-logo-embleme.webp', BASE).href;
 const LOGO_TEXTE = new URL('entree-logo-texte.webp', BASE).href;
+const chargerDef = f => fetch(new URL('entree-' + f, BASE)).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
 // contours vectoriels du logo (tracés au démarrage, puis remplis par l'image)
 const TRACE_LOGO = {"embleme":{"w":480,"h":477,"traits":[["M4.6,2.4 H474.6 V474.4 H4.6 Z",4.8],["M87.7,369.6 H93.3",7.2],["M107.3,369.6 H234.7",7.2],["M137.8,369.6 V218.2",7.2],["M101,255 L235,121",7.2],["M213.4,369.6 V270 H234.3",7.2],["M160.7,218.3 L206.7,172.3",7.2],["M69,242.3 L78,233 L88.7,211.7 L208.3,91.5 L209.7,87.3 L217,80 L219.3,79.3 L222.7,80 L231,88.3 L231.7,91.3 L231,94 L223.7,101.3 L219.5,102.8 L99.3,222.3 L78,233",7.2],["M88.7,211.7 L99.3,222.3",7.2],["M208.3,91.5 L219.5,102.8",7.2],["M248.8,397.6 V77.6 L411,238.4 L248.8,397.6",7.2],["M288.4,173.4 L355,238 L288.4,303.2 Z",7.2],["M278.7,129.7 L335.3,186.3",7.2],["M347.7,198.7 L353,204.3",7.2],["M384,261 L377,254",7.2],["M359.7,285.7 L347.7,273.3",7.2],["M335.3,310 L328.3,302.7",7.2],["M311,334 L299,322",7.2],["M286.7,358.7 L279.7,351.3",7.2]]},"texte":{"w":560,"h":151,"traits":[["M4,17 L4.7,8.3 L6,4.7 L11,3.3 L32.7,3.3 L35.7,4.3 L38,6.3",2.6],["M26.3,78.7 L34,78 L37.7,75.3",2.6],["M38,75 L38,6.7",2.6],["M70.3,4.7 L65.3,3.3 L44,3.3 L40,4.7 L38.3,6.3",2.6],["M38.3,75.3 L39.7,76.7 L43.7,78.3 L50.7,78.3",2.6],["M70.7,4.7 L73.7,2.7 L79.7,2.7 L82.3,3.3 L85.7,5.7",2.6],["M70.7,5 L72.3,17.3",2.6],["M74,77.7 L80.7,77.3 L83.3,76.3 L85.7,74.3",2.6],["M118.7,35 L120,36.7 L124.3,37.7 L129.3,40 L133.3,43.3 L136,47 L137.7,52 L138,58 L137.3,62.3 L134.3,68 L131.3,71 L125,74.7 L114,77.3 L91.7,77.3 L88,76 L86,74.3",2.6],["M86,74 L86,6",2.6],["M118.7,35 L119.7,33 L123.3,30.7 L127.3,26.3 L129,21.7 L129.3,17.7 L128.7,14 L126.7,10.3 L123.3,7 L118,4.3 L110.3,3 L91.3,3 L88.3,4 L86.3,5.7",2.6],["M95.7,36 L118.7,35",2.6],["M175.3,5.7 L171,3 L163.7,2.3",2.6],["M163.7,77.7 L170.3,77.3 L173,76.3 L175.3,74.3",2.6],["M175.7,74 L175.7,6",2.6],["M176,5.7 L181.3,3 L198.7,3 L208.7,4.3 L219.7,9 L228.3,16.3 L232.3,22 L235.3,28.3 L237.3,40.7 L235.7,50.7 L231.7,59.7 L227.3,65.3 L218,72.3 L211,75.3 L198.7,77.3 L181.3,77.3 L177.7,76 L175.7,74.3",2.6],["M253.7,5.7 L249.3,3 L242,2.3",2.6],["M242,77.7 L248.7,77.3 L251.3,76.3 L253.7,74.3",2.6],["M254,41.7 L254,6",2.6],["M254,74 L254,42.3",2.6],["M362,14 L355.7,6.3 L352.3,4.7 L345.3,2.7 L332.7,2 L324.3,4 L316.7,8.7 L313.3,14 L312,20.7 L312,23.3 L314,28.3 L317.7,32 L322,34.7 L327.3,36.7 L353.3,43 L359,46 L363,49.7 L366,55.7 L366.3,59.3 L365.3,65.3 L362.7,70 L356,75.7 L345.7,79.3 L336.7,79.7 L329.3,79 L318,75.3 L306.7,67.3 L304,68.3 L302.3,75.3 L301.3,76.3 L298,77 L260,77.3 L257.3,76.7 L254,74.3",2.6],["M254.3,42 L291,42",2.6],["M254.3,5.7 L256.3,4 L259.3,3 L295,3.3 L299,4.7 L301.7,14",2.6],["M291.3,41.7 L292.7,38 L293,33.3",2.6],["M293,50 L291.3,42.3",2.6],["M371.3,78 L379,77 L383,74.3",2.6],["M383,5.7 L378.7,3 L371.3,2.3",2.6],["M395.3,77.7 L387.3,77 L383.3,74.3",2.6],["M383.3,74 L383.3,6",2.6],["M383.7,5.7 L388,3 L395.3,2.3",2.6],["M464.3,14.7 L457.7,6.3 L453.7,4 L448,2.3 L442,1.3 L435.7,1.3 L427.7,2.7 L419.7,5.7 L413.7,9.7 L409.7,13.7 L405.7,19.3 L401.7,29.3 L400.3,37 L400.3,43.3 L402.7,54.7 L405,60 L409,66 L417.7,73.7 L423,76.3 L429.7,78.3 L447,78.3 L457.3,75.3 L463.3,72 L464.7,70.3 L464.7,51.3",2.6],["M451.7,48 L459.3,48.3 L464.7,51",2.6],["M465,51 L470,48.3 L475.3,47.7",2.6],["M477.3,78.7 L483.7,78.3 L487.3,77",2.6],["M490.7,7.7 L490,6 L487.7,4 L484,3 L479,3",2.6],["M487.7,76.7 L487.7,11.3 L490.7,8",2.6],["M498.7,78.3 L491.3,78.3 L488,77",2.6],["M542,72.3 L539.3,71.3 L537.3,69.3 L495,10.3 L493.3,8.7 L491,8",2.6],["M535.3,3 L541,3 L545.7,4.3",2.6],["M542.3,72.3 L545.7,69 L545.7,4.3",2.6],["M556.7,2.7 L548,3.3 L545.7,4.3",2.6],["M209.7,141.3 L209.7,137.3 L210.7,136.7 L217.3,137.7 L219.3,139.7 L220.3,142 L220.3,145.7 L219.3,147.7 L216,150 L210,150",1.6],["M225,121 L225,127.3 L225.7,128 L229,128 L230.7,127.3 L232.3,125 L231.7,122.3 L230,120.7",1.6],["M225,120.3 L225,115.3 L225.7,114.7 L229.7,115 L230.7,116 L231,118 L230,120.3",1.6],["M225.3,120.7 L229.7,120.7",1.6],["M244.7,115.3 L245,125.3 L246.7,127.3 L250,128 L253,125 L253,115",1.6],["M253.7,150.7 L252.3,150 L246,150 L245.7,143",1.6],["M245.7,142.3 L245.7,137.7 L246.3,137 L253,136.7",1.6],["M252.3,142.7 L246,142.7",1.6],["M266.3,128 L266.7,121.7",1.6],["M266.7,137 L266.3,150",1.6],["M270,121.3 L273.3,120.3 L274.3,118.3 L274,116.7 L272.3,115 L267.3,114.7 L266.7,115.3 L266.7,121",1.6],["M270.3,136.7 L266.7,137",1.6],["M274.3,128.3 L270.3,123.7 L269.7,121.7",1.6],["M289.7,136.3 L289.3,147 L287,150 L283.7,150 L281.3,147.3 L281,137",1.6],["M286,121 L286,127.3 L286.7,128 L293,128",1.6],["M293,114.7 L286.7,114.7 L286,115.3 L286,120.3",1.6],["M286.3,120.7 L293,120.7",1.6],["M310.3,149.3 L309,150 L303,149.7 L303.3,137 L308.7,137 L311,138 L313,140 L313.7,145.3 L313,147.3",1.6],["M307,122.7 L305.3,124.7 L304,128.3",1.6],["M307,122.7 L308.3,118.3 L309.7,117",1.6],["M307,122.7 L312.7,122.7",1.6],["M310.3,117 L311.3,117.7 L312.7,122.3",1.6],["M316,128 L313,122.7",1.6],["M326.7,142.3 L327,137 L333.3,137",1.6],["M334,150.3 L327,150 L326.7,143",1.6],["M327.3,114.7 L327,125 L328.7,127.3 L332,128 L334.3,126.7 L335.3,124.3 L335.3,114.3",1.6],["M333,142.7 L327,142.7",1.6],["M351,138.3 L349.3,137 L347.3,137 L345.7,139.7 L346,141 L351.3,145.7 L351.3,148.7 L349.3,150 L347,150 L345,148.3",1.6]]}};
 const RACINE = document.documentElement;
@@ -78,6 +79,9 @@ function demarrer(){
     <p class="tbe-sr" aria-live="polite"></p>`;
   document.body.appendChild(ov);
   RACINE.classList.add('tb-intro-pret');
+  if (/[?&]intro=1/.test(location.search)){
+    try { history.replaceState(null, '', location.pathname + location.search.replace(/([?&])intro=1(&|$)/, (m, a, b) => b ? a : '').replace(/\?$/, '') + location.hash); } catch (e) {}
+  }
   const ancienDebordement = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
 
@@ -90,10 +94,9 @@ function demarrer(){
     e.target.replaceWith(t);
   });
 
-  /* ---------------- Le logo se trace au trait, dans le temps de la construction ----------------
-     Une seule ligne de temps pour tout l'écran : l'emblème puis le logotype se tracent pendant la construction
-     des créations (avancement 0 → 0,43), le logotype passe en plein, puis la devise apparaît. À 100 % les
-     créations se mettent à tourner et le bouton « Entrer sur le site » apparaît. */
+  /* ---------------- Le logo se trace au trait dès l'ouverture (≈ 3 s), sans attendre la 3D ----------------
+     L'emblème puis le logotype se tracent, le logotype passe en plein, puis la devise apparaît.
+     Le bouton « Entrer sur le site » arrive en fondu à la fin du tracé, sans attendre le chargement de la 3D. */
   const logo = (function(){
     const groupes = [[...ov.querySelectorAll('.tbe-logo-boite .tbe-trace path')], [...ov.querySelectorAll('.tbe-marque-boite .tbe-trace path')]];
     const plages = [[0, 0.27], [0.25, 0.41]], PLEIN = 0.43, DEVISE = 0.46;
@@ -123,24 +126,30 @@ function demarrer(){
     }
     return {
       poser,
-      // sans 3D (WebGL absent, échec de chargement) : le logo se trace seul en 10 s, puis le bouton apparaît
       seul(){
         if (auto) return;
-        if (reduit){ poser(1); montrerEntrer(); return; }
-        let p = Math.max(0, dernierP), avant = null;
+        if (reduit){ setTimeout(() => { poser(1); engrenage.progression(1, true); montrerEntrer(); }, 0); return; }
+        let p = Math.max(0, dernierP), avant = null, debut = 0;
+        // compteur de l'engrenage : suit le tracé du logo, sans dépasser le chargement réel des créations
         const pas = now => {
-          if (avant !== null) p += Math.min(0.1, Math.max(0, now - avant) / 1000) / 10;
-          avant = now; poser(Math.min(1, p));
-          if (p >= DEVISE){ montrerEntrer(); return; }
+          if (avant !== null) p += Math.min(0.1, Math.max(0, now - avant) / 1000) / 6.5;
+          else debut = now;
+          avant = now;
+          p = Math.max(p, (now - debut - 1000) / 6500);    // navigateur occupé : jamais plus de 1,5 s de retard
+          poser(Math.min(1, p));
+          const compte = Math.min(p / DEVISE, 0.3 + 0.7 * fracFichiers);
+          engrenage.progression(Math.min(1, compte), compte >= 1);
+          if (compte >= 1){ setTimeout(montrerEntrer, 400); return; }   // logo tracé et créations chargées : le bouton arrive
           if (ov.isConnected) auto = requestAnimationFrame(pas);
         };
         auto = requestAnimationFrame(pas);
       }
     };
   })();
-  function montrerEntrer(){ ov.classList.add('tbe-logo-plein', 'tbe-devise-pret', 'tbe-entrer-pret'); }
-  // filet de sécurité : quoi qu'il arrive, le bouton finit par apparaître
-  setTimeout(() => { logo.poser(1); montrerEntrer(); }, 60000);
+  function montrerEntrer(){ ov.classList.add('tbe-entrer-pret'); }
+  let fracFichiers = 0;                                    // part des créations chargées (0 → 1)
+  logo.seul();
+  setTimeout(() => { logo.poser(1); engrenage.progression(1, true); montrerEntrer(); }, 9000);   // filet de sécurité (connexion très lente)
 
   /* ---------------- Engrenage de chargement (indépendant de la 3D) ---------------- */
   const engrenage = creerEngrenage($('.tbe-engrenage'), reduit);
@@ -186,7 +195,7 @@ function demarrer(){
     if (sortie) return;
     scene3D = creerScene(THREE);
   }).catch(() => {
-    engrenage.abandon(); logo.seul();                     // sans 3D : l'écran reste utilisable (logo + bouton)
+    fracFichiers = 1;                        // sans 3D : l'écran reste utilisable (logo, compteur, bouton)
   });
 
   /* ======================================================================== */
@@ -194,7 +203,7 @@ function demarrer(){
     let renderer;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-    } catch (e) { engrenage.abandon(); logo.seul(); return null; }
+    } catch (e) { fracFichiers = 1; return null; }
     const mobile = Math.min(innerWidth, innerHeight) < 700;
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2));
     renderer.setClearColor(0x000000, 0);
@@ -205,6 +214,385 @@ function demarrer(){
     camera.position.set(0, 0, 20);
     const H_VISIBLE = 2 * 20 * Math.tan(THREE.MathUtils.degToRad(15));
 
+    const { construireDessin, construireOurs, construireTraits, construireRepli, envTex, pmrem } = atelier(THREE, renderer);   // fabrique de modèles commune (écran d'entrée + galerie)
+    const l1 = new THREE.DirectionalLight(0xfff0d8, 1.9); l1.position.set(3, 4, 6);
+    const l2 = new THREE.DirectionalLight(0xffdca0, 1.2); l2.position.set(-5, 2, -3);
+    scene.add(l1, l2, new THREE.HemisphereLight(0x4a3a24, 0x050505, 0.15));
+
+
+    let horloge = 0, detruit = false, construction = 1;
+    const DUREE_RECONSTRUCTION = 9;
+
+    /* ---------- objets de la scène ---------- */
+    const OBJ = CREATIONS.map((c, i) => {
+      const racine = new THREE.Group(), inclin = new THREE.Group(), lacet = new THREE.Group();
+      racine.add(inclin); inclin.add(lacet); racine.visible = false; scene.add(racine);
+      return { c, i, racine, inclin, lacet, pret: false, apparition: 0, az: 0, el: 0.2, R: 1, mats: [], metal: [], pivots: {},
+               t: i * 3.7, phase: i * 0.83, sel: 0, att: 1, yawMain: 0, pitchMain: 0,
+               porte: 0, porteCible: 0, autoSuspendu: 0, slot: new THREE.Vector3(), rayonEcran: 60, echelle: 1 };
+    });
+
+    let nbCharges = 0;
+    function majCharge(){}
+    function charger(o){
+      return chargerDef(o.c.fichier)
+        .then(def => {
+          const m = def.pieces ? (def.pieces[0] && def.pieces[0].f ? construireDessin(def) : construireOurs(def)) : construireTraits(def);   // dessin puis volumes ; tôles pliées (taureau) ; traits seuls
+          o.az = def.az || 0; o.el = THREE.MathUtils.clamp(def.el === undefined ? 0.2 : def.el, 0.08, 0.32);
+          return m;
+        })
+        .catch(e => { console.error("modèle", o.c.fichier, e); return construireRepli(); })
+        .then(m => {
+          if (detruit) return;
+          o.lacet.add(m.modele); o.R = m.R; o.bas = m.bas === undefined ? -0.8 : m.bas; o.mats = m.mats; o.prog = m.prog; o.poserOurs = m.poser; o.cadrageOurs = m.cadrage; o.pointe = m.pointe || null; o.metal = m.metal; o.pivots = m.pivots; o.p = -1;
+          o.pret = true; o.racine.visible = true; nbCharges++; majCharge();
+  
+          disposer();
+        });
+    }
+    // chargement progressif, trois fichiers à la fois
+    (async () => {
+      const file = OBJ.slice();
+      const ouvrier = async () => { while (file.length && !detruit) await charger(file.shift()); };
+      await Promise.all([ouvrier(), ouvrier(), ouvrier()]);
+    })();
+
+    /* ---------- disposition autour du logo ---------- */
+    let W = 1, H = 1, centreGrandY = 0, ORB = null, orbite = reduit ? null : -1, phi = 0;   // rotation dès le départ (sens horaire)
+    function emplacements(){
+      const portrait = W / H < 0.85;
+      if (portrait){
+        const r = Math.min(W * 0.13, H * 0.07);
+        const P = [[0.5, 0.11], [0.18, 0.15], [0.82, 0.15], [0.17, 0.33], [0.83, 0.33], [0.17, 0.71], [0.83, 0.71], [0.31, 0.87], [0.69, 0.87]];
+        return { cy: 0.45, logo: Math.max(80, Math.min(112, W * 0.25)), pts: P.map(p => [p[0] * W, p[1] * H, r]) };
+      }
+      const r = Math.min(W * 0.072, H * 0.115);
+      const rx = W * (W / H > 1.6 ? 0.37 : 0.35), ry = H * 0.355, cy = H * 0.5;
+      const pts = [];
+      [-90, -48, -8, 30, 58, 122, 150, 188, 228].forEach(d => { const a = d * Math.PI / 180; pts.push([W / 2 + rx * Math.cos(a), cy + ry * Math.sin(a), r]); });
+      return { cy: 0.49, logo: Math.max(92, Math.min(150, H * 0.17)), pts };
+    }
+    function disposer(){
+      W = innerWidth; H = innerHeight;
+      renderer.setSize(W, H, false);
+      camera.aspect = W / H; camera.updateProjectionMatrix();
+      const e = emplacements();
+      ov.style.setProperty('--tbe-cy', (e.cy * 100) + '%');
+      ov.style.setProperty('--tbe-logo', e.logo + 'px');
+      const k = H_VISIBLE / H;
+      centreGrandY = 0.045 * H_VISIBLE;
+      // orbite finale autour du logo (ellipse), parcourue dans le sens horaire
+      const portrait = W / H < 0.85;
+      const orx = portrait ? W * 0.41 : W * (W / H > 1.6 ? 0.37 : 0.35), ory = portrait ? H * 0.41 : H * 0.355, ocy = portrait ? H * 0.46 : H * 0.5;
+      ORB = { rx: orx * k, ry: ory * k, cy: -(ocy - H / 2) * k, portrait, k,
+              hx: W * 0.385, hy: H * 0.39, cxp: W * 0.5, cyp: H * 0.48, rc: W * 0.17 };
+      OBJ.forEach((o, i) => {
+        const [x, y, r] = e.pts[i];
+        o.slot.set((x - W / 2) * k, -(y - H / 2) * k, 0);
+        if (orbite === null) o.slotCur = o.slot.clone();
+        o.rayonEcran = r;
+        o.echelle = (r * k) / (o.R || 1);
+        o.echelleGrand = (Math.min(W * 0.47, H * 0.35) * k) / (o.R || 1);
+      });
+    }
+    // point d'une piste en rectangle arrondi (sens horaire à l'écran, départ en haut au centre), s ∈ [0, 1[
+    function piste(s){
+      const { hx, hy, cxp, cyp, rc } = ORB, lx = 2 * (hx - rc), ly = 2 * (hy - rc), arcL = Math.PI * rc / 2;
+      const seg = [lx / 2, arcL, ly, arcL, lx, arcL, ly, arcL, lx / 2], tot = seg.reduce((a, b) => a + b, 0);
+      let d = ((s % 1) + 1) % 1 * tot, i = 0;
+      while (i < seg.length - 1 && d > seg[i]){ d -= seg[i]; i++; }
+      const coin = (cx, cy, a0) => { const a = a0 + d / rc; return [cx + rc * Math.cos(a), cy + rc * Math.sin(a)]; };
+      switch (i){
+        case 0: return [cxp + d, cyp - hy];
+        case 1: return coin(cxp + hx - rc, cyp - hy + rc, -Math.PI / 2);
+        case 2: return [cxp + hx, cyp - hy + rc + d];
+        case 3: return coin(cxp + hx - rc, cyp + hy - rc, 0);
+        case 4: return [cxp + hx - rc - d, cyp + hy];
+        case 5: return coin(cxp - hx + rc, cyp + hy - rc, Math.PI / 2);
+        case 6: return [cxp - hx, cyp + hy - rc - d];
+        case 7: return coin(cxp - hx + rc, cyp - hy + rc, Math.PI);
+        default: return [cxp - hx + rc + d, cyp - hy];
+      }
+    }
+    addEventListener('resize', disposer);
+    disposer();
+
+    /* ---------- sélection ---------- */
+    const proj = new THREE.Vector3();
+    function pointerSur(x, y){
+      let best = -1, bd = 1e9;
+      OBJ.forEach((o, i) => {
+        if (!o.construit) return;
+        proj.copy(o.racine.position).project(camera);
+        const sx = (proj.x + 1) / 2 * W, sy = (1 - proj.y) / 2 * H;
+        const r = o.rayonEcran * (1 + 0.3 * o.sel) * 1.05;
+        const d = Math.hypot(x - sx, y - sy) / r;
+        if (d < 1 && d < bd){ bd = d; best = i; }
+      });
+      return best;
+    }
+    function selectionner(i){
+      if (sortie) return;
+      if (etat.selection === i){ return; }
+      etat.selection = i;
+      OBJ.forEach(x => { x.yawMain = 0; x.pitchMain = 0; });
+      noms.forEach((n, k) => n.classList.toggle('tbe-actif', k === i));
+      ov.classList.add('tbe-selection', 'tbe-plein');
+      const o = OBJ[i];
+      titrePanneau.textContent = o.c.nom;
+      if (o.c.id === 'portail'){ btnPortes.hidden = false; btnPortes.textContent = 'Ouvrir / fermer le portail'; }
+      else if (o.c.id === 'verriere'){ btnPortes.hidden = false; btnPortes.textContent = 'Ouvrir / fermer les ouvrants'; }
+      else btnPortes.hidden = true;
+      panneau.classList.add('tbe-ouvert');
+      o.rejeu = 0; o.porteCible = 0; o.porte = 0; o.autoSuspendu = horloge + DUREE_RECONSTRUCTION + 6;
+    }
+    function deselectionner(){
+      etat.selection = -1;
+      noms.forEach(n => n.classList.remove('tbe-actif'));
+      ov.classList.remove('tbe-selection', 'tbe-plein');
+      panneau.classList.remove('tbe-ouvert');
+    }
+    btnFermerX.addEventListener('click', () => deselectionner());
+    noms.forEach((n, i) => n.addEventListener('click', () => { if (!OBJ[i].construit) return; etat.selection === i ? deselectionner() : selectionner(i); }));
+    panneau.addEventListener('click', e => {
+      const b = e.target.closest('[data-a]'); if (!b || etat.selection < 0) return;
+      const o = OBJ[etat.selection];
+      if (b.dataset.a === 'fermer') deselectionner();
+      else if (b.dataset.a === 'rejouer'){ o.rejeu = 0; o.porteCible = 0; o.porte = 0; o.autoSuspendu = horloge + DUREE_RECONSTRUCTION + 6; }
+      else if (b.dataset.a === 'reinit'){ o.yawMain = 0; o.pitchMain = 0; o.porteCible = 0; o.autoSuspendu = horloge + 20; }
+      else if (b.dataset.a === 'portes'){
+        const max = o.c.id === 'portail' ? 1 : 1;
+        o.porteCible = o.porteCible > 0.05 ? 0 : max;
+        o.autoSuspendu = horloge + 30;
+      }
+    });
+
+    let appui = null;
+    canvas.addEventListener('pointerdown', e => { appui = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, glisse: false }; });
+    canvas.addEventListener('pointermove', e => {
+      if (!appui) return;
+      const dx = e.clientX - appui.x, dy = e.clientY - appui.y;
+      if (Math.hypot(e.clientX - appui.x0, e.clientY - appui.y0) > 6) appui.glisse = true;
+      if (appui.glisse && etat.selection >= 0){             // vue en grand : glisser pour tourner la création
+        const o = OBJ[etat.selection];
+        o.yawMain += dx * 0.01; o.pitchMain = THREE.MathUtils.clamp(o.pitchMain + dy * 0.006, -0.35, 0.6);
+      }
+      appui.x = e.clientX; appui.y = e.clientY;
+    });
+    canvas.addEventListener('pointerup', e => {
+      if (appui && !appui.glisse){
+        const i = pointerSur(e.clientX, e.clientY);
+        if (etat.selection < 0 && i >= 0) selectionner(i);
+      }
+      appui = null;
+    });
+    canvas.addEventListener('pointercancel', () => { appui = null; });
+
+    btnPause.addEventListener('click', () => {
+      etat.pause = !etat.pause;
+      btnPause.textContent = etat.pause ? 'Reprendre' : 'Pause';
+      btnPause.setAttribute('aria-pressed', String(etat.pause));
+    });
+
+    /* ---------- animation ---------- */
+    let vitesse = reduit ? 0 : 1, enSortie = false, tSortie = 0, dernier = performance.now(), rafId = 0;
+    const lisse = (x, y, k, dt) => x + (y - x) * (1 - Math.exp(-k * dt));
+    const ease = x => x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x);
+
+    function boucle(now){
+      rafId = 0;
+      if (detruit) return;
+      const dt = Math.max(0, Math.min(0.05, (now - dernier) / 1000)); dernier = now;
+      const cibleV = (etat.pause || enSortie || reduit) ? 0 : 1;
+      vitesse = lisse(vitesse, cibleV, enSortie ? 3.5 : 2.2, dt);
+      horloge += dt;
+      const sel = etat.selection;
+
+      // les créations arrivent déjà construites ; l'engrenage indique seulement le chargement des fichiers
+      const tousCharges = nbCharges === CREATIONS.length;
+      const pc = 1;
+      fracFichiers = nbCharges / CREATIONS.length;           // le compteur de l'engrenage en tient compte
+      const eS = enSortie ? ease((now - tSortie - 120) / 950) : 0;
+      if (orbite !== null && horloge > orbite) phi += dt * vitesse * (sel >= 0 ? 0 : 1) * (2 * Math.PI / 120);
+
+      OBJ.forEach(o => {
+        if (!o.pret) return;
+        o.apparition = Math.min(1, o.apparition + dt / (reduit ? 0.2 : 0.5));
+        // avancement de la construction de cette création : commun à toutes, ou « Reconstruire »
+        let po = pc;
+        if (o.rejeu !== undefined){
+          o.rejeu = Math.min(1, o.rejeu + (reduit ? 1 : dt / DUREE_RECONSTRUCTION));
+          po = o.rejeu; if (o.rejeu >= 1) o.rejeu = undefined;
+        }
+        if (o.p !== po){
+          o.p = po;
+          o.prog.forEach(m => { m.uniforms.uProg.value = po; });
+          if (o.poserOurs) o.poserOurs(po, 1);
+        }
+        if (pc >= 1 && !o.construit){
+          o.construit = true; noms[o.i].classList.add('tbe-vu');
+          if (o.c.id === 'portail' || o.c.id === 'verriere') o.prochainAuto = horloge + (o.c.id === 'portail' ? 3 : 7);
+        }
+        const choisi = sel === o.i;
+        const facteur = choisi ? 0.4 : (sel >= 0 ? 0.35 : 1);
+        o.t += dt * vitesse * facteur;
+        o.sel = lisse(o.sel, choisi ? 1 : 0, 4, dt);
+        o.att = lisse(o.att, sel >= 0 && !choisi ? 0 : 1, 5, dt);
+
+        // orientation : vue validée de chaque création, puis mouvement lent
+        let yaw = -o.az + o.yawMain;
+        if (o.c.mouv === 'tour') yaw += o.t * (2 * Math.PI / o.c.periode) + o.phase;
+        else yaw += THREE.MathUtils.degToRad(o.c.amp) * Math.sin(o.t * 2 * Math.PI / o.c.periode + o.phase);
+        o.lacet.rotation.y = yaw;
+        o.inclin.rotation.x = o.el + o.pitchMain;
+
+        // position : emplacement autour du logo, léger rapprochement si sélectionnée, dispersion à la sortie
+        // sélection : la création vient au centre et s'ouvre en grand sur toute la page
+        const k = ease(o.sel);
+        const zoom = o.cadrageOurs ? o.cadrageOurs(o.p) : 1;
+        const s = (o.echelle + (o.echelleGrand - o.echelle) * k) * zoom * (0.92 + 0.08 * o.apparition) * (1 - 0.25 * eS);
+        o.racine.scale.setScalar(s);
+        if (orbite !== null && horloge > orbite){
+          let tx, ty;
+          if (ORB.portrait){
+            // téléphone : piste en rectangle arrondi le long des bords, autour du bloc central
+            const [px, py] = piste((o.i / OBJ.length + phi / (2 * Math.PI)) % 1);
+            tx = (px - W / 2) * ORB.k; ty = -(py - H / 2) * ORB.k;
+          } else {
+            const a = -Math.PI / 2 + o.i * (2 * Math.PI / OBJ.length) + phi;
+            tx = ORB.rx * Math.cos(a); ty = ORB.cy - ORB.ry * Math.sin(a);
+          }
+          const kk = 1 - Math.exp(-1.6 * dt);
+          if (!o.slotCur) o.slotCur = new THREE.Vector3(tx, ty, 0);
+          o.slotCur.x += (tx - o.slotCur.x) * kk; o.slotCur.y += (ty - o.slotCur.y) * kk;
+        }
+        const sl = o.slotCur || o.slot;
+        o.racine.position.set(
+          (sl.x + (0 - sl.x) * k) * (1 + 0.45 * eS),
+          (sl.y + (centreGrandY - sl.y) * k) * (1 + 0.45 * eS) + 0.4 * eS, -2 * eS);
+
+        // portes : auto-ouverture lente puis refermeture (portail, verrière), commande manuelle prioritaire
+        if (o.prochainAuto !== undefined && !reduit && !enSortie){
+          if (horloge > o.autoSuspendu && vitesse > 0.5 && horloge > o.prochainAuto){
+            if (o.porteCible === 0){ o.porteCible = o.c.id === 'portail' ? 0.72 : 0.38; o.prochainAuto = horloge + (o.c.id === 'portail' ? 6 : 4.5); }
+            else { o.porteCible = 0; o.prochainAuto = horloge + (o.c.id === 'portail' ? 16 : 14); }
+          }
+        }
+        o.porte = reduit ? o.porteCible : lisse(o.porte, o.porteCible, 1.1, dt);
+        Object.values(o.pivots).forEach(p => { p.g.rotation.y = p.sens * THREE.MathUtils.degToRad(p.max) * o.porte; });
+
+        // lumière : surbrillance champagne, reflet qui parcourt la pièce, fondu d'apparition / de sortie
+        const op = o.apparition * o.att * (1 - eS);
+        const cycle = ((horloge * (reduit ? 0 : 1) + o.phase * 4.3) % 12) / 12;
+        o.mats.forEach(m => { m.uniforms.uOp.value = op * (m.userData.dim === undefined ? 1 : m.userData.dim); m.uniforms.uHi.value = o.sel; m.uniforms.uSweep.value = -1.6 + cycle * 6; });
+        o.metal.forEach(m => {
+          m.envMapIntensity = m.userData.env0 * (0.9 + 0.6 * o.sel) * o.att;
+          const op0 = m.userData.op0 === undefined ? 1 : m.userData.op0;
+          m.opacity = op0 * (m.userData.fill === undefined ? 1 : m.userData.fill) * (enSortie ? 1 - eS : o.apparition * o.att);
+          m.transparent = m.opacity < 0.999;
+        });
+        o.racine.visible = o.att > 0.06 && (op > 0.003 || (o.metal.length > 0 && (1 - eS) > 0.003));
+      });
+
+      // noms sous les objets
+      OBJ.forEach(o => {
+        if (!o.pret) return;
+        const s = o.racine.scale.x, bas = o.bas * o.R * s * Math.cos(o.inclin.rotation.x) - 0.15 * o.R * s * Math.abs(Math.sin(o.inclin.rotation.x));
+        proj.set(o.racine.position.x, o.racine.position.y + bas, o.racine.position.z).project(camera);
+        const x = (proj.x + 1) / 2 * W, y = (1 - proj.y) / 2 * H + 8;
+        noms[o.i].style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translateX(-50%)`;
+      });
+
+      renderer.render(scene, camera);
+      if (!document.hidden) rafId = requestAnimationFrame(boucle);
+    }
+    rafId = requestAnimationFrame(boucle);
+    // onglet masqué : plus aucun calcul ; retour : reprise sans saut
+    document.addEventListener('visibilitychange', surVisibilite);
+    function surVisibilite(){ if (!document.hidden && !rafId && !detruit){ dernier = performance.now(); rafId = requestAnimationFrame(boucle); } }
+
+    function sortir(){ enSortie = true; tSortie = performance.now(); deselectionner(); }
+    function detruireTout(){
+      detruit = true; if (rafId) cancelAnimationFrame(rafId);
+      removeEventListener('resize', disposer);
+      document.removeEventListener('visibilitychange', surVisibilite);
+      scene.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material){ (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose()); } });
+      envTex.dispose(); pmrem.dispose(); renderer.dispose();
+      try { renderer.forceContextLoss(); } catch (e) {}
+    }
+
+    // accès de test (sans effet en production)
+    window.__tbEntree = { OBJ, selectionner, deselectionner, etat, get horloge(){ return horloge; }, get construction(){ return construction; }, avancer(v){ construction = v; }, tourner(v){ phi = v; } };
+    return { sortir, detruire: detruireTout, deselectionner };
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   Engrenage de chargement : grande roue dentée autour de l'emblème,
+   pignon engrené qui affiche l'avancement, arc de progression
+   -------------------------------------------------------------------------- */
+function creerEngrenage(svg, reduit){
+  const NS = 'http://www.w3.org/2000/svg';
+  const N1 = 48, R1 = 69, N2 = 12, M = 2 * R1 / N1, R2 = M * N2 / 2, D = R1 + R2, A2 = -42 * Math.PI / 180;
+  const C2 = [D * Math.cos(A2), D * Math.sin(A2)];
+  function denture(N, rp){
+    const ra = rp + M, rf = rp - 1.25 * M, t = 2 * Math.PI / N; let d = '';
+    for (let i = 0; i < N; i++){
+      const a = i * t, P = (r, b) => (r * Math.cos(b)).toFixed(2) + ',' + (r * Math.sin(b)).toFixed(2);
+      d += (i ? 'L' : 'M') + P(rf, a - 0.27 * t) + 'L' + P(ra, a - 0.13 * t) + 'L' + P(ra, a + 0.13 * t) + 'L' + P(rf, a + 0.27 * t)
+         + 'A' + rf.toFixed(2) + ',' + rf.toFixed(2) + ' 0 0 1 ' + P(rf, a + 0.73 * t);
+    }
+    return d + 'Z';
+  }
+  const el = (n, a, parent) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); (parent || svg).appendChild(e); return e; };
+  const roue = el('g', { class: 'tbe-roue' });
+  el('path', { d: denture(N1, R1), class: 'tbe-dent' }, roue);
+  el('circle', { r: 60.5, class: 'tbe-trait' }, roue);
+  for (let k = 0; k < 24; k++){ const a = k * Math.PI / 12; el('line', { x1: (61.6 * Math.cos(a)).toFixed(2), y1: (61.6 * Math.sin(a)).toFixed(2), x2: (63.4 * Math.cos(a)).toFixed(2), y2: (63.4 * Math.sin(a)).toFixed(2), class: 'tbe-trait' }, roue); }
+  const L = 2 * Math.PI * 57;
+  const arc = el('circle', { r: 57, class: 'tbe-arc', transform: 'rotate(-90)', 'stroke-dasharray': L.toFixed(1), 'stroke-dashoffset': L.toFixed(1) });
+  const pignonPos = el('g', { transform: `translate(${C2[0].toFixed(2)} ${C2[1].toFixed(2)})` });
+  const pignon = el('g', {}, pignonPos);
+  el('path', { d: denture(N2, R2), class: 'tbe-dent' }, pignon);
+  el('circle', { r: 12.2, class: 'tbe-trait' }, pignon);
+  for (let k = 0; k < 6; k++){ const a = k * Math.PI / 3; el('line', { x1: (12.2 * Math.cos(a)).toFixed(2), y1: (12.2 * Math.sin(a)).toFixed(2), x2: (R2 - 1.25 * M - 0.2) * Math.cos(a), y2: (R2 - 1.25 * M - 0.2) * Math.sin(a), class: 'tbe-trait' }, pignon); }
+  const texte = el('text', { class: 'tbe-pct', 'text-anchor': 'middle', 'dominant-baseline': 'central' }, pignonPos);
+  texte.textContent = '0';
+
+  let th = 0, vit = reduit ? 0 : 26, cible = reduit ? 0 : 26, prog = 0, fini = false, raf = 0, t0 = performance.now();
+  function tour(now){
+    const dt = Math.max(0, Math.min(0.05, (now - t0) / 1000)); t0 = now;
+    vit += (cible - vit) * (1 - Math.exp(-1.5 * dt));
+    th += vit * dt;
+    roue.setAttribute('transform', 'rotate(' + th.toFixed(2) + ')');
+    pignon.setAttribute('transform', 'rotate(' + (-th * N1 / N2 + 180 / N2).toFixed(2) + ')');
+    raf = requestAnimationFrame(tour);
+  }
+  if (!reduit) raf = requestAnimationFrame(tour);
+  else pignon.setAttribute('transform', 'rotate(' + (180 / N2) + ')');
+  return {
+    progression(p, termine){
+      if (fini) return;
+      p = Math.max(prog, Math.min(1, p)); prog = p;
+      arc.setAttribute('stroke-dashoffset', (L * (1 - p)).toFixed(1));
+      texte.textContent = termine ? 100 : Math.min(99, Math.floor(p * 100));
+      if (termine){
+        fini = true; cible = reduit ? 0 : 4;
+        svg.classList.add('tbe-fini');
+      }
+    },
+    abandon(){ fini = true; cible = reduit ? 0 : 4; svg.classList.add('tbe-fini'); },
+    arreter(){ cancelAnimationFrame(raf); }
+  };
+}
+
+
+/* --------------------------------------------------------------------------
+   Fabrique de modèles 3D (commune à l'écran d'entrée et à la galerie de la page) :
+   éclairage studio, matériaux, tracé « dessin puis volumes », tôles du taureau
+   -------------------------------------------------------------------------- */
+function atelier(THREE, renderer){
     // éclairage studio (sert à l'ours en tôles pleines, repris de sa page)
     function studio(){
       const s = new THREE.Scene(); s.background = new THREE.Color(0x3d2f1f);
@@ -219,10 +607,6 @@ function demarrer(){
     }
     const pmrem = new THREE.PMREMGenerator(renderer);
     const envTex = pmrem.fromScene(studio(), 0.02).texture;
-    const l1 = new THREE.DirectionalLight(0xfff0d8, 1.9); l1.position.set(3, 4, 6);
-    const l2 = new THREE.DirectionalLight(0xffdca0, 1.2); l2.position.set(-5, 2, -3);
-    scene.add(l1, l2, new THREE.HemisphereLight(0x4a3a24, 0x050505, 0.15));
-
     /* ---------- matériau des traits : champagne, tracé progressif « ligne après ligne »,
                   reflet qui parcourt la pièce ---------- */
     const OR = new THREE.Color(0xC9A66B);
@@ -753,380 +1137,225 @@ function demarrer(){
       const m = materiauTraits(1); const g = new THREE.Group(); g.add(new THREE.LineSegments(geo, m));
       return { modele: g, R: 1, mats: [m], prog: [m], pivots: {}, metal: [], poser: null };
     }
-
-    let horloge = 0, detruit = false, construction = 0, cent = false, tEntrer = null;
-    const DUREE_CONSTRUCTION = 13, DUREE_RECONSTRUCTION = 11;
-
-    /* ---------- objets de la scène ---------- */
-    const OBJ = CREATIONS.map((c, i) => {
-      const racine = new THREE.Group(), inclin = new THREE.Group(), lacet = new THREE.Group();
-      racine.add(inclin); inclin.add(lacet); racine.visible = false; scene.add(racine);
-      return { c, i, racine, inclin, lacet, pret: false, apparition: 0, az: 0, el: 0.2, R: 1, mats: [], metal: [], pivots: {},
-               t: i * 3.7, phase: i * 0.83, sel: 0, att: 1, yawMain: 0, pitchMain: 0,
-               porte: 0, porteCible: 0, autoSuspendu: 0, slot: new THREE.Vector3(), rayonEcran: 60, echelle: 1 };
-    });
-
-    let nbCharges = 0;
-    function majCharge(){}
-    function charger(o){
-      return fetch(new URL('entree-' + o.c.fichier, BASE)).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(def => {
-          const m = def.pieces ? (def.pieces[0] && def.pieces[0].f ? construireDessin(def) : construireOurs(def)) : construireTraits(def);   // dessin puis volumes ; tôles pliées (taureau) ; traits seuls
-          o.az = def.az || 0; o.el = THREE.MathUtils.clamp(def.el === undefined ? 0.2 : def.el, 0.08, 0.32);
-          return m;
-        })
-        .catch(e => { console.error("modèle", o.c.fichier, e); return construireRepli(); })
-        .then(m => {
-          if (detruit) return;
-          o.lacet.add(m.modele); o.R = m.R; o.bas = m.bas === undefined ? -0.8 : m.bas; o.mats = m.mats; o.prog = m.prog; o.poserOurs = m.poser; o.cadrageOurs = m.cadrage; o.pointe = m.pointe || null; o.metal = m.metal; o.pivots = m.pivots; o.p = -1;
-          o.pret = true; o.racine.visible = true; nbCharges++; majCharge();
-  
-          disposer();
-        });
+    function fabriquer(def){                  // dessin puis volumes ; tôles pliées (taureau) ; traits seuls
+      return def.pieces ? (def.pieces[0] && def.pieces[0].f ? construireDessin(def) : construireOurs(def)) : construireTraits(def);
     }
-    // chargement progressif, trois fichiers à la fois
-    (async () => {
-      const file = OBJ.slice();
-      const ouvrier = async () => { while (file.length && !detruit) await charger(file.shift()); };
-      await Promise.all([ouvrier(), ouvrier(), ouvrier()]);
-    })();
-
-    /* ---------- disposition autour du logo ---------- */
-    let W = 1, H = 1, centreGrandY = 0, ORB = null, orbite = null, phi = 0;
-    function emplacements(){
-      const portrait = W / H < 0.85;
-      if (portrait){
-        const r = Math.min(W * 0.13, H * 0.07);
-        const P = [[0.5, 0.11], [0.18, 0.15], [0.82, 0.15], [0.17, 0.33], [0.83, 0.33], [0.17, 0.71], [0.83, 0.71], [0.31, 0.87], [0.69, 0.87]];
-        return { cy: 0.45, logo: Math.max(80, Math.min(112, W * 0.25)), pts: P.map(p => [p[0] * W, p[1] * H, r]) };
-      }
-      const r = Math.min(W * 0.072, H * 0.115);
-      const rx = W * (W / H > 1.6 ? 0.37 : 0.35), ry = H * 0.355, cy = H * 0.5;
-      const pts = [];
-      [-90, -48, -8, 30, 58, 122, 150, 188, 228].forEach(d => { const a = d * Math.PI / 180; pts.push([W / 2 + rx * Math.cos(a), cy + ry * Math.sin(a), r]); });
-      return { cy: 0.49, logo: Math.max(92, Math.min(150, H * 0.17)), pts };
-    }
-    function disposer(){
-      W = innerWidth; H = innerHeight;
-      renderer.setSize(W, H, false);
-      camera.aspect = W / H; camera.updateProjectionMatrix();
-      const e = emplacements();
-      ov.style.setProperty('--tbe-cy', (e.cy * 100) + '%');
-      ov.style.setProperty('--tbe-logo', e.logo + 'px');
-      const k = H_VISIBLE / H;
-      centreGrandY = 0.045 * H_VISIBLE;
-      // orbite finale autour du logo (ellipse), parcourue dans le sens horaire
-      const portrait = W / H < 0.85;
-      const orx = portrait ? W * 0.41 : W * (W / H > 1.6 ? 0.37 : 0.35), ory = portrait ? H * 0.41 : H * 0.355, ocy = portrait ? H * 0.46 : H * 0.5;
-      ORB = { rx: orx * k, ry: ory * k, cy: -(ocy - H / 2) * k, portrait, k,
-              hx: W * 0.385, hy: H * 0.39, cxp: W * 0.5, cyp: H * 0.48, rc: W * 0.17 };
-      OBJ.forEach((o, i) => {
-        const [x, y, r] = e.pts[i];
-        o.slot.set((x - W / 2) * k, -(y - H / 2) * k, 0);
-        if (!o.slotCur || orbite === null) o.slotCur = o.slot.clone();
-        o.rayonEcran = r;
-        o.echelle = (r * k) / (o.R || 1);
-        o.echelleGrand = (Math.min(W * 0.47, H * 0.35) * k) / (o.R || 1);
-      });
-    }
-    // point d'une piste en rectangle arrondi (sens horaire à l'écran, départ en haut au centre), s ∈ [0, 1[
-    function piste(s){
-      const { hx, hy, cxp, cyp, rc } = ORB, lx = 2 * (hx - rc), ly = 2 * (hy - rc), arcL = Math.PI * rc / 2;
-      const seg = [lx / 2, arcL, ly, arcL, lx, arcL, ly, arcL, lx / 2], tot = seg.reduce((a, b) => a + b, 0);
-      let d = ((s % 1) + 1) % 1 * tot, i = 0;
-      while (i < seg.length - 1 && d > seg[i]){ d -= seg[i]; i++; }
-      const coin = (cx, cy, a0) => { const a = a0 + d / rc; return [cx + rc * Math.cos(a), cy + rc * Math.sin(a)]; };
-      switch (i){
-        case 0: return [cxp + d, cyp - hy];
-        case 1: return coin(cxp + hx - rc, cyp - hy + rc, -Math.PI / 2);
-        case 2: return [cxp + hx, cyp - hy + rc + d];
-        case 3: return coin(cxp + hx - rc, cyp + hy - rc, 0);
-        case 4: return [cxp + hx - rc - d, cyp + hy];
-        case 5: return coin(cxp - hx + rc, cyp + hy - rc, Math.PI / 2);
-        case 6: return [cxp - hx, cyp + hy - rc - d];
-        case 7: return coin(cxp - hx + rc, cyp - hy + rc, Math.PI);
-        default: return [cxp - hx + rc + d, cyp - hy];
-      }
-    }
-    addEventListener('resize', disposer);
-    disposer();
-
-    /* ---------- sélection ---------- */
-    const proj = new THREE.Vector3();
-    function pointerSur(x, y){
-      let best = -1, bd = 1e9;
-      OBJ.forEach((o, i) => {
-        if (!o.construit) return;
-        proj.copy(o.racine.position).project(camera);
-        const sx = (proj.x + 1) / 2 * W, sy = (1 - proj.y) / 2 * H;
-        const r = o.rayonEcran * (1 + 0.3 * o.sel) * 1.05;
-        const d = Math.hypot(x - sx, y - sy) / r;
-        if (d < 1 && d < bd){ bd = d; best = i; }
-      });
-      return best;
-    }
-    function selectionner(i){
-      if (sortie) return;
-      if (etat.selection === i){ return; }
-      etat.selection = i;
-      OBJ.forEach(x => { x.yawMain = 0; x.pitchMain = 0; });
-      noms.forEach((n, k) => n.classList.toggle('tbe-actif', k === i));
-      ov.classList.add('tbe-selection', 'tbe-plein');
-      const o = OBJ[i];
-      titrePanneau.textContent = o.c.nom;
-      if (o.c.id === 'portail'){ btnPortes.hidden = false; btnPortes.textContent = 'Ouvrir / fermer le portail'; }
-      else if (o.c.id === 'verriere'){ btnPortes.hidden = false; btnPortes.textContent = 'Ouvrir / fermer les ouvrants'; }
-      else btnPortes.hidden = true;
-      panneau.classList.add('tbe-ouvert');
-    }
-    function deselectionner(){
-      etat.selection = -1;
-      noms.forEach(n => n.classList.remove('tbe-actif'));
-      ov.classList.remove('tbe-selection', 'tbe-plein');
-      panneau.classList.remove('tbe-ouvert');
-    }
-    btnFermerX.addEventListener('click', () => deselectionner());
-    noms.forEach((n, i) => n.addEventListener('click', () => { if (!OBJ[i].construit) return; etat.selection === i ? deselectionner() : selectionner(i); }));
-    panneau.addEventListener('click', e => {
-      const b = e.target.closest('[data-a]'); if (!b || etat.selection < 0) return;
-      const o = OBJ[etat.selection];
-      if (b.dataset.a === 'fermer') deselectionner();
-      else if (b.dataset.a === 'rejouer'){ o.rejeu = 0; o.porteCible = 0; o.porte = 0; o.autoSuspendu = horloge + DUREE_RECONSTRUCTION + 6; }
-      else if (b.dataset.a === 'reinit'){ o.yawMain = 0; o.pitchMain = 0; o.porteCible = 0; o.autoSuspendu = horloge + 20; }
-      else if (b.dataset.a === 'portes'){
-        const max = o.c.id === 'portail' ? 1 : 1;
-        o.porteCible = o.porteCible > 0.05 ? 0 : max;
-        o.autoSuspendu = horloge + 30;
-      }
-    });
-
-    let appui = null;
-    canvas.addEventListener('pointerdown', e => { appui = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, glisse: false }; });
-    canvas.addEventListener('pointermove', e => {
-      if (!appui) return;
-      const dx = e.clientX - appui.x, dy = e.clientY - appui.y;
-      if (Math.hypot(e.clientX - appui.x0, e.clientY - appui.y0) > 6) appui.glisse = true;
-      if (appui.glisse && etat.selection >= 0){             // vue en grand : glisser pour tourner la création
-        const o = OBJ[etat.selection];
-        o.yawMain += dx * 0.01; o.pitchMain = THREE.MathUtils.clamp(o.pitchMain + dy * 0.006, -0.35, 0.6);
-      }
-      appui.x = e.clientX; appui.y = e.clientY;
-    });
-    canvas.addEventListener('pointerup', e => {
-      if (appui && !appui.glisse){
-        const i = pointerSur(e.clientX, e.clientY);
-        if (etat.selection < 0 && i >= 0) selectionner(i);
-      }
-      appui = null;
-    });
-    canvas.addEventListener('pointercancel', () => { appui = null; });
-
-    btnPause.addEventListener('click', () => {
-      etat.pause = !etat.pause;
-      btnPause.textContent = etat.pause ? 'Reprendre' : 'Pause';
-      btnPause.setAttribute('aria-pressed', String(etat.pause));
-    });
-
-    /* ---------- animation ---------- */
-    let vitesse = reduit ? 0 : 1, enSortie = false, tSortie = 0, dernier = performance.now(), rafId = 0;
-    const lisse = (x, y, k, dt) => x + (y - x) * (1 - Math.exp(-k * dt));
-    const ease = x => x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x);
-
-    function boucle(now){
-      rafId = 0;
-      if (detruit) return;
-      const dt = Math.max(0, Math.min(0.05, (now - dernier) / 1000)); dernier = now;
-      const cibleV = (etat.pause || enSortie || reduit) ? 0 : 1;
-      vitesse = lisse(vitesse, cibleV, enSortie ? 3.5 : 2.2, dt);
-      horloge += dt;
-      const sel = etat.selection;
-
-      // construction simultanée des neuf créations, rythmée par l'engrenage
-      const tousCharges = nbCharges === CREATIONS.length;
-      if (tousCharges || horloge > 6) construction = Math.min(1, construction + (reduit ? 1 : dt / DUREE_CONSTRUCTION));
-      const pc = ease(construction);
-      engrenage.progression(0.12 * nbCharges / CREATIONS.length + 0.88 * pc, pc >= 1 && tousCharges);
-      logo.poser(construction);                            // le logo se trace dans le même temps
-      const eS = enSortie ? ease((now - tSortie - 120) / 950) : 0;
-      // une fois tout construit : les créations et leurs noms tournent autour du logo, sens horaire
-      if (pc >= 1 && tousCharges && !cent){
-        cent = true; logo.poser(1);
-        if (!reduit) orbite = horloge;                     // 100 % : les créations se mettent à tourner…
-        tEntrer = horloge + (reduit ? 0 : 2.5);            // …puis le bouton arrive, en douceur
-      }
-      if (tEntrer !== null && horloge >= tEntrer){ tEntrer = null; montrerEntrer(); }
-      if (orbite !== null && horloge > orbite) phi += dt * vitesse * (sel >= 0 ? 0 : 1) * (2 * Math.PI / 120);
-
-      OBJ.forEach(o => {
-        if (!o.pret) return;
-        o.apparition = Math.min(1, o.apparition + dt / (reduit ? 0.2 : 0.5));
-        // avancement de la construction de cette création : commun à toutes, ou « Reconstruire »
-        let po = pc;
-        if (o.rejeu !== undefined){
-          o.rejeu = Math.min(1, o.rejeu + (reduit ? 1 : dt / DUREE_RECONSTRUCTION));
-          po = o.rejeu; if (o.rejeu >= 1) o.rejeu = undefined;
-        }
-        if (o.p !== po){
-          o.p = po;
-          o.prog.forEach(m => { m.uniforms.uProg.value = po; });
-          if (o.poserOurs) o.poserOurs(po, 1);
-        }
-        if (pc >= 1 && !o.construit){
-          o.construit = true; noms[o.i].classList.add('tbe-vu');
-          if (o.c.id === 'portail' || o.c.id === 'verriere') o.prochainAuto = horloge + (o.c.id === 'portail' ? 3 : 7);
-        }
-        const choisi = sel === o.i;
-        const facteur = choisi ? 0.4 : (sel >= 0 ? 0.35 : 1);
-        o.t += dt * vitesse * facteur;
-        o.sel = lisse(o.sel, choisi ? 1 : 0, 4, dt);
-        o.att = lisse(o.att, sel >= 0 && !choisi ? 0 : 1, 5, dt);
-
-        // orientation : vue validée de chaque création, puis mouvement lent
-        let yaw = -o.az + o.yawMain;
-        if (o.c.mouv === 'tour') yaw += o.t * (2 * Math.PI / o.c.periode) + o.phase;
-        else yaw += THREE.MathUtils.degToRad(o.c.amp) * Math.sin(o.t * 2 * Math.PI / o.c.periode + o.phase);
-        o.lacet.rotation.y = yaw;
-        o.inclin.rotation.x = o.el + o.pitchMain;
-
-        // position : emplacement autour du logo, léger rapprochement si sélectionnée, dispersion à la sortie
-        // sélection : la création vient au centre et s'ouvre en grand sur toute la page
-        const k = ease(o.sel);
-        const zoom = o.cadrageOurs ? o.cadrageOurs(o.p) : 1;
-        const s = (o.echelle + (o.echelleGrand - o.echelle) * k) * zoom * (0.92 + 0.08 * o.apparition) * (1 - 0.25 * eS);
-        o.racine.scale.setScalar(s);
-        if (orbite !== null && horloge > orbite){
-          let tx, ty;
-          if (ORB.portrait){
-            // téléphone : piste en rectangle arrondi le long des bords, autour du bloc central
-            const [px, py] = piste((o.i / OBJ.length + phi / (2 * Math.PI)) % 1);
-            tx = (px - W / 2) * ORB.k; ty = -(py - H / 2) * ORB.k;
-          } else {
-            const a = -Math.PI / 2 + o.i * (2 * Math.PI / OBJ.length) + phi;
-            tx = ORB.rx * Math.cos(a); ty = ORB.cy - ORB.ry * Math.sin(a);
-          }
-          const kk = 1 - Math.exp(-1.6 * dt);
-          if (!o.slotCur) o.slotCur = new THREE.Vector3(tx, ty, 0);
-          o.slotCur.x += (tx - o.slotCur.x) * kk; o.slotCur.y += (ty - o.slotCur.y) * kk;
-        }
-        const sl = o.slotCur || o.slot;
-        o.racine.position.set(
-          (sl.x + (0 - sl.x) * k) * (1 + 0.45 * eS),
-          (sl.y + (centreGrandY - sl.y) * k) * (1 + 0.45 * eS) + 0.4 * eS, -2 * eS);
-
-        // portes : auto-ouverture lente puis refermeture (portail, verrière), commande manuelle prioritaire
-        if (o.prochainAuto !== undefined && !reduit && !enSortie){
-          if (horloge > o.autoSuspendu && vitesse > 0.5 && horloge > o.prochainAuto){
-            if (o.porteCible === 0){ o.porteCible = o.c.id === 'portail' ? 0.72 : 0.38; o.prochainAuto = horloge + (o.c.id === 'portail' ? 6 : 4.5); }
-            else { o.porteCible = 0; o.prochainAuto = horloge + (o.c.id === 'portail' ? 16 : 14); }
-          }
-        }
-        o.porte = reduit ? o.porteCible : lisse(o.porte, o.porteCible, 1.1, dt);
-        Object.values(o.pivots).forEach(p => { p.g.rotation.y = p.sens * THREE.MathUtils.degToRad(p.max) * o.porte; });
-
-        // lumière : surbrillance champagne, reflet qui parcourt la pièce, fondu d'apparition / de sortie
-        const op = o.apparition * o.att * (1 - eS);
-        const cycle = ((horloge * (reduit ? 0 : 1) + o.phase * 4.3) % 12) / 12;
-        o.mats.forEach(m => { m.uniforms.uOp.value = op * (m.userData.dim === undefined ? 1 : m.userData.dim); m.uniforms.uHi.value = o.sel; m.uniforms.uSweep.value = -1.6 + cycle * 6; });
-        o.metal.forEach(m => {
-          m.envMapIntensity = m.userData.env0 * (0.9 + 0.6 * o.sel) * o.att;
-          const op0 = m.userData.op0 === undefined ? 1 : m.userData.op0;
-          m.opacity = op0 * (m.userData.fill === undefined ? 1 : m.userData.fill) * (enSortie ? 1 - eS : o.apparition * o.att);
-          m.transparent = m.opacity < 0.999;
-        });
-        o.racine.visible = o.att > 0.06 && (op > 0.003 || (o.metal.length > 0 && (1 - eS) > 0.003));
-      });
-
-      // noms sous les objets
-      OBJ.forEach(o => {
-        if (!o.pret) return;
-        const s = o.racine.scale.x, bas = o.bas * o.R * s * Math.cos(o.inclin.rotation.x) - 0.15 * o.R * s * Math.abs(Math.sin(o.inclin.rotation.x));
-        proj.set(o.racine.position.x, o.racine.position.y + bas, o.racine.position.z).project(camera);
-        const x = (proj.x + 1) / 2 * W, y = (1 - proj.y) / 2 * H + 8;
-        noms[o.i].style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translateX(-50%)`;
-      });
-
-      renderer.render(scene, camera);
-      if (!document.hidden) rafId = requestAnimationFrame(boucle);
-    }
-    rafId = requestAnimationFrame(boucle);
-    // onglet masqué : plus aucun calcul ; retour : reprise sans saut
-    document.addEventListener('visibilitychange', surVisibilite);
-    function surVisibilite(){ if (!document.hidden && !rafId && !detruit){ dernier = performance.now(); rafId = requestAnimationFrame(boucle); } }
-
-    function sortir(){ enSortie = true; tSortie = performance.now(); deselectionner(); }
-    function detruireTout(){
-      detruit = true; if (rafId) cancelAnimationFrame(rafId);
-      removeEventListener('resize', disposer);
-      document.removeEventListener('visibilitychange', surVisibilite);
-      scene.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material){ (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose()); } });
-      envTex.dispose(); pmrem.dispose(); renderer.dispose();
-      try { renderer.forceContextLoss(); } catch (e) {}
-    }
-
-    // accès de test (sans effet en production)
-    window.__tbEntree = { OBJ, selectionner, deselectionner, etat, get horloge(){ return horloge; }, get construction(){ return construction; }, avancer(v){ construction = v; }, tourner(v){ phi = v; } };
-    return { sortir, detruire: detruireTout, deselectionner };
-  }
+    return { construireDessin, construireOurs, construireTraits, construireRepli, fabriquer, envTex, pmrem };
 }
-
 
 /* --------------------------------------------------------------------------
-   Engrenage de chargement : grande roue dentée autour de l'emblème,
-   pignon engrené qui affiche l'avancement, arc de progression
+   Galerie 3D dans la page d'accueil (section « Mes créations en 3D »)
+   Les neuf créations se dessinent puis se remplissent quand la section arrive
+   à l'écran ; un clic ouvre la création en grand et la reconstruit.
+   Rien n'est chargé tant que la section n'approche pas de l'écran.
    -------------------------------------------------------------------------- */
-function creerEngrenage(svg, reduit){
-  const NS = 'http://www.w3.org/2000/svg';
-  const N1 = 48, R1 = 69, N2 = 12, M = 2 * R1 / N1, R2 = M * N2 / 2, D = R1 + R2, A2 = -42 * Math.PI / 180;
-  const C2 = [D * Math.cos(A2), D * Math.sin(A2)];
-  function denture(N, rp){
-    const ra = rp + M, rf = rp - 1.25 * M, t = 2 * Math.PI / N; let d = '';
-    for (let i = 0; i < N; i++){
-      const a = i * t, P = (r, b) => (r * Math.cos(b)).toFixed(2) + ',' + (r * Math.sin(b)).toFixed(2);
-      d += (i ? 'L' : 'M') + P(rf, a - 0.27 * t) + 'L' + P(ra, a - 0.13 * t) + 'L' + P(ra, a + 0.13 * t) + 'L' + P(rf, a + 0.27 * t)
-         + 'A' + rf.toFixed(2) + ',' + rf.toFixed(2) + ' 0 0 1 ' + P(rf, a + 0.73 * t);
-    }
-    return d + 'Z';
-  }
-  const el = (n, a, parent) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); (parent || svg).appendChild(e); return e; };
-  const roue = el('g', { class: 'tbe-roue' });
-  el('path', { d: denture(N1, R1), class: 'tbe-dent' }, roue);
-  el('circle', { r: 60.5, class: 'tbe-trait' }, roue);
-  for (let k = 0; k < 24; k++){ const a = k * Math.PI / 12; el('line', { x1: (61.6 * Math.cos(a)).toFixed(2), y1: (61.6 * Math.sin(a)).toFixed(2), x2: (63.4 * Math.cos(a)).toFixed(2), y2: (63.4 * Math.sin(a)).toFixed(2), class: 'tbe-trait' }, roue); }
-  const L = 2 * Math.PI * 57;
-  const arc = el('circle', { r: 57, class: 'tbe-arc', transform: 'rotate(-90)', 'stroke-dasharray': L.toFixed(1), 'stroke-dashoffset': L.toFixed(1) });
-  const pignonPos = el('g', { transform: `translate(${C2[0].toFixed(2)} ${C2[1].toFixed(2)})` });
-  const pignon = el('g', {}, pignonPos);
-  el('path', { d: denture(N2, R2), class: 'tbe-dent' }, pignon);
-  el('circle', { r: 12.2, class: 'tbe-trait' }, pignon);
-  for (let k = 0; k < 6; k++){ const a = k * Math.PI / 3; el('line', { x1: (12.2 * Math.cos(a)).toFixed(2), y1: (12.2 * Math.sin(a)).toFixed(2), x2: (R2 - 1.25 * M - 0.2) * Math.cos(a), y2: (R2 - 1.25 * M - 0.2) * Math.sin(a), class: 'tbe-trait' }, pignon); }
-  const texte = el('text', { class: 'tbe-pct', 'text-anchor': 'middle', 'dominant-baseline': 'central' }, pignonPos);
-  texte.textContent = '0';
+function galerie(){
+  const grille = document.getElementById('tb-galerie3d');
+  if (!grille || grille.dataset.pret) return;
+  grille.dataset.pret = '1';
+  const reduit = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cartes = [...grille.querySelectorAll('.tbg-carte')].map(el => ({ el, c: CREATIONS.find(c => c.id === el.dataset.id), scene: el.querySelector('.tbg-scene') })).filter(x => x.c);
+  const canvas = document.createElement('canvas'); canvas.className = 'tbg-canvas'; canvas.setAttribute('aria-hidden', 'true');
+  grille.appendChild(canvas);
+  const defs = {};                                   // modèles déjà téléchargés (servent aussi à la vue en grand)
+  let THREE = null, renderer = null, A = null, visible = false, raf = 0, dernier = 0, horloge = 0, lance = false;
+  const lisse = (x, y, k, dt) => x + (y - x) * (1 - Math.exp(-k * dt));
 
-  let th = 0, vit = reduit ? 0 : 26, cible = reduit ? 0 : 26, prog = 0, fini = false, raf = 0, t0 = performance.now();
-  function tour(now){
-    const dt = Math.max(0, Math.min(0.05, (now - t0) / 1000)); t0 = now;
-    vit += (cible - vit) * (1 - Math.exp(-1.5 * dt));
-    th += vit * dt;
-    roue.setAttribute('transform', 'rotate(' + th.toFixed(2) + ')');
-    pignon.setAttribute('transform', 'rotate(' + (-th * N1 / N2 + 180 / N2).toFixed(2) + ')');
-    raf = requestAnimationFrame(tour);
+  function lumieres(scene){
+    const l1 = new THREE.DirectionalLight(0xfff0d8, 1.9); l1.position.set(3, 4, 6);
+    const l2 = new THREE.DirectionalLight(0xffdca0, 1.2); l2.position.set(-5, 2, -3);
+    scene.add(l1, l2, new THREE.HemisphereLight(0x4a3a24, 0x050505, 0.15));
   }
-  if (!reduit) raf = requestAnimationFrame(tour);
-  else pignon.setAttribute('transform', 'rotate(' + (180 / N2) + ')');
-  return {
-    progression(p, termine){
-      if (fini) return;
-      p = Math.max(prog, Math.min(1, p)); prog = p;
-      arc.setAttribute('stroke-dashoffset', (L * (1 - p)).toFixed(1));
-      texte.textContent = termine ? 100 : Math.min(99, Math.floor(p * 100));
-      if (termine){
-        fini = true; cible = reduit ? 0 : 4;
-        svg.classList.add('tbe-fini');
-      }
-    },
-    abandon(){ fini = true; cible = reduit ? 0 : 4; svg.classList.add('tbe-fini'); },
-    arreter(){ cancelAnimationFrame(raf); }
-  };
+  // une création prête à afficher : racine > inclinaison > lacet > modèle (rayon ramené à 1)
+  function monter(fab, def, c){
+    const m = fab.fabriquer(def);
+    const racine = new THREE.Group(), inclin = new THREE.Group(), lacet = new THREE.Group();
+    racine.add(inclin); inclin.add(lacet); lacet.add(m.modele);
+    const o = { c, m, racine, inclin, lacet, az: def.az || 0, el: Math.min(0.32, Math.max(0.08, def.el === undefined ? 0.2 : def.el)),
+                p: -1, prog: 0, t: Math.random() * 20, porte: 0, porteCible: 0, yawMain: 0, pitchMain: 0 };
+    return o;
+  }
+  // état d'une création à l'avancement p (0 → 1 : traits pièce par pièce, puis volumes)
+  function poser(o, p, op, dt, hi){
+    if (o.p !== p){ o.p = p; o.m.prog.forEach(x => { x.uniforms.uProg.value = p; }); if (o.m.poser) o.m.poser(p, 1); }
+    const cycle = ((horloge + o.t) % 12) / 12;
+    o.m.mats.forEach(x => { x.uniforms.uOp.value = op * (x.userData.dim === undefined ? 1 : x.userData.dim); x.uniforms.uHi.value = hi; x.uniforms.uSweep.value = -1.6 + cycle * 6; });
+    (o.m.metal || []).forEach(x => {
+      x.envMapIntensity = x.userData.env0 * (0.9 + 0.6 * hi);
+      const op0 = x.userData.op0 === undefined ? 1 : x.userData.op0;
+      x.opacity = op0 * (x.userData.fill === undefined ? 1 : x.userData.fill) * op; x.transparent = x.opacity < 0.999;
+    });
+    o.porte = reduit ? o.porteCible : lisse(o.porte, o.porteCible, 1.1, dt);
+    Object.values(o.m.pivots || {}).forEach(pv => { pv.g.rotation.y = pv.sens * THREE.MathUtils.degToRad(pv.max) * o.porte; });
+    const zoom = o.m.cadrage ? o.m.cadrage(p) : 1;
+    o.racine.scale.setScalar(zoom / (o.m.R || 1));
+    const plat = o.c.id === 'portail' || o.c.id === 'verriere';     // ouvrages plats : balancement doux, jamais vus par la tranche
+    const w = o.t * (2 * Math.PI / (o.c.periode || 48));
+    o.lacet.rotation.y = -o.az + o.yawMain + (reduit ? 0 : plat ? 0.6 * Math.sin(w) : w);
+    o.inclin.rotation.x = o.el + o.pitchMain;
+  }
+
+  function demarrer3D(){
+    if (lance) return; lance = true;
+    import(URL_THREE).then(T => {
+      THREE = T;
+      try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+      catch (e) { grille.classList.add('tbg-sans3d'); return; }
+      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
+      renderer.setClearColor(0x000000, 0); renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.autoClear = false;
+      A = atelier(THREE, renderer);
+      cartes.forEach(k => {
+        k.sc = new THREE.Scene(); lumieres(k.sc);
+        k.cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50); k.cam.position.set(0, 0, 1.12 / Math.sin(THREE.MathUtils.degToRad(15)));
+      });
+      // téléchargement : trois fichiers à la fois, dans l'ordre de la grille
+      const file = cartes.slice();
+      const ouvrier = async () => {
+        while (file.length){
+          const k = file.shift();
+          try {
+            const def = defs[k.c.fichier] || (defs[k.c.fichier] = await chargerDef(k.c.fichier));
+            k.o = monter(A, def, k.c); k.sc.add(k.o.racine); k.el.classList.add('tbg-chargee');
+          } catch (e) { console.error('galerie', k.c.fichier, e); k.el.classList.add('tbg-erreur'); }
+        }
+      };
+      ouvrier(); ouvrier(); ouvrier();
+      relancer();
+    }).catch(() => grille.classList.add('tbg-sans3d'));
+  }
+
+  function relancer(){ if (!raf && renderer && visible && !document.hidden){ dernier = performance.now(); raf = requestAnimationFrame(image); } }
+  function image(now){
+    raf = 0;
+    const dt = Math.max(0, Math.min(0.05, (now - dernier) / 1000)); dernier = now; horloge += dt;
+    if (document.getElementById('tb-entree') || vue.ouverte){ raf = requestAnimationFrame(image); return; }   // l'intro ou la vue en grand passe devant
+    const g = grille.getBoundingClientRect(), H = Math.min(innerHeight, g.height), W = g.width;
+    const ty = Math.max(0, Math.min(g.height - H, -g.top));          // la toile suit la partie visible de la grille
+    if (canvas._w !== W || canvas._h !== H){ canvas._w = W; canvas._h = H; renderer.setSize(W, H, false); canvas.style.width = W + 'px'; canvas.style.height = H + 'px'; }
+    canvas.style.transform = `translateY(${ty}px)`;
+    renderer.setScissorTest(false); renderer.clear();
+    renderer.setScissorTest(true);
+    cartes.forEach((k, i) => {
+      if (!k.o) return;
+      const r = k.scene.getBoundingClientRect();
+      const x = r.left - g.left, y = r.top - g.top - ty;
+      const vu = r.bottom > 0 && r.top < innerHeight;
+      // le dessin démarre quand la carte arrive vraiment à l'écran, en léger décalé d'une carte à l'autre
+      if (k.debut === undefined && r.top < innerHeight * 0.85 && r.bottom > innerHeight * 0.1) k.debut = horloge + (i % 3) * 0.25;
+      if (k.debut !== undefined) k.o.prog = reduit ? 1 : Math.min(1, Math.max(0, (horloge - k.debut) / 6.5));
+      if (!reduit) k.o.t += dt;
+      k.survol = lisse(k.survol || 0, k.el.matches(':hover, :focus-visible') ? 1 : 0, 6, dt);
+      if (!vu || y > H || y + r.height < 0) return;
+      poser(k.o, k.o.prog, 1, dt, k.survol);
+      const vy = H - y - r.height;
+      renderer.setViewport(x, vy, r.width, r.height); renderer.setScissor(x, vy, r.width, r.height);
+      k.cam.aspect = r.width / r.height; k.cam.updateProjectionMatrix();
+      renderer.render(k.sc, k.cam);
+    });
+    raf = requestAnimationFrame(image);
+  }
+
+  /* ---------- vue en grand : la création se reconstruit ---------- */
+  const vue = { ouverte: false };
+  function creerVue(){
+    const d = document.createElement('div');
+    d.id = 'tbg-vue'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'Création en 3D');
+    d.innerHTML = `<canvas class="tbg-vue-canvas"></canvas>
+      <button type="button" class="tbg-vue-x" aria-label="Fermer">×</button>
+      <div class="tbg-vue-panneau"><h3></h3><p>Glisser pour tourner</p>
+        <div class="tbg-vue-actions">
+          <button type="button" data-a="portes" hidden></button>
+          <button type="button" data-a="rejouer">Reconstruire</button>
+          <button type="button" data-a="reinit">Réinitialiser</button>
+          <button type="button" data-a="fermer">Fermer</button>
+        </div></div>`;
+    document.body.appendChild(d);
+    vue.d = d; vue.canvas = d.querySelector('canvas'); vue.titre = d.querySelector('h3'); vue.portes = d.querySelector('[data-a="portes"]');
+    vue.r = new THREE.WebGLRenderer({ canvas: vue.canvas, antialias: true, alpha: true });
+    vue.r.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); vue.r.setClearColor(0x000000, 0); vue.r.outputColorSpace = THREE.SRGBColorSpace;
+    vue.A = atelier(THREE, vue.r);
+    vue.sc = new THREE.Scene(); lumieres(vue.sc);
+    vue.cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+    d.querySelector('.tbg-vue-x').addEventListener('click', fermerVue);
+    d.querySelector('.tbg-vue-actions').addEventListener('click', e => {
+      const b = e.target.closest('[data-a]'); if (!b || !vue.o) return;
+      const a = b.dataset.a;
+      if (a === 'fermer') fermerVue();
+      else if (a === 'rejouer'){ vue.o.prog = 0; vue.o.porteCible = 0; vue.o.porte = 0; }
+      else if (a === 'reinit'){ vue.o.yawMain = 0; vue.o.pitchMain = 0; vue.o.porteCible = 0; }
+      else if (a === 'portes') vue.o.porteCible = vue.o.porteCible > 0.05 ? 0 : 1;
+    });
+    let appui = null;
+    vue.canvas.addEventListener('pointerdown', e => { appui = { x: e.clientX, y: e.clientY }; vue.canvas.setPointerCapture(e.pointerId); });
+    vue.canvas.addEventListener('pointermove', e => {
+      if (!appui || !vue.o) return;
+      vue.o.yawMain += (e.clientX - appui.x) * 0.01; vue.o.pitchMain = Math.max(-0.35, Math.min(0.6, vue.o.pitchMain + (e.clientY - appui.y) * 0.006));
+      appui.x = e.clientX; appui.y = e.clientY;
+    });
+    const fin = () => { appui = null; };
+    vue.canvas.addEventListener('pointerup', fin); vue.canvas.addEventListener('pointercancel', fin);
+    d.addEventListener('keydown', e => { if (e.key === 'Escape') fermerVue(); });
+  }
+  function ouvrirVue(k){
+    if (!THREE || !defs[k.c.fichier]) return;
+    if (!vue.d) creerVue();
+    if (vue.o){ vue.sc.remove(vue.o.racine); jeter(vue.o.racine); }
+    vue.o = monter(vue.A, defs[k.c.fichier], k.c); vue.o.prog = reduit ? 1 : 0; vue.o.t = 0;
+    vue.sc.add(vue.o.racine);
+    vue.titre.textContent = k.c.nom;
+    const portes = k.c.id === 'portail' ? 'Ouvrir / fermer le portail' : k.c.id === 'verriere' ? 'Ouvrir / fermer les ouvrants' : '';
+    vue.portes.hidden = !portes; vue.portes.textContent = portes;
+    vue.ouverte = true; vue.retour = k.el; vue.debord = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    vue.d.classList.add('tbg-vue-ouverte');
+    vue.d.querySelector('.tbg-vue-x').focus({ preventScroll: true });
+    vue.dernier = performance.now(); requestAnimationFrame(imageVue);
+  }
+  function fermerVue(){
+    if (!vue.ouverte) return;
+    vue.ouverte = false; vue.d.classList.remove('tbg-vue-ouverte');
+    document.body.style.overflow = vue.debord || '';
+    if (vue.retour) vue.retour.focus({ preventScroll: true });
+    relancer();
+  }
+  function jeter(g){ g.traverse(x => { if (x.geometry) x.geometry.dispose(); if (x.material) (Array.isArray(x.material) ? x.material : [x.material]).forEach(m => m.dispose()); }); }
+  function imageVue(now){
+    if (!vue.ouverte) return;
+    const dt = Math.max(0, Math.min(0.05, (now - vue.dernier) / 1000)); vue.dernier = now; horloge += dt;
+    const W = innerWidth, H = innerHeight;
+    if (vue.canvas._w !== W || vue.canvas._h !== H){ vue.canvas._w = W; vue.canvas._h = H; vue.r.setSize(W, H, false); vue.cam.aspect = W / H; vue.cam.updateProjectionMatrix(); }
+    // la création occupe le centre de l'écran, au-dessus du panneau de commandes
+    const taille = Math.min(W * 0.42, H * 0.34), dist = 20;
+    vue.cam.position.set(0, -H * 0.045 * (2 * dist * Math.tan(THREE.MathUtils.degToRad(15)) / H), dist);
+    const o = vue.o;
+    if (!reduit){ o.prog = Math.min(1, o.prog + dt / 9); o.t += dt * 0.5; }
+    poser(o, o.prog, 1, dt, 1);
+    o.racine.scale.multiplyScalar(taille * (2 * dist * Math.tan(THREE.MathUtils.degToRad(15)) / H));
+    vue.r.render(vue.sc, vue.cam);
+    requestAnimationFrame(imageVue);
+  }
+
+  cartes.forEach(k => k.el.addEventListener('click', () => { if (k.o) ouvrirVue(k); }));
+  // la 3D ne se charge qu'à l'approche de la section
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => {
+      es.forEach(e => { visible = e.isIntersecting; if (visible){ demarrer3D(); relancer(); } });
+    }, { rootMargin: '400px 0px' }).observe(grille);
+  } else { visible = true; demarrer3D(); }
+  document.addEventListener('visibilitychange', relancer);
 }
 
+// « Revoir l'introduction 3D » : relance l'écran d'entrée sans recharger la page
+window.tbRevoirIntro = function(){
+  if (document.getElementById('tb-entree')) return;
+  RACINE.classList.add('tb-intro'); demarrer();
+};
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('[data-tb-revoir]');
+  if (!a) return;
+  e.preventDefault(); window.tbRevoirIntro();
+});
+
 if (RACINE.classList.contains('tb-intro')) demarrer();
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', galerie); else galerie();
