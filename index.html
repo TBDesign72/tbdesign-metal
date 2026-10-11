@@ -662,6 +662,34 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   }
 }
 
+
+/* ══════════════════════════════════════════════════════════════════════
+   Galerie 3D de la page d'accueil (section « Mes créations en 3D »)
+   ══════════════════════════════════════════════════════════════════════ */
+.tbg-intro{max-width:640px;color:var(--gris,#9a9a9a);font-size:14px;line-height:1.8;margin:-18px 0 40px}
+.tbg-grille{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+.tbg-carte{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 14px 20px;background:#0e0e0e;border:1px solid #c8a96e1a;color:inherit;font:inherit;cursor:pointer;text-align:center;transition:border-color .35s,background .35s}
+.tbg-carte:hover,.tbg-carte:focus-visible{border-color:#c8a96e66;background:#121110;outline:none}
+.tbg-scene{display:block;width:100%;aspect-ratio:4/3;position:relative}
+.tbg-actif .tbg-scene::after{content:'';position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border:1px solid #c8a96e44;border-top-color:#c8a96e;border-radius:50%;animation:tbgTourne 1.1s linear infinite}
+.tbg-chargee .tbg-scene::after,.tbg-erreur .tbg-scene::after,.tbg-sans3d .tbg-scene::after{display:none}
+@keyframes tbgTourne{to{transform:rotate(360deg)}}
+.tbg-nom{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blanc,#f7f4ef);line-height:1.6}
+.tbg-voir{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or,#c8a96e);opacity:.55;transition:opacity .3s}
+.tbg-carte:hover .tbg-voir,.tbg-carte:focus-visible .tbg-voir{opacity:1}
+.tbg-canvas{position:absolute;left:0;top:0;pointer-events:none;z-index:2}
+.tbg-sans3d .tbg-voir{display:none}
+.tbg-revoir{display:inline-flex;align-items:center;gap:12px;margin-top:34px;padding:15px 24px;border:1px solid #c8a96e55;color:var(--or,#c8a96e);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;transition:border-color .3s,background .3s}
+.tbg-revoir:hover{border-color:var(--or,#c8a96e);background:#c8a96e0f}
+.tbg-revoir svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+@media(max-width:760px){
+  .tbg-grille{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tbg-grille .tbg-carte:nth-of-type(9){grid-column:1 / -1;justify-self:center;width:calc(50% - 1.5px)}
+  .tbg-carte{padding:12px 8px 14px;gap:8px}
+  .tbg-nom{font-size:8.5px;letter-spacing:1.6px}
+  .tbg-voir{display:none}
+  .tbg-intro{margin:-18px 0 28px;font-size:13px}
+}
 </style>
 <!-- Écran d'entrée immersif TB Design Métal (couche indépendante, fichiers entree*) -->
 <script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{var u=r?new URL(r):null;m=!!u&&(u.origin===location.origin||/(^|\.)(google|bing|qwant|duckduckgo|ecosia|yahoo|yandex|startpage|lilo|brave)\./.test(u.hostname+'.'))}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!sessionStorage.getItem('tbIntroVue')&&!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
@@ -831,7 +859,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <button type="button" class="tbg-carte" data-id="deuxq"><span class="tbg-scene"></span><span class="tbg-nom">Escalier deux-quarts tournant</span><span class="tbg-voir">Voir en 3D</span></button>
     <button type="button" class="tbg-carte" data-id="verriere"><span class="tbg-scene"></span><span class="tbg-nom">Verrière</span><span class="tbg-voir">Voir en 3D</span></button>
   </div>
-  <a class="tbg-revoir" href="./?intro=1" data-tb-revoir><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Revoir l'introduction 3D</a>
+  <a class="tbg-revoir" href="./?intro=1" data-tb-revoir><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Revoir l'introduction 3D</a>
 </section>
 
 <!-- POURQUOI TB DESIGN -->

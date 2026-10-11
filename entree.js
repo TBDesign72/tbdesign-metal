@@ -1152,7 +1152,7 @@ function atelier(THREE, renderer){
 function galerie(){
   const grille = document.getElementById('tb-galerie3d');
   if (!grille || grille.dataset.pret) return;
-  grille.dataset.pret = '1';
+  grille.dataset.pret = '1'; grille.classList.add('tbg-actif');
   const reduit = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cartes = [...grille.querySelectorAll('.tbg-carte')].map(el => ({ el, c: CREATIONS.find(c => c.id === el.dataset.id), scene: el.querySelector('.tbg-scene') })).filter(x => x.c);
   const canvas = document.createElement('canvas'); canvas.className = 'tbg-canvas'; canvas.setAttribute('aria-hidden', 'true');
