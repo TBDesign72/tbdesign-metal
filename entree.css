@@ -1,0 +1,177 @@
+/* ==========================================================================
+   TB Design Métal — écran d'entrée immersif (couche indépendante)
+   Toutes les règles sont préfixées « tbe- » ou ciblent #tb-entree :
+   aucune interférence avec la page d'accueil.
+   ========================================================================== */
+
+/* Cache noir posé avant le premier affichage (évite d'apercevoir l'accueil).
+   Sécurité : s'il n'est pas remplacé par l'écran d'entrée, il s'efface seul après 5 s. */
+html.tb-intro::before{
+  content:"";position:fixed;inset:0;background:#080808;z-index:2147483000;
+  animation:tbeSecours 0s linear 5s forwards;
+}
+html.tb-intro.tb-intro-pret::before{display:none}
+@keyframes tbeSecours{to{visibility:hidden}}
+
+#tb-entree{
+  --tbe-or:#C9A66B; --tbe-or2:#E7CF9F; --tbe-fond:#080808; --tbe-gris:#8f887b;
+  position:fixed;inset:0;z-index:2147483001;background:var(--tbe-fond);color:#e9e2d4;
+  font-family:'Montserrat',system-ui,sans-serif;overflow:hidden;
+  opacity:1;transition:opacity .75s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+#tb-entree.tbe-fondu{opacity:0}
+#tb-entree *{box-sizing:border-box}
+
+.tbe-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:manipulation}
+
+/* Halo champagne derrière le logo */
+.tbe-halo{
+  position:absolute;left:50%;top:var(--tbe-cy,50%);width:min(78vmin,760px);height:min(78vmin,760px);
+  transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(201,166,107,.20) 0%,rgba(201,166,107,.08) 32%,rgba(201,166,107,0) 66%);
+  animation:tbeRespire 7s ease-in-out infinite;transition:opacity .8s,filter .8s;
+}
+#tb-entree.tbe-sortie .tbe-halo{filter:brightness(1.6)}
+@keyframes tbeRespire{0%,100%{opacity:.85}50%{opacity:1}}
+
+/* Bloc central : emblème dans l'engrenage, logotype, devise, bouton */
+.tbe-centre{
+  position:absolute;left:50%;top:var(--tbe-cy,50%);transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;text-align:center;pointer-events:none;
+  width:min(92vw,360px);
+}
+.tbe-logo-zone{position:relative;width:var(--tbe-logo,132px);height:var(--tbe-logo,132px);display:flex;align-items:center;justify-content:center}
+.tbe-logo{width:78%;height:78%;object-fit:contain;display:block;position:relative;z-index:2;filter:drop-shadow(0 0 14px rgba(201,166,107,.35));transition:filter .8s}
+#tb-entree.tbe-sortie .tbe-logo,#tb-entree.tbe-sortie .tbe-marque{filter:drop-shadow(0 0 30px rgba(231,207,159,.75))}
+.tbe-marque{display:block;width:calc(var(--tbe-logo,132px) * 1.5);height:auto;margin-top:calc(var(--tbe-logo,132px) * .3);filter:drop-shadow(0 0 10px rgba(201,166,107,.25));transition:filter .8s}
+
+/* Engrenage de chargement (1 unité = 1 % de la taille de l'emblème) */
+.tbe-engrenage{position:absolute;left:50%;top:50%;width:230%;height:230%;transform:translate(-50%,-50%);overflow:visible;pointer-events:none}
+.tbe-dent,.tbe-trait,.tbe-arc{fill:none;stroke:var(--tbe-or)}
+.tbe-dent{stroke-width:.75;stroke-opacity:.9;stroke-linejoin:round}
+.tbe-trait{stroke-width:.55;stroke-opacity:.5}
+.tbe-arc{stroke:var(--tbe-or2);stroke-width:1.7;stroke-linecap:round;filter:drop-shadow(0 0 2.5px rgba(231,207,159,.8));transition:opacity 1.2s}
+.tbe-pct{font:500 8.5px/1 'Montserrat',system-ui,sans-serif;fill:var(--tbe-or2);transition:opacity 1s}
+.tbe-engrenage.tbe-fini .tbe-arc{opacity:.22}
+.tbe-engrenage.tbe-fini .tbe-pct{opacity:0}
+.tbe-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tbe-logo-texte{position:relative;z-index:2;font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;letter-spacing:.12em;color:var(--tbe-or);line-height:1.1}
+.tbe-anneau{
+  position:absolute;left:50%;top:50%;border-radius:50%;border:1px solid rgba(201,166,107,.42);
+  transform-style:preserve-3d;pointer-events:none;
+}
+.tbe-anneau::after{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--tbe-or2);box-shadow:0 0 8px 2px rgba(231,207,159,.6)}
+.tbe-a1{width:190%;height:190%;margin:-95% 0 0 -95%;animation:tbeA1 46s linear infinite}
+.tbe-a2{width:235%;height:235%;margin:-117.5% 0 0 -117.5%;border-color:rgba(201,166,107,.26);animation:tbeA2 64s linear infinite}
+.tbe-a3{width:150%;height:150%;margin:-75% 0 0 -75%;border-style:dashed;border-color:rgba(201,166,107,.22);animation:tbeA3 34s linear infinite}
+@keyframes tbeA1{from{transform:rotateX(72deg) rotateZ(0)}to{transform:rotateX(72deg) rotateZ(360deg)}}
+@keyframes tbeA2{from{transform:rotateX(64deg) rotateY(16deg) rotateZ(360deg)}to{transform:rotateX(64deg) rotateY(16deg) rotateZ(0)}}
+@keyframes tbeA3{from{transform:rotateX(78deg) rotateY(-12deg) rotateZ(0)}to{transform:rotateX(78deg) rotateY(-12deg) rotateZ(360deg)}}
+
+.tbe-devise{margin:14px 0 0;font-size:10.5px;letter-spacing:.42em;padding-left:.42em;color:var(--tbe-or);font-weight:400;white-space:nowrap}
+.tbe-entrer{
+  pointer-events:auto;margin-top:22px;padding:15px 30px;background:var(--tbe-or);color:#0a0a0a;border:none;cursor:pointer;
+  font:500 10.5px/1 'Montserrat',system-ui,sans-serif;letter-spacing:.3em;padding-left:calc(30px + .3em);text-transform:uppercase;
+  box-shadow:0 0 0 1px rgba(231,207,159,.5),0 10px 30px rgba(201,166,107,.18);transition:background .3s,transform .2s,box-shadow .3s;
+}
+.tbe-entrer:hover{background:var(--tbe-or2);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(231,207,159,.8),0 14px 36px rgba(201,166,107,.3)}
+.tbe-entrer:focus-visible{outline:2px solid var(--tbe-or2);outline-offset:4px}
+
+/* Noms sous les créations (ce sont aussi des boutons : clavier et lecteurs d'écran) */
+.tbe-noms{position:absolute;inset:0;pointer-events:none}
+.tbe-nom{
+  position:absolute;left:0;top:0;transform:translate(-50%,0);pointer-events:auto;background:none;border:none;cursor:pointer;
+  font:300 9px/1.3 'Montserrat',system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--tbe-gris);
+  padding:6px 8px;white-space:nowrap;opacity:0;transition:opacity .8s,color .4s,letter-spacing .4s;
+}
+.tbe-nom.tbe-vu{opacity:1}
+.tbe-nom:hover,.tbe-nom:focus-visible{color:var(--tbe-or2);outline:none}
+.tbe-nom.tbe-actif{color:var(--tbe-or2);font-weight:400;letter-spacing:.3em}
+#tb-entree.tbe-selection .tbe-nom:not(.tbe-actif){opacity:.45}
+
+/* Panneau de la création sélectionnée */
+.tbe-panneau{
+  position:absolute;left:50%;bottom:calc(22px + env(safe-area-inset-bottom, 0px));transform:translate(-50%,10px);opacity:0;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 14px 11px;width:max-content;max-width:94vw;
+  background:rgba(8,8,8,.78);border:1px solid rgba(201,166,107,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:opacity .45s,transform .45s;
+}
+.tbe-panneau.tbe-ouvert{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.tbe-panneau h2{margin:0;font:400 21px/1.2 'Cormorant Garamond',Georgia,serif;letter-spacing:.06em;color:var(--tbe-or2)}
+.tbe-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.tbe-btn{
+  background:transparent;border:1px solid rgba(201,166,107,.45);color:var(--tbe-or);cursor:pointer;
+  font:400 9.5px/1 'Montserrat',system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:9px 12px;
+  transition:border-color .3s,background .3s;
+}
+.tbe-btn:hover,.tbe-btn:focus-visible{border-color:var(--tbe-or2);outline:none}
+.tbe-btn.tbe-on{background:rgba(201,166,107,.16);border-color:var(--tbe-or2)}
+.tbe-btn[hidden]{display:none}
+
+/* Commandes discrètes */
+.tbe-pause{
+  position:absolute;left:16px;bottom:16px;background:none;border:1px solid rgba(201,166,107,.25);color:var(--tbe-gris);cursor:pointer;
+  font:400 9px/1 'Montserrat',system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:8px 10px;transition:color .3s,border-color .3s;
+}
+.tbe-pause:hover,.tbe-pause:focus-visible{color:var(--tbe-or2);border-color:var(--tbe-or);outline:none}
+.tbe-charge{
+  position:absolute;right:16px;bottom:20px;font:300 9px/1 'Montserrat',system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--tbe-gris);transition:opacity .8s;pointer-events:none;
+}
+.tbe-charge.tbe-fini{opacity:0}
+#tb-entree.tbe-sortie .tbe-noms,#tb-entree.tbe-sortie .tbe-panneau,#tb-entree.tbe-sortie .tbe-pause,#tb-entree.tbe-sortie .tbe-charge{opacity:0;transition:opacity .45s}
+#tb-entree.tbe-sortie .tbe-entrer{pointer-events:none}
+
+@media (max-width:640px){
+  .tbe-devise{font-size:9px;letter-spacing:.32em;padding-left:.32em;white-space:normal;max-width:190px;line-height:1.7}
+  .tbe-entrer{padding:13px 22px;padding-left:calc(22px + .26em);letter-spacing:.26em;font-size:10px;margin-top:16px}
+  .tbe-nom{font-size:7.5px;letter-spacing:.14em;padding:4px 4px;white-space:normal;width:max-content;max-width:31vw;text-align:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .tbe-halo,.tbe-anneau{animation:none}
+  .tbe-a1{transform:rotateX(72deg)} .tbe-a2{transform:rotateX(64deg) rotateY(16deg)} .tbe-a3{transform:rotateX(78deg) rotateY(-12deg)}
+  #tb-entree{transition:opacity .3s}
+}
+
+/* Vue en grand : la création sélectionnée occupe la page, le reste s'efface */
+.tbe-centre{transition:opacity .5s,transform .5s}
+#tb-entree.tbe-plein .tbe-centre{opacity:0;transform:translate(-50%,-50%) scale(.94)}
+#tb-entree.tbe-plein .tbe-entrer{pointer-events:none}
+#tb-entree.tbe-plein .tbe-noms{opacity:0;pointer-events:none;transition:opacity .4s}
+#tb-entree.tbe-plein .tbe-halo{opacity:.35}
+#tb-entree.tbe-plein .tbe-canvas{cursor:grab}
+.tbe-fermer-x{
+  position:absolute;top:calc(14px + env(safe-area-inset-top, 0px));right:16px;width:40px;height:40px;border-radius:50%;
+  background:rgba(8,8,8,.6);border:1px solid rgba(201,166,107,.45);color:var(--tbe-or2);font:300 22px/1 'Montserrat',system-ui,sans-serif;
+  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s,border-color .3s;
+}
+.tbe-fermer-x:hover,.tbe-fermer-x:focus-visible{border-color:var(--tbe-or2);outline:none}
+#tb-entree.tbe-plein .tbe-fermer-x{opacity:1;pointer-events:auto}
+.tbe-astuce{margin:0;font:300 9px/1 'Montserrat',system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--tbe-gris)}
+
+/* Logo dessiné au trait puis rempli */
+.tbe-logo-boite{position:relative;width:78%;height:78%;z-index:2}
+.tbe-logo-boite .tbe-logo{position:absolute;inset:0;width:100%;height:100%}
+.tbe-marque-boite{position:relative;width:calc(var(--tbe-logo,132px) * 1.5);margin-top:calc(var(--tbe-logo,132px) * .3)}
+.tbe-marque-boite .tbe-marque{width:100%;margin-top:0}
+.tbe-trace{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.tbe-trace path{fill:none;stroke:#D9BC85;stroke-linecap:round;stroke-linejoin:round;transition:stroke-opacity 1.2s ease;filter:drop-shadow(0 0 3px rgba(231,207,159,.55))}
+.tbe-logo,.tbe-marque{opacity:0;transition:opacity 1s ease, filter .8s}
+#tb-entree.tbe-logo-plein .tbe-logo,#tb-entree.tbe-logo-plein .tbe-marque{opacity:1}
+#tb-entree.tbe-logo-plein .tbe-trace path{stroke-opacity:0}
+
+/* l'emblème reste en trait (identique au logo), seul le logotype passe à l'image pleine */
+.tbe-logo-boite .tbe-logo{display:none}
+.tbe-logo-boite .tbe-trace path{stroke:#CDAA6E;filter:none}
+.tbe-logo-boite .tbe-trace{filter:drop-shadow(0 0 6px rgba(201,166,107,.45));transition:filter .8s}
+#tb-entree.tbe-logo-plein .tbe-logo-boite .tbe-trace path{stroke-opacity:1}
+#tb-entree.tbe-sortie .tbe-logo-boite .tbe-trace{filter:drop-shadow(0 0 30px rgba(231,207,159,.75))}
+
+/* une seule ligne de temps : la devise après le logotype, le bouton à 100 % (quand les créations se mettent à tourner) */
+#tb-entree .tbe-devise{opacity:0;transform:translateY(6px);transition:opacity 1.2s ease,transform 1.2s ease}
+#tb-entree.tbe-devise-pret .tbe-devise{opacity:1;transform:none}
+#tb-entree .tbe-entrer{opacity:0;visibility:hidden;transform:translateY(16px);filter:blur(5px);transition:opacity .9s ease,transform .9s ease,filter .9s ease,visibility 0s .9s,background .3s,color .3s,box-shadow .3s}
+#tb-entree.tbe-entrer-pret .tbe-entrer{opacity:1;visibility:visible;transform:none;filter:none;transition:opacity 2.6s cubic-bezier(.22,.61,.36,1),transform 2.6s cubic-bezier(.22,.61,.36,1),filter 2s ease,visibility 0s,background .3s,color .3s,box-shadow .3s}
+#tb-entree.tbe-entrer-pret .tbe-entrer:hover{transform:translateY(-2px)}

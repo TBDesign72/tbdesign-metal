@@ -1,0 +1,16 @@
+ÉCRAN D'ENTRÉE 3D — TB DESIGN MÉTAL (version « tout à la racine »)
+==================================================================
+
+Tous les fichiers vont directement à la racine du dépôt GitHub (TBDesign72, branche main), à côté de vos autres pages. Aucun dossier à créer.
+
+  index.html                 remplace votre index.html (4 lignes ajoutées avant </head>, section « escalier hélicoïdal pièce par pièce » retirée)
+  entree.js, entree.css      l'écran d'entrée
+  entree-logo-embleme.webp, entree-logo-texte.webp   votre logo
+  entree-*.json (9 fichiers) les 9 créations
+
+Sur GitHub : Add file → Upload files → glisser les 14 fichiers → Commit changes.
+Si un ancien dossier intro/ existe sur le dépôt (version précédente), vous pouvez le supprimer : il ne sert plus.
+Vérifier après 1 à 2 minutes : https://tbdesign-metal.com/?intro=1 en fenêtre privée (ou Ctrl+F5).
+
+L'écran s'affiche une fois par visite (pas en naviguant dans le site, ni avec le bouton retour, ni sur un lien avec #ancre).
+Pour le retirer : supprimer les 4 lignes de index.html.
