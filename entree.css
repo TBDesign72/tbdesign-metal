@@ -190,3 +190,7 @@ html.tb-intro.tb-intro-pret::before{display:none}
 .tbg-vue-actions button{background:transparent;border:1px solid #c8a96e66;color:#e7cf9f;padding:10px 14px;font:400 9.5px/1 'Montserrat',system-ui,sans-serif;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .3s,border-color .3s}
 .tbg-vue-actions button:hover,.tbg-vue-actions button:focus-visible{background:#c8a96e1f;border-color:#e7cf9f;outline:none}
 @media(max-width:600px){.tbg-vue-panneau{bottom:14px;padding:14px 10px 12px}.tbg-vue-panneau h3{font-size:20px}.tbg-vue-actions button{padding:9px 10px;letter-spacing:1.4px}}
+
+/* le curseur doré du site reste visible au-dessus de l'écran d'entrée et de la vue en grand */
+#cursor{z-index:2147483647 !important}
+#cursor-trail{z-index:2147483646 !important}
