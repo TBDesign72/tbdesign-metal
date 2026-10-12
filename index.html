@@ -33,7 +33,7 @@
 <meta name="geo.placename" content="Le Mans, Sarthe, France">
 <meta name="geo.position" content="47.995810;0.192060">
 <meta name="ICBM" content="47.995810, 0.192060">
-<link rel="canonical" href="https://tbdesign-metal.com/index.html">
+<link rel="canonical" href="https://tbdesign-metal.com/">
 <link rel="preload" as="style" href="shared.css">
 <link rel="stylesheet" href="shared.css">
 <link rel="preload" as="image" href="images/real-escalier-passerelle.webp" fetchpriority="high">
@@ -692,9 +692,10 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 }
 </style>
 <!-- Écran d'entrée immersif TB Design Métal (couche indépendante, fichiers entree*) -->
+<script>(function(){try{if(/\/index\.html$/.test(location.pathname))history.replaceState(null,'',location.pathname.replace(/index\.html$/,'')+location.search+location.hash)}catch(e){}})();</script>
 <script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{m=!!r&&new URL(r).origin===location.origin}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
-<link rel="stylesheet" href="entree.css">
-<script type="module" src="entree.js"></script>
+<link rel="stylesheet" href="entree.css?v=20261012">
+<script type="module" src="entree.js?v=20261012"></script>
 </head>
 <body>
 
@@ -1889,6 +1890,8 @@ body::after{
 .tarif-scroll::-webkit-scrollbar-thumb{background:#c8a96e55;border-radius:4px}
 .tarif-scroll::-webkit-scrollbar-thumb:hover{background:var(--or)}
 .tarif-track{display:flex;gap:3px;width:max-content}
+.tarif-fixe .tarif-track{width:100%}
+.tarif-fixe .tarif-card{flex:1 1 0;min-width:0}
 .tarif-card{
   background:var(--anth);
   padding:40px 32px;
@@ -2695,20 +2698,33 @@ document.addEventListener('DOMContentLoaded',function(){
   var tfReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(tfReduceMotion) return;
 
-  // Duplique les cartes pour permettre une boucle infinie sans à-coup
+  // Les cartes ne sont dupliquées (boucle infinie) que si elles ne tiennent pas toutes à l'écran :
+  // sur grand écran, les 3 tarifs restent fixes, sans doublon.
   var tfOriginalCards = Array.prototype.slice.call(tfTrack.children);
-  tfOriginalCards.forEach(function(card){
-    var clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden','true');
-    tfTrack.appendChild(clone);
-  });
-
+  var tfClones = [], tfBoucle = false;
   var tfLoopWidth = 0;
-  function computeTfLoopWidth(){
-    tfLoopWidth = tfTrack.scrollWidth / 2;
+  function tfMiseEnPlace(){
+    tfClones.forEach(function(c){ c.remove(); }); tfClones = [];
+    tfScroll.classList.remove('tarif-fixe'); tfScroll.scrollLeft = 0;
+    tfBoucle = tfTrack.scrollWidth > tfScroll.clientWidth + 2;
+    if(tfBoucle){
+      tfOriginalCards.forEach(function(card){
+        var clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden','true');
+        tfTrack.appendChild(clone); tfClones.push(clone);
+      });
+      tfLoopWidth = tfTrack.scrollWidth / 2;
+    } else {
+      tfScroll.classList.add('tarif-fixe');
+    }
   }
-  computeTfLoopWidth();
-  window.addEventListener('resize', computeTfLoopWidth);
+  tfMiseEnPlace();
+  var tfLargeur = window.innerWidth, tfMinuteur = null;
+  window.addEventListener('resize', function(){
+    if(window.innerWidth === tfLargeur) return;            // la barre d'adresse mobile qui bouge ne compte pas
+    tfLargeur = window.innerWidth;
+    clearTimeout(tfMinuteur); tfMinuteur = setTimeout(tfMiseEnPlace, 200);
+  });
 
   var tfPaused = false;
   var tfResumeTimer = null;
@@ -2734,7 +2750,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 
   function tfTick(){
-    if(!tfPaused){
+    if(!tfPaused && tfBoucle){
       tfScroll.scrollLeft += tfSpeed;
       if(tfScroll.scrollLeft >= tfLoopWidth){
         tfScroll.scrollLeft -= tfLoopWidth;
