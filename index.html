@@ -688,8 +688,8 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <!-- Écran d'entrée immersif TB Design Métal (couche indépendante, fichiers entree*) -->
 <script>(function(){try{if(/\/index\.html$/.test(location.pathname))history.replaceState(null,'',location.pathname.replace(/index\.html$/,'')+location.search+location.hash)}catch(e){}})();</script>
 <script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{m=!!r&&new URL(r).origin===location.origin}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
-<link rel="stylesheet" href="entree.css?v=20261012">
-<script type="module" src="entree.js?v=20261012"></script>
+<link rel="stylesheet" href="entree.css?v=20261013">
+<script type="module" src="entree.js?v=20261013"></script>
 </head>
 <body>
 
@@ -1450,9 +1450,6 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
   </nav>
 </div>
 
-<!-- CURSEUR DORÉ -->
-<div id="cursor"></div>
-<div id="cursor-trail"></div>
 
 <!-- FORMULAIRE DE CONTACT -->
 <section class="contact-form-section" id="contact-form">
@@ -1538,33 +1535,6 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 </section>
 
 <style>
-/* ── CURSEUR ── */
-* { cursor: none !important; }
-#cursor {
-  width: 8px; height: 8px;
-  background: #c8a96e;
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 99999;
-  transform: translate(-50%,-50%);
-  transition: width .2s ease, height .2s ease, opacity .2s;
-}
-#cursor-trail {
-  width: 28px; height: 28px;
-  border: 1px solid #c8a96e88;
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 99998;
-  transform: translate(-50%,-50%);
-  transition: left .1s ease, top .1s ease, width .2s, height .2s, border-color .2s;
-}
-body:has(a:hover) #cursor, body:has(button:hover) #cursor {
-  width: 6px; height: 6px; opacity: .6;
-}
-body:has(a:hover) #cursor-trail, body:has(button:hover) #cursor-trail {
-  width: 44px; height: 44px; border-color: #c8a96e;
-}
-
 /* ── GRAIN SUBTIL (remplace particules) ── */
 body::after{
   content:'';
@@ -1682,7 +1652,7 @@ body::after{
   font-size: 11px; font-weight: 500;
   letter-spacing: 3px; text-transform: uppercase;
   padding: 18px 48px;
-  cursor: none;
+  
   display: flex; align-items: center; gap: 16px;
   transition: color .4s, border-color .4s;
   margin-top: 8px;
@@ -1944,7 +1914,7 @@ body::after{
   color:var(--or);border:1px solid #c8a96e44;
   padding:12px 24px;text-decoration:none;
   font-family:'Montserrat',sans-serif;
-  transition:background .3s,border-color .3s;cursor:none;
+  transition:background .3s,border-color .3s;
   background:none;width:100%;text-align:center;
 }
 .tarif-cta:hover{background:rgba(200,169,110,0.08);border-color:var(--or);}
@@ -1990,7 +1960,7 @@ body::after{
   font-family: 'Cormorant Garamond', serif;
   font-size: 15px; letter-spacing: 4px;
   text-transform: uppercase; color: var(--or);
-  text-decoration: none; cursor: none;
+  text-decoration: none; 
   flex-shrink: 0;
 }
 
@@ -2026,7 +1996,7 @@ body::after{
 .main-nav-burger {
   display: none;
   flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: none; padding: 4px;
+  background: none; border: none;  padding: 4px;
 }
 .main-nav-burger span {
   display: block; width: 22px; height: 1px;
@@ -2116,11 +2086,11 @@ body::after{
 .page-view{display:none;position:fixed;inset:0;z-index:5000;background:var(--noir);overflow-y:auto;}
 .page-view.active{display:block;}
 .sp-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 64px;height:56px;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);border-bottom:1px solid #c8a96e22;}
-.sp-nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--or);letter-spacing:4px;text-transform:uppercase;background:none;border:none;cursor:none;}
+.sp-nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--or);letter-spacing:4px;text-transform:uppercase;background:none;border:none;}
 .sp-nav-links{display:flex;}
-.sp-nav-links button{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);background:none;border:none;cursor:none;font-family:'Montserrat',sans-serif;padding:0 14px;height:56px;border-bottom:2px solid transparent;transition:color .3s,border-color .3s;}
+.sp-nav-links button{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);background:none;border:none;font-family:'Montserrat',sans-serif;padding:0 14px;height:56px;border-bottom:2px solid transparent;transition:color .3s,border-color .3s;}
 .sp-nav-links button:hover,.sp-nav-links button.active{color:var(--or);border-bottom-color:var(--or);}
-.sp-back{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or);background:none;border:1px solid #c8a96e44;padding:8px 16px;cursor:none;font-family:'Montserrat',sans-serif;transition:background .3s;}
+.sp-back{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or);background:none;border:1px solid #c8a96e44;padding:8px 16px;font-family:'Montserrat',sans-serif;transition:background .3s;}
 .sp-back:hover{background:rgba(200,169,110,0.08);}
 .page-hero-sub{min-height:35vh;display:flex;align-items:flex-end;padding:60px 64px 44px;background:var(--anth);border-bottom:1px solid #c8a96e22;position:relative;overflow:hidden;}
 .page-hero-sub::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 85%,rgba(200,169,110,0.05) 0%,transparent 60%);}
@@ -2141,11 +2111,11 @@ body::after{
 .ps-bottom{border-top:1px solid #c8a96e18;padding-top:44px;display:flex;align-items:center;justify-content:space-between;gap:40px;}
 .ps-cta-txt{font-size:13px;line-height:1.8;color:var(--gris);max-width:560px;}
 .ps-btns{display:flex;gap:12px;flex-shrink:0;}
-.ps-btn-gold{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--noir);background:var(--or);padding:14px 30px;border:none;cursor:none;font-family:'Montserrat',sans-serif;font-weight:500;transition:background .3s;}
+.ps-btn-gold{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--noir);background:var(--or);padding:14px 30px;border:none;font-family:'Montserrat',sans-serif;font-weight:500;transition:background .3s;}
 .ps-btn-gold:hover{background:var(--or2);}
-.ps-btn-ghost{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--or);border:1px solid #c8a96e44;padding:13px 22px;background:none;cursor:none;font-family:'Montserrat',sans-serif;transition:background .3s;}
+.ps-btn-ghost{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--or);border:1px solid #c8a96e44;padding:13px 22px;background:none;font-family:'Montserrat',sans-serif;transition:background .3s;}
 .ps-btn-ghost:hover{background:rgba(200,169,110,0.08);}
-.srv{cursor:none!important;transition:background .3s,transform .2s;}
+.srv{transition:background .3s,transform .2s;}
 .srv:hover{background:rgba(200,169,110,0.04)!important;transform:translateY(-2px);}
 @media(max-width:900px){
   .ps-body{padding:40px 20px 60px;}
@@ -2158,25 +2128,7 @@ body::after{
 </style>
 
 <script>
-// ── CURSEUR ──
-const cursor = document.getElementById('cursor');
-const trail = document.getElementById('cursor-trail');
-let mx = 0, my = 0, tx = 0, ty = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
-
-function animateTrail() {
-  tx += (mx - tx) * 0.12;
-  ty += (my - ty) * 0.12;
-  trail.style.left = tx + 'px';
-  trail.style.top = ty + 'px';
-  requestAnimationFrame(animateTrail);
-}
-animateTrail();
 
 // Particules remplacées par grain CSS
 

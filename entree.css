@@ -191,6 +191,6 @@ html.tb-intro.tb-intro-pret::before{display:none}
 .tbg-vue-actions button:hover,.tbg-vue-actions button:focus-visible{background:#c8a96e1f;border-color:#e7cf9f;outline:none}
 @media(max-width:600px){.tbg-vue-panneau{bottom:14px;padding:14px 10px 12px}.tbg-vue-panneau h3{font-size:20px}.tbg-vue-actions button{padding:9px 10px;letter-spacing:1.4px}}
 
-/* le curseur doré du site reste visible au-dessus de l'écran d'entrée et de la vue en grand */
-#cursor{z-index:2147483647 !important}
-#cursor-trail{z-index:2147483646 !important}
+/* poignée « main » pour tourner les créations en vue grand format */
+#tb-entree.tbe-plein .tbe-canvas,.tbg-vue-canvas{cursor:grab !important}
+#tb-entree.tbe-plein .tbe-canvas:active,.tbg-vue-canvas:active{cursor:grabbing !important}
