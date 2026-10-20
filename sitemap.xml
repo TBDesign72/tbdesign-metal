@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
   <url>
     <loc>https://tbdesign-metal.com/index.html</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/index.html"/>
+    <video:video>
+      <video:thumbnail_loc>https://tbdesign-metal.com/videos/escalier-helicoidal-montage-poster.webp</video:thumbnail_loc>
+      <video:title>Escalier hélicoïdal acier et chêne, décomposé pièce par pièce</video:title>
+      <video:description>Conception d'un escalier hélicoïdal acier et chêne modélisé sous SolidWorks, pièce par pièce : fût, consoles, supports de marches, marches et garde-corps.</video:description>
+      <video:content_loc>https://tbdesign-metal.com/videos/escalier-helicoidal-montage.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-20T12:00:00+02:00</video:publication_date>
+    </video:video>
   </url>
 
   <url>
@@ -28,10 +37,18 @@
 
   <url>
     <loc>https://tbdesign-metal.com/escalier-le-mans.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://tbdesign-metal.com/escalier-le-mans.html"/>
+    <video:video>
+      <video:thumbnail_loc>https://tbdesign-metal.com/videos/escalier-helicoidal-montage-poster.webp</video:thumbnail_loc>
+      <video:title>Escalier hélicoïdal acier et chêne, décomposé pièce par pièce</video:title>
+      <video:description>Conception d'un escalier hélicoïdal acier et chêne modélisé sous SolidWorks, pièce par pièce : fût, consoles, supports de marches, marches et garde-corps.</video:description>
+      <video:content_loc>https://tbdesign-metal.com/videos/escalier-helicoidal-montage.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-20T12:00:00+02:00</video:publication_date>
+    </video:video>
   </url>
 
   <url>

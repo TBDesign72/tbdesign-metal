@@ -1,0 +1,32 @@
+VIDÉO ESCALIER HÉLICOÏDAL — MISE EN LIGNE (tbdesign-metal.com)
+==============================================================
+
+FICHIERS À DÉPOSER À LA RACINE DU DÉPÔT GitHub (TBDesign72/tbdesign-metal, branche main)
+  index.html               remplace l'actuel : nouvelle section « En vidéo — Avant le rendu, la conception »
+                           juste sous le bandeau d'accueil + entrée « Vidéo » dans le sommaire et le menu mobile
+  escalier-le-mans.html    remplace l'actuel : bloc vidéo « Un escalier hélicoïdal, pièce par pièce » en tête de page
+  sitemap.xml              remplace l'actuel : vidéo déclarée pour Google sur ces deux pages
+  videos/                  nouveau dossier (4 fichiers : 2 vidéos + 2 images d'aperçu)
+
+Rien d'autre n'a été modifié dans les pages : les ajouts sont repérés par des commentaires « Vidéo escalier hélicoïdal ».
+
+DÉPÔT SUR GITHUB
+  1. Ouvrir le dépôt tbdesign-metal sur github.com.
+  2. Add file → Upload files.
+  3. Glisser en une fois : index.html, escalier-le-mans.html, sitemap.xml ET le dossier videos
+     (glisser le dossier lui-même, GitHub garde la structure videos/…).
+  4. Commit changes.
+  5. Attendre 1 à 2 minutes, puis vérifier en fenêtre privée :
+       https://tbdesign-metal.com/#video
+       https://tbdesign-metal.com/escalier-le-mans.html
+
+VÉRIFICATIONS
+  - Ordinateur : la vidéo démarre seule en arrivant dessus, en boucle, sans son.
+  - Téléphone tenu verticalement : c'est la version verticale qui s'affiche.
+  - Google Search Console : Sitemaps → renvoyer sitemap.xml (accélère la prise en compte de la vidéo).
+
+BON À SAVOIR
+  - La vidéo ne se charge qu'à l'arrivée sur la section : aucun ralentissement de la page.
+  - Si le visiteur a demandé de réduire les animations, elle ne démarre pas seule (bouton lecture).
+  - Ces pages partent de la version en ligne sur GitHub (13/10/2026). Si tu as modifié index.html
+    ou escalier-le-mans.html sur ton PC depuis sans les envoyer, dis-le-moi avant de remplacer.

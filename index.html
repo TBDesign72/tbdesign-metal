@@ -690,6 +690,14 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <script>(function(){try{var f=/[?&]intro=1/.test(location.search),m=false,r=document.referrer;try{m=!!r&&new URL(r).origin===location.origin}catch(e){}var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null,bf=n&&n.type==='back_forward';if(f||(!m&&!bf&&!location.hash))document.documentElement.classList.add('tb-intro')}catch(e){}})();</script>
 <link rel="stylesheet" href="entree.css?v=20261013">
 <script type="module" src="entree.js?v=20261013"></script>
+<!-- Vidéo escalier hélicoïdal (fichiers dans videos/) -->
+<style>
+.tbv-cadre{position:relative;aspect-ratio:16/9;max-width:1100px;margin:0 auto;border:1px solid #c8a96e40;background:#0a0a0a;overflow:hidden}
+.tbv-media{display:block;width:100%;height:100%;object-fit:cover}
+.tbv-legende{max-width:1100px;margin:14px auto 0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gris,#9a9a9a);text-align:center}
+.tbv-intro{max-width:640px;color:var(--gris,#9a9a9a);font-size:14px;line-height:1.8;margin:0 0 40px}
+@media(max-width:700px) and (orientation:portrait){.tbv-cadre{aspect-ratio:9/16;max-width:420px}}
+</style>
 </head>
 <body>
 
@@ -712,6 +720,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 </nav>
 
 <div class="main-nav-mobile" id="mobileMenu">
+  <a href="#video" onclick="closeMobileMenu(this)">Vidéo</a>
   <a href="#services" onclick="closeMobileMenu(this)">Services</a>
   <a href="#pourquoi" onclick="closeMobileMenu(this)">Pourquoi</a>
   <a href="#realisations" onclick="closeMobileMenu(this)">Domaines</a>
@@ -780,6 +789,7 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
 <!-- MINI-SOMMAIRE — navigation rapide pour faciliter la lecture d'une page longue -->
 <nav class="mini-toc" id="miniToc" aria-label="Sommaire de la page">
   <div class="mini-toc-track">
+    <a href="#video" data-section="video">Vidéo</a>
     <a href="#services" data-section="services">Services</a>
     <a href="#creations-3d" data-section="creations-3d">3D</a>
     <a href="#pourquoi" data-section="pourquoi">Pourquoi</a>
@@ -792,6 +802,19 @@ footer{background:var(--anth);padding:22px 64px;display:flex;align-items:center;
     <a href="#contact-form" data-section="contact-form">Contact</a>
   </div>
 </nav>
+
+<!-- VIDÉO — conception de l'escalier hélicoïdal, pièce par pièce (fichiers dans videos/) -->
+<section class="sect darker" id="video" aria-label="Vidéo : conception d'un escalier hélicoïdal">
+  <div class="sect-hd">
+    <div><p class="sect-ey">En vidéo</p><h2 class="sect-ti">Avant le rendu, <em>la conception</em></h2></div>
+  </div>
+  <p class="tbv-intro">Un escalier hélicoïdal acier et chêne, décomposé pièce par pièce sous SolidWorks : fût et platines, consoles, supports de marches, marches, puis garde-corps. C'est ce travail que je réalise pour votre atelier, avec les plans d'exécution.</p>
+  <div class="tbv-cadre">
+    <video class="tbv-media" muted loop playsinline preload="none" poster="videos/escalier-helicoidal-montage-poster.webp" aria-label="Animation de conception d'un escalier hélicoïdal acier et chêne, modélisé pièce par pièce sous SolidWorks">
+      <source src="videos/escalier-helicoidal-montage.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <!-- section id pour ancres SEO -->
@@ -2799,5 +2822,37 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+<!-- Vidéo escalier hélicoïdal : version verticale sur mobile, lecture seulement quand la vidéo est visible -->
+<script>
+(function(){
+  var vids=document.querySelectorAll('.tbv-media'); if(!vids.length) return;
+  var mob=window.matchMedia('(max-width:700px) and (orientation:portrait)').matches;
+  var reduit=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  vids.forEach(function(v){
+    v.poster = mob ? 'videos/escalier-helicoidal-montage-mobile-poster.webp' : 'videos/escalier-helicoidal-montage-poster.webp';
+    var s=v.querySelector('source'); if(s) s.src = mob ? 'videos/escalier-helicoidal-montage-mobile.mp4' : 'videos/escalier-helicoidal-montage.mp4';
+    if(reduit){ v.controls=true; return; }
+    if(!('IntersectionObserver' in window)){ v.preload='auto'; v.autoplay=true; v.load(); return; }
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ if(v.preload==='none'){ v.preload='auto'; v.load(); } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else v.pause();
+    }); },{threshold:0.35}).observe(v);
+  });
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Escalier hélicoïdal acier et chêne, décomposé pièce par pièce",
+  "description": "Conception d'un escalier hélicoïdal acier et chêne modélisé sous SolidWorks : fût et platines, consoles, supports de marches en trois pièces, marches et garde-corps. Modélisation 3D et plans d'exécution par TB Design, bureau d'études au Mans.",
+  "thumbnailUrl": "https://tbdesign-metal.com/videos/escalier-helicoidal-montage-poster.webp",
+  "contentUrl": "https://tbdesign-metal.com/videos/escalier-helicoidal-montage.mp4",
+  "uploadDate": "2026-10-20T12:00:00+02:00",
+  "duration": "PT30S",
+  "inLanguage": "fr",
+  "url": "https://tbdesign-metal.com/"
+}
+</script>
 </body>
 </html>
